@@ -18,8 +18,8 @@ final class Keys {
         } set {
             let defaults = UserDefaults.standard
             let key = HumanSettings.height.rawValue
-            if let kladr = newValue {
-                defaults.set(kladr, forKey: key)
+            if let height = newValue {
+                defaults.set(height, forKey: key)
             }
         }
         
@@ -31,8 +31,8 @@ final class Keys {
         } set {
             let defults = UserDefaults.standard
             let key = HumanSettings.weight.rawValue
-            if let kladr = newValue {
-                defults.set(kladr, forKey: key)
+            if let weight = newValue {
+                defults.set(weight, forKey: key)
             }
         }
         
@@ -44,8 +44,8 @@ final class Keys {
         } set {
             let defaults = UserDefaults.standard
             let key = HumanSettings.age.rawValue
-            if let kladr = newValue {
-                defaults.set(kladr, forKey: key)
+            if let age = newValue {
+                defaults.set(age, forKey: key)
             }
         }
         
@@ -57,8 +57,8 @@ final class Keys {
         } set {
             let defaults = UserDefaults.standard
             let key = HumanSettings.gender.rawValue
-            if let kladr = newValue {
-                defaults.set(kladr, forKey: key)
+            if let gender = newValue {
+                defaults.set(gender, forKey: key)
             }
         }
         

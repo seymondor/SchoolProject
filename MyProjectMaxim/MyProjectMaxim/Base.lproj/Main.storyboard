@@ -172,9 +172,9 @@
                                 <constraints>
                                     <constraint firstItem="8Jj-lA-bzj" firstAttribute="centerX" secondItem="zmh-Hs-ptr" secondAttribute="centerX" constant="74" id="2Tb-ek-l3B"/>
                                     <constraint firstAttribute="height" constant="70" id="SC9-ch-irU"/>
+                                    <constraint firstItem="8Jj-lA-bzj" firstAttribute="leading" secondItem="Ce9-ua-oWs" secondAttribute="trailing" constant="44" id="UQY-BE-ZkV"/>
                                     <constraint firstItem="Ce9-ua-oWs" firstAttribute="centerY" secondItem="zmh-Hs-ptr" secondAttribute="centerY" id="dFt-g9-AtQ"/>
                                     <constraint firstItem="8Jj-lA-bzj" firstAttribute="top" secondItem="zmh-Hs-ptr" secondAttribute="top" constant="11" id="log-FG-Sof"/>
-                                    <constraint firstItem="8Jj-lA-bzj" firstAttribute="leading" secondItem="Ce9-ua-oWs" secondAttribute="trailing" constant="44" id="qeh-wU-ncp"/>
                                     <constraint firstItem="8Jj-lA-bzj" firstAttribute="bottom" secondItem="zmh-Hs-ptr" secondAttribute="bottomMargin" constant="-2" id="sFf-mo-VeX"/>
                                     <constraint firstItem="Ce9-ua-oWs" firstAttribute="top" secondItem="zmh-Hs-ptr" secondAttribute="top" constant="14" id="sy1-Fg-rwV"/>
                                 </constraints>
@@ -254,6 +254,7 @@
                     <connections>
                         <outlet property="Enter1" destination="RVg-FG-kcJ" id="494-4J-3fd"/>
                         <outlet property="Enter2" destination="buy-pZ-TWw" id="793-b4-g20"/>
+                        <outlet property="Enter3" destination="pZy-qV-d1A" id="1J0-NM-IsT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

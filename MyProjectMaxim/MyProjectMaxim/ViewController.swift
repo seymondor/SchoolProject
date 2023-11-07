@@ -8,21 +8,23 @@
 import UIKit
 
 class ViewController: UIViewController {
-    func createFrameForButton(button: UIButton){
+    func createFrameForButton(button: UIButton, button2: UIButton){
+        if button2.layer.borderColor == #colorLiteral(red: 0.3026678778, green: 0.6489531224, blue: 0.9067135847, alpha: 1) {
+            button2.layer.borderColor = #colorLiteral(red: 0.4778209925, green: 0.7600174546, blue: 0.8799687028, alpha: 1)
+        }
         if button.layer.borderColor == #colorLiteral(red: 0.4778209925, green: 0.7600174546, blue: 0.8799687028, alpha: 1) {
             button.layer.borderColor = #colorLiteral(red: 0.3026678778, green: 0.6489531224, blue: 0.9067135847, alpha: 1)
         } else {
             button.layer.borderColor = #colorLiteral(red: 0.4778209925, green: 0.7600174546, blue: 0.8799687028, alpha: 1)
         }
     }
+    @IBOutlet weak var OutletManButton: UIButton!
+    @IBOutlet weak var OutletWomanButton: UIButton!
     @IBAction func StartManButton(_ sender: UIButton) {
-        createFrameForButton(button: sender)
+        createFrameForButton(button: sender, button2: OutletWomanButton)
     }
     @IBAction func StartWomanButton(_ sender: UIButton) {
-        createFrameForButton(button: sender)
-        sender.layer.cornerRadius = 5
-        sender.layer.borderWidth = 1
-        sender.layer.borderColor = #colorLiteral(red: 0.4778209925, green: 0.7600174546, blue: 0.8799687028, alpha: 1)
+        createFrameForButton(button: sender, button2: OutletManButton)
     }
     @IBOutlet weak var StartEnterWeight: UITextField!
     @IBOutlet weak var StartEnterHeight: UITextField!

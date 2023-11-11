@@ -63,9 +63,9 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        StartEnterHeight.textAlignment = .center
-        StartEnterWeight.textAlignment = .center
-        StartEnterAge.textAlignment = .center
+        StartEnterHeight.delegate = self
+        StartEnterWeight.delegate = self
+        StartEnterAge.delegate = self
         Label1.text = Keys.height
         Label2.text = Keys.weight
         Label3.text = Keys.age
@@ -73,4 +73,11 @@ class ViewController: UIViewController {
     }
 }
 
-
+extension ViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let allowedcharacters = "0123456789"
+        let allowedcharacterSet = CharacterSet(charactersIn: allowedcharacters)
+        let typedCharactersetIn = CharacterSet(charactersIn: string)
+        return allowedcharacterSet.isSuperset(of: typedCharactersetIn)
+    }
+}

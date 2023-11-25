@@ -8,6 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    
+    
+    
+    
     func checkButtonManOrWoman(buttonMan:UIButton,buttonWoman:UIButton) -> String {
         if buttonMan.layer.borderColor == #colorLiteral(red: 0.3026678778, green: 0.6489531224, blue: 0.9067135847, alpha: 1) {
             return "Man"
@@ -97,6 +102,12 @@ class ViewController: UIViewController {
             showAlertApsent(error: "пол")
         } else {
             Keys.gender = checkButtonManOrWoman(buttonMan: OutletManButton, buttonWoman: OutletWomanButton)
+        }
+        
+        if Keys.age != "Error" && Keys.gender != "Error" && Keys.height != "Error" && Keys.weight != "Error"{
+            let vc = storyboard!.instantiateViewController(withIdentifier: "HomeStoryboard") as UIViewController
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true, completion: nil)
         }
     }
     override func viewDidLoad() {

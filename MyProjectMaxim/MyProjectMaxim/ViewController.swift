@@ -8,26 +8,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    
-    
-    
-    
     func checkButtonManOrWoman(buttonMan:UIButton,buttonWoman:UIButton) -> String {
-        if buttonMan.layer.borderColor == #colorLiteral(red: 0.3026678778, green: 0.6489531224, blue: 0.9067135847, alpha: 1) {
+        if buttonMan.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
             return "Man"
-        } else if buttonWoman.layer.borderColor == #colorLiteral(red: 0.3026678778, green: 0.6489531224, blue: 0.9067135847, alpha: 1) {
+        } else if buttonWoman.layer.borderColor ==  #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1){
             return "Woman"
         } else {
             return "Error"
         }
     }
     func createFrameForButton(button: UIButton, button2: UIButton){
-        if button2.layer.borderColor == #colorLiteral(red: 0.3026678778, green: 0.6489531224, blue: 0.9067135847, alpha: 1) {
-            button2.layer.borderColor = #colorLiteral(red: 0.4778209925, green: 0.7600174546, blue: 0.8799687028, alpha: 1)
-            button.layer.borderColor = #colorLiteral(red: 0.3026678778, green: 0.6489531224, blue: 0.9067135847, alpha: 1)
+        if button2.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
+            button2.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
+            button.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         } else {
-            button.layer.borderColor = #colorLiteral(red: 0.3026678778, green: 0.6489531224, blue: 0.9067135847, alpha: 1)
+            button.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         }
     }
     @IBOutlet weak var OutletManButton: UIButton!
@@ -54,6 +49,29 @@ class ViewController: UIViewController {
         }))
         present(alert, animated: true)
     }
+    
+    
+    func calculateStandarts(){
+        var beforeInitKkal : Int = 10 * Int(Keys.weight)!
+        beforeInitKkal = beforeInitKkal + (6 * Int(Keys.height)!)
+        beforeInitKkal = beforeInitKkal - (5 * Int(Keys.age)!)
+        if Keys.gender == "Woman" {
+            Keys.kkal = beforeInitKkal - 161
+            var beforeInitWater : Double = Double(Keys.weight)! * 0.03
+            beforeInitWater = (beforeInitWater + 30 * 0.6) * 100
+            Keys.water = Int(beforeInitWater)
+        }
+        if Keys.gender == "Man" {
+            Keys.kkal = beforeInitKkal + 5
+            var beforeInitWater : Double = Double(Keys.weight)! * 0.04
+            beforeInitWater = (beforeInitWater + 30 * 0.6) * 100
+            Keys.water = Int(beforeInitWater)
+        }
+        print("KKAL - \(Keys.kkal ?? 0)")
+        print("WATER - \(Keys.water ?? 0)")
+    }
+    
+    
     @IBOutlet weak var StartEnterWeight: UITextField!
     @IBOutlet weak var StartEnterHeight: UITextField!
     @IBOutlet weak var StartEnterAge: UITextField!
@@ -62,7 +80,7 @@ class ViewController: UIViewController {
             Keys.height = "Error"
             showAlertApsent(error: "рост")
         } else {
-            var height = Int(StartEnterHeight.text!)
+            let height = Int(StartEnterHeight.text!)
             if height! > 300 || height! < 50 {
                 Keys.height = "Error"
                 showAlertNumber(error: "рост")
@@ -75,7 +93,7 @@ class ViewController: UIViewController {
             Keys.weight = "Error"
             showAlertApsent(error: "вес")
         } else {
-            var weight = Int(StartEnterWeight.text!)
+            let weight = Int(StartEnterWeight.text!)
             if weight! > 300 || weight! < 30 {
                 Keys.weight = "Error"
                 showAlertNumber(error: "вес")
@@ -88,7 +106,7 @@ class ViewController: UIViewController {
             Keys.age = "Error"
             showAlertApsent(error: "возраст")
         } else {
-            var age = Int(StartEnterAge.text!)
+            let age = Int(StartEnterAge.text!)
             if age! > 150 || age! < 3 {
                 Keys.age = "Error"
                 showAlertNumber(error: "возраст")
@@ -105,6 +123,7 @@ class ViewController: UIViewController {
         }
         
         if Keys.age != "Error" && Keys.gender != "Error" && Keys.height != "Error" && Keys.weight != "Error"{
+            calculateStandarts()
             let vc = storyboard!.instantiateViewController(withIdentifier: "HomeStoryboard") as UIViewController
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)

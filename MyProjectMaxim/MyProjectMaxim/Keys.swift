@@ -12,6 +12,32 @@ final class Keys {
         case age
         case gender
     }
+    private enum Standarts: String{
+        case kkal
+        case water
+    }
+    static var kkal: Int! {
+        get {
+            return UserDefaults.standard.integer(forKey: "kkal")
+        } set {
+            let defaults = UserDefaults.standard
+            if let kkal = newValue {
+                defaults.set(kkal, forKey: "kkal")
+            }
+        }
+        
+    }
+    static var water: Int! {
+        get {
+            return UserDefaults.standard.integer(forKey: "water")
+        } set {
+            let defaults = UserDefaults.standard
+            if let water = newValue {
+                defaults.set(water, forKey: "water")
+            }
+        }
+        
+    }
     static var height: String! {
         get {
             return UserDefaults.standard.string(forKey: HumanSettings.height.rawValue)

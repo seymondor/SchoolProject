@@ -14,10 +14,232 @@
             filePath = "MyProjectMaxim/AppDelegate.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "application(_:configurationForConnecting:options:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0C374B52-FBB8-41EB-A1A8-D520F02DB005"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "scene(_:willConnectTo:options:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0C374B52-FBB8-41EB-A1A8-D520F02DB005 - 9c25802efef00040"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.SceneDelegate.scene(_: __C.UIScene, willConnectTo: __C.UISceneSession, options: __C.UISceneConnectionOptions) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "394">
+               </Location>
+               <Location
+                  uuid = "0C374B52-FBB8-41EB-A1A8-D520F02DB005 - 9c25802efef00061"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.SceneDelegate.scene(_: __C.UIScene, willConnectTo: __C.UISceneSession, options: __C.UISceneConnectionOptions) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "394">
+               </Location>
+               <Location
+                  uuid = "0C374B52-FBB8-41EB-A1A8-D520F02DB005 - 9c25802efef00040"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.SceneDelegate.scene(_: __C.UIScene, willConnectTo: __C.UISceneSession, options: __C.UISceneConnectionOptions) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/SceneDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "412">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DBF81648-3B58-4965-B757-25840B79CD23"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "StartButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4B979351-5E94-4D8B-AAE2-51C24A882EE4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "StartButton(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4B979351-5E94-4D8B-AAE2-51C24A882EE4 - d89a49dde51b49dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.ViewController.StartButton(__C.UIButton) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "133"
+                  endingLineNumber = "133"
+                  offsetFromSymbolStart = "8299">
+               </Location>
+               <Location
+                  uuid = "4B979351-5E94-4D8B-AAE2-51C24A882EE4 - d89a49dde51b49dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.ViewController.StartButton(__C.UIButton) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "133"
+                  endingLineNumber = "133"
+                  offsetFromSymbolStart = "10485">
+               </Location>
+               <Location
+                  uuid = "4B979351-5E94-4D8B-AAE2-51C24A882EE4 - d89a49dde51b49fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.ViewController.StartButton(__C.UIButton) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
+                  offsetFromSymbolStart = "10485">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4F1F4F83-8D57-4699-91C5-6CF867C7BD6E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/SceneDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "scene(_:willConnectTo:options:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2BE9DB6D-A6EA-4006-9DEE-B58C04EE1698"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2BE9DB6D-A6EA-4006-9DEE-B58C04EE1698 - d72e471e6f327068"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.ViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "37">
+               </Location>
+               <Location
+                  uuid = "2BE9DB6D-A6EA-4006-9DEE-B58C04EE1698 - d72e471e6f327068"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.ViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11"
+                  endingLineNumber = "11"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A16D606B-F90D-4ED6-A5D8-FB469E3CC588"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/Keys.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "isStartedApp"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

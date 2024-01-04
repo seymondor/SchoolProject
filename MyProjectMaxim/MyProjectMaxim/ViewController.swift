@@ -8,6 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        StartEnterHeight.delegate = self
+        StartEnterWeight.delegate = self
+    }
     func checkButtonManOrWoman(buttonMan:UIButton,buttonWoman:UIButton) -> String {
         if buttonMan.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
             return "Man"
@@ -124,16 +129,13 @@ class ViewController: UIViewController {
         
         if Keys.age != "Error" && Keys.gender != "Error" && Keys.height != "Error" && Keys.weight != "Error"{
             calculateStandarts()
-            let vc = storyboard!.instantiateViewController(withIdentifier: "HomeStoryboard") as UIViewController
+            Keys.isStartedApp = "true"
+            let vc = storyboard!.instantiateViewController(withIdentifier: "Home") as UIViewController
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        StartEnterHeight.delegate = self
-        StartEnterWeight.delegate = self
-    }
+    
 }
 
 extension ViewController: UITextFieldDelegate {

@@ -17,6 +17,9 @@
 		632495182ADA754D0028B95E /* MyProjectMaximUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632495172ADA754D0028B95E /* MyProjectMaximUITests.swift */; };
 		6324951A2ADA754D0028B95E /* MyProjectMaximUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632495192ADA754D0028B95E /* MyProjectMaximUITestsLaunchTests.swift */; };
 		63BB96BE2AF633C900293D2E /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB96BD2AF633C900293D2E /* Keys.swift */; };
+		63EC9AC22B527266000290FA /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC12B527266000290FA /* CircularProgressBar.swift */; };
+		63EC9AC42B528127000290FA /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC32B528127000290FA /* HomeScreen.swift */; };
+		63EC9AC62B5285FE000290FA /* RouterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC52B5285FE000290FA /* RouterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		632495172ADA754D0028B95E /* MyProjectMaximUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectMaximUITests.swift; sourceTree = "<group>"; };
 		632495192ADA754D0028B95E /* MyProjectMaximUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectMaximUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		63BB96BD2AF633C900293D2E /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		63EC9AC12B527266000290FA /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		63EC9AC32B528127000290FA /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		63EC9AC52B5285FE000290FA /* RouterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,9 @@
 				632494F82ADA75480028B95E /* SceneDelegate.swift */,
 				63BB96BD2AF633C900293D2E /* Keys.swift */,
 				632494FA2ADA75480028B95E /* ViewController.swift */,
+				63EC9AC12B527266000290FA /* CircularProgressBar.swift */,
+				63EC9AC52B5285FE000290FA /* RouterViewController.swift */,
+				63EC9AC32B528127000290FA /* HomeScreen.swift */,
 				632494FC2ADA75480028B95E /* Main.storyboard */,
 				632494FF2ADA754C0028B95E /* Assets.xcassets */,
 				632495012ADA754C0028B95E /* LaunchScreen.storyboard */,
@@ -263,8 +272,11 @@
 			files = (
 				632494FB2ADA75480028B95E /* ViewController.swift in Sources */,
 				63BB96BE2AF633C900293D2E /* Keys.swift in Sources */,
+				63EC9AC42B528127000290FA /* HomeScreen.swift in Sources */,
+				63EC9AC62B5285FE000290FA /* RouterViewController.swift in Sources */,
 				632494F72ADA75480028B95E /* AppDelegate.swift in Sources */,
 				632494F92ADA75480028B95E /* SceneDelegate.swift in Sources */,
+				63EC9AC22B527266000290FA /* CircularProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

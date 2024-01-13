@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NEE-zs-gJ9">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Router-->
+        <scene sceneID="nFs-ea-LM9">
+            <objects>
+                <viewController title="Router" id="NEE-zs-gJ9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hZK-La-eTz">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="OTj-ZN-EEI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ANc-oL-UpP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="338" y="-702"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -398,18 +413,35 @@
         <!--Главная-->
         <scene sceneID="qi3-zr-L4G">
             <objects>
-                <viewController id="4ZD-W7-cGn" sceneMemberID="viewController">
+                <viewController id="4ZD-W7-cGn" customClass="HomeScreenViewController" customModule="MyProjectMaxim" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wlx-bx-Zhx">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQc-lp-sen" customClass="CircularProgressBar" customModule="MyProjectMaxim" customModuleProvider="target">
+                                <rect key="frame" x="76.666666666666686" y="132" width="240" height="240"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="40w-kY-yqO"/>
+                                    <constraint firstAttribute="height" constant="240" id="mbk-Kb-vxX"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Hf8-6y-xEs"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="OQc-lp-sen" firstAttribute="centerX" secondItem="wlx-bx-Zhx" secondAttribute="centerX" id="Bvq-d8-zcv"/>
+                            <constraint firstItem="OQc-lp-sen" firstAttribute="top" secondItem="Hf8-6y-xEs" secondAttribute="top" constant="73" id="FFu-7M-uoC"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Главная" image="house.fill" catalog="system" id="jJ1-ja-0Cd"/>
+                    <connections>
+                        <outlet property="CircularProgress" destination="OQc-lp-sen" id="ehw-SW-ZlA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u40-Mu-Hgi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1" y="763"/>
+            <point key="canvasLocation" x="0.76335877862595414" y="762.67605633802816"/>
         </scene>
         <!--Home-->
         <scene sceneID="KZW-yG-xM0">

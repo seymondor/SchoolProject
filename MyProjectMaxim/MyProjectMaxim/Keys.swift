@@ -16,16 +16,30 @@ final class Keys {
         case kkal
         case water
     }
-//        get {
-//            return UserDefaults.standard.string(forKey: HumanSettings.height.rawValue)
-//        } 
-//        set {
-//            let defaults = UserDefaults.standard
-//            let key = HumanSettings.height.rawValue
-//            if let height = newValue {
-//                defaults.set(height, forKey: key)
-//            }
-//        }
+    private enum UsedStandarts : String{
+        case usedKkal
+        case usedWater
+    }
+    static var usedKkal: Int! {
+        get{
+            return UserDefaults.standard.integer(forKey: "usedKkal")
+        }
+        set{
+            if let usedKkal = newValue {
+                UserDefaults.standard.integer(forKey: "usedKkal")
+            }
+        }
+    }
+    static var usedWater: Int! {
+        get{
+            return UserDefaults.standard.integer(forKey: "usedWater")
+        }
+        set{
+            if let usedWater = newValue {
+                UserDefaults.standard.set(usedWater, forKey: "usedWater")
+            }
+        }
+    }
     static var kkal: Int! {
         get {
             return UserDefaults.standard.integer(forKey: "kkal")

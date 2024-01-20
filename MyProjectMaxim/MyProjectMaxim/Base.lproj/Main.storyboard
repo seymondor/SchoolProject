@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NEE-zs-gJ9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NEE-zs-gJ9">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -419,22 +419,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQc-lp-sen" customClass="CircularProgressBar" customModule="MyProjectMaxim" customModuleProvider="target">
-                                <rect key="frame" x="36.666666666666657" y="100" width="320" height="320"/>
+                                <rect key="frame" x="22.666666666666657" y="100" width="348" height="348"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEQ-hv-bI2">
+                                        <rect key="frame" x="29" y="187" width="297" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfT-D5-FG4">
+                                        <rect key="frame" x="8" y="102" width="340" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="40w-kY-yqO"/>
-                                    <constraint firstAttribute="height" constant="320" id="mbk-Kb-vxX"/>
+                                    <constraint firstAttribute="height" constant="348" id="gpI-Qw-jat"/>
+                                    <constraint firstAttribute="width" constant="348" id="n1f-ik-Azc"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEP-6o-Nbb">
-                                <rect key="frame" x="169" y="428" width="55" height="26"/>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEP-6o-Nbb">
+                                <rect key="frame" x="128" y="465" width="137" height="40"/>
+                                <color key="backgroundColor" red="0.66946256213737088" green="0.75371416712844075" blue="0.73229302987740896" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="B2o-xB-b0f"/>
+                                    <constraint firstAttribute="width" constant="137" id="X1R-4X-l8B"/>
+                                </constraints>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Add water">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title=" Добавить" image="plus" catalog="system">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="AddWater:" destination="4ZD-W7-cGn" eventType="touchUpInside" id="22D-rh-Oa8"/>
                                 </connections>
@@ -443,16 +468,17 @@
                         <viewLayoutGuide key="safeArea" id="Hf8-6y-xEs"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="OQc-lp-sen" firstAttribute="centerX" secondItem="wlx-bx-Zhx" secondAttribute="centerX" id="Bvq-d8-zcv"/>
-                            <constraint firstItem="OQc-lp-sen" firstAttribute="top" secondItem="Hf8-6y-xEs" secondAttribute="top" constant="41" id="FFu-7M-uoC"/>
-                            <constraint firstItem="OQc-lp-sen" firstAttribute="centerX" secondItem="Hf8-6y-xEs" secondAttribute="centerX" id="dqQ-kV-8hP"/>
-                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="centerX" secondItem="Hf8-6y-xEs" secondAttribute="centerX" id="gIm-xl-ZVS"/>
-                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="bottom" constant="8" symbolic="YES" id="zLH-cq-wYp"/>
+                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="bottom" constant="17" id="AfL-qY-ja1"/>
+                            <constraint firstItem="OQc-lp-sen" firstAttribute="centerX" secondItem="wlx-bx-Zhx" secondAttribute="centerX" id="Ijs-43-ycR"/>
+                            <constraint firstItem="OQc-lp-sen" firstAttribute="top" secondItem="Hf8-6y-xEs" secondAttribute="top" constant="41" id="Jsy-ND-6dq"/>
+                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="centerX" secondItem="OQc-lp-sen" secondAttribute="centerX" id="suO-L7-9q0"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Главная" image="house.fill" catalog="system" id="jJ1-ja-0Cd"/>
                     <connections>
                         <outlet property="CircularProgress" destination="OQc-lp-sen" id="ehw-SW-ZlA"/>
+                        <outlet property="amountOfSomething" destination="bEQ-hv-bI2" id="ziR-aU-UK6"/>
+                        <outlet property="percentage" destination="BfT-D5-FG4" id="CIb-cy-8HX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u40-Mu-Hgi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -488,11 +514,9 @@
         <image name="clock.fill" catalog="system" width="128" height="123"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -16,20 +16,6 @@ final class Keys {
         case kkal
         case water
     }
-    private enum App : String{
-        case isStartedApp
-    }
-    static var isStartedApp: String! {
-        get{
-            print("GET \(UserDefaults.standard.bool(forKey: "app"))")
-            return UserDefaults.standard.string(forKey: "app")
-        } set {
-            let defaults = UserDefaults.standard
-            if let isStartedApp = newValue {
-                defaults.set(height, forKey: "app")
-                print("SET \(isStartedApp)")
-            }
-        }
 //        get {
 //            return UserDefaults.standard.string(forKey: HumanSettings.height.rawValue)
 //        } 
@@ -40,8 +26,6 @@ final class Keys {
 //                defaults.set(height, forKey: key)
 //            }
 //        }
-        
-    }
     static var kkal: Int! {
         get {
             return UserDefaults.standard.integer(forKey: "kkal")

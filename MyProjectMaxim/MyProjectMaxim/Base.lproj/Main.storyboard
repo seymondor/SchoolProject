@@ -419,19 +419,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQc-lp-sen" customClass="CircularProgressBar" customModule="MyProjectMaxim" customModuleProvider="target">
-                                <rect key="frame" x="76.666666666666686" y="132" width="240" height="240"/>
+                                <rect key="frame" x="36.666666666666657" y="100" width="320" height="320"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="40w-kY-yqO"/>
-                                    <constraint firstAttribute="height" constant="240" id="mbk-Kb-vxX"/>
+                                    <constraint firstAttribute="width" constant="320" id="40w-kY-yqO"/>
+                                    <constraint firstAttribute="height" constant="320" id="mbk-Kb-vxX"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEP-6o-Nbb">
+                                <rect key="frame" x="169" y="428" width="55" height="26"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Add water">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="AddWater:" destination="4ZD-W7-cGn" eventType="touchUpInside" id="22D-rh-Oa8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hf8-6y-xEs"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OQc-lp-sen" firstAttribute="centerX" secondItem="wlx-bx-Zhx" secondAttribute="centerX" id="Bvq-d8-zcv"/>
-                            <constraint firstItem="OQc-lp-sen" firstAttribute="top" secondItem="Hf8-6y-xEs" secondAttribute="top" constant="73" id="FFu-7M-uoC"/>
+                            <constraint firstItem="OQc-lp-sen" firstAttribute="top" secondItem="Hf8-6y-xEs" secondAttribute="top" constant="41" id="FFu-7M-uoC"/>
+                            <constraint firstItem="OQc-lp-sen" firstAttribute="centerX" secondItem="Hf8-6y-xEs" secondAttribute="centerX" id="dqQ-kV-8hP"/>
+                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="centerX" secondItem="Hf8-6y-xEs" secondAttribute="centerX" id="gIm-xl-ZVS"/>
+                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="bottom" constant="8" symbolic="YES" id="zLH-cq-wYp"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Главная" image="house.fill" catalog="system" id="jJ1-ja-0Cd"/>
@@ -441,7 +457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u40-Mu-Hgi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1" y="763"/>
+            <point key="canvasLocation" x="0.76335877862595414" y="762.67605633802816"/>
         </scene>
         <!--Home-->
         <scene sceneID="KZW-yG-xM0">
@@ -474,6 +490,9 @@
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529410000001" green="0.69019607839999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -12,6 +12,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         StartEnterHeight.delegate = self
         StartEnterWeight.delegate = self
+    
     }
     func checkButtonManOrWoman(buttonMan:UIButton,buttonWoman:UIButton) -> String {
         if buttonMan.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
@@ -129,7 +130,6 @@ class ViewController: UIViewController {
         
         if Keys.age != "Error" && Keys.gender != "Error" && Keys.height != "Error" && Keys.weight != "Error"{
             calculateStandarts()
-            Keys.isStartedApp = "true"
             let vc = storyboard!.instantiateViewController(withIdentifier: "Home") as UIViewController
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)

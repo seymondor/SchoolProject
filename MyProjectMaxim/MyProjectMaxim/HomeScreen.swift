@@ -10,22 +10,14 @@ import UIKit
 class HomeScreenViewController: UIViewController {
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
+    @IBAction func AddWater(_ sender: UIButton) {
+        CircularProgress.setProgressWithAnimation(duration: 1.0, value: 0.7,from: 0.6)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let cp = CircularProgressBar(frame: CGRect(x: 10.0, y: 10.0, width: 100.0, height: 100.0))
-//        cp.trackColor = UIColor.red
-//        cp.progressColor = UIColor.yellow
-//        cp.tag = 101
-//        self.view.addSubview(cp)
-//        cp.center = self.view.center
-//        self.perform(#selector(animateProgress), with: nil, afterDelay: 2.0)
-        CircularProgress.trackColor = UIColor.white
-        CircularProgress.trackColor = UIColor.purple
-        CircularProgress.setProgressWithAnimation(duration: 1.0, value: 0.6)
+        CircularProgress.trackColor = #colorLiteral(red: 0.6807348041, green: 0.8550895293, blue: 1, alpha: 1)
+        CircularProgress.progressColor = #colorLiteral(red: 0.4277995191, green: 0.7138730807, blue: 1, alpha: 1)
+        CircularProgress.setProgressWithAnimation(duration: 1.0, value: 0.6,from: 0)
         
     }
-//    @objc func animateProgress() {
-//        let cP = self.view.viewWithTag(101) as! CircularProgressBar
-//        cP.setProgressWithAnimation(duration: 1.0, value: 0.7)
-//    }
 }

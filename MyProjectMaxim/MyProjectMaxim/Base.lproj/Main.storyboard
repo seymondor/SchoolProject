@@ -421,16 +421,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQc-lp-sen" customClass="CircularProgressBar" customModule="MyProjectMaxim" customModuleProvider="target">
                                 <rect key="frame" x="22.666666666666657" y="100" width="348" height="348"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEQ-hv-bI2">
-                                        <rect key="frame" x="29" y="187" width="297" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEQ-hv-bI2">
+                                        <rect key="frame" x="22" y="187" width="304" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfT-D5-FG4">
-                                        <rect key="frame" x="8" y="102" width="340" height="55"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfT-D5-FG4">
+                                        <rect key="frame" x="8" y="102" width="332" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="NDb-cf-rcX"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="46"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -438,8 +439,14 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="bEQ-hv-bI2" firstAttribute="leading" secondItem="OQc-lp-sen" secondAttribute="leading" constant="22" id="2gZ-tN-F34"/>
+                                    <constraint firstAttribute="trailing" secondItem="BfT-D5-FG4" secondAttribute="trailing" constant="8" id="MtF-mo-4QN"/>
+                                    <constraint firstAttribute="trailing" secondItem="bEQ-hv-bI2" secondAttribute="trailing" constant="22" id="eRb-HM-Fmi"/>
+                                    <constraint firstItem="BfT-D5-FG4" firstAttribute="leading" secondItem="OQc-lp-sen" secondAttribute="leading" constant="8" id="eaD-jl-ZY1"/>
+                                    <constraint firstItem="BfT-D5-FG4" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="top" constant="102" id="eek-ai-Sxc"/>
                                     <constraint firstAttribute="height" constant="348" id="gpI-Qw-jat"/>
                                     <constraint firstAttribute="width" constant="348" id="n1f-ik-Azc"/>
+                                    <constraint firstItem="bEQ-hv-bI2" firstAttribute="top" secondItem="BfT-D5-FG4" secondAttribute="bottom" constant="30" id="vEo-Ms-VuL"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEP-6o-Nbb">

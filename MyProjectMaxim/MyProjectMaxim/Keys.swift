@@ -26,7 +26,7 @@ final class Keys {
         }
         set{
             if let usedKkal = newValue {
-                UserDefaults.standard.integer(forKey: "usedKkal")
+                UserDefaults.standard.set(usedKkal, forKey: "usedKkal")
             }
         }
     }

@@ -9,25 +9,10 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        self.window = UIWindow()
-
-//        if Keys.isStartedApp == true{
-//                    // implement home view controller
-//                    let homeViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Home")
-//                    self.window?.rootViewController = homeViewController
-//                    self.window?.makeKeyAndVisible()
-//                }else{
-//                    // implement register view controller
-//                    let registerViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "Start")
-//                    self.window?.rootViewController = registerViewController
-//                    self.window?.makeKeyAndVisible()
-//                }
-
-                        return true
+        return true
             }
     }
 

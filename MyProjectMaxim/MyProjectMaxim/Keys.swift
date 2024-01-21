@@ -19,6 +19,17 @@ final class Keys {
     private enum UsedStandarts : String{
         case usedKkal
         case usedWater
+        case selectedBar
+    }
+    static var selectedBar: String! {
+        get{
+            return UserDefaults.standard.string(forKey: "bar")
+        }
+        set{
+            if let selectedBar = newValue {
+                UserDefaults.standard.set(selectedBar, forKey: "bar")
+            }
+        }
     }
     static var usedKkal: Int! {
         get{

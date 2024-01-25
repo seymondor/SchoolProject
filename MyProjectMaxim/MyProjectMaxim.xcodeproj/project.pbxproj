@@ -20,6 +20,7 @@
 		63EC9AC22B527266000290FA /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC12B527266000290FA /* CircularProgressBar.swift */; };
 		63EC9AC42B528127000290FA /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC32B528127000290FA /* HomeScreen.swift */; };
 		63EC9AC62B5285FE000290FA /* RouterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC52B5285FE000290FA /* RouterViewController.swift */; };
+		B54FFFC42B62757C008E08EF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54FFFC32B62757C008E08EF /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		63EC9AC12B527266000290FA /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		63EC9AC32B528127000290FA /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		63EC9AC52B5285FE000290FA /* RouterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewController.swift; sourceTree = "<group>"; };
+		B54FFFC32B62757C008E08EF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				63EC9AC12B527266000290FA /* CircularProgressBar.swift */,
 				63EC9AC52B5285FE000290FA /* RouterViewController.swift */,
 				63EC9AC32B528127000290FA /* HomeScreen.swift */,
+				B54FFFC32B62757C008E08EF /* SettingsViewController.swift */,
 				632494FC2ADA75480028B95E /* Main.storyboard */,
 				632494FF2ADA754C0028B95E /* Assets.xcassets */,
 				632495012ADA754C0028B95E /* LaunchScreen.storyboard */,
@@ -277,6 +280,7 @@
 				632494F72ADA75480028B95E /* AppDelegate.swift in Sources */,
 				632494F92ADA75480028B95E /* SceneDelegate.swift in Sources */,
 				63EC9AC22B527266000290FA /* CircularProgressBar.swift in Sources */,
+				B54FFFC42B62757C008E08EF /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

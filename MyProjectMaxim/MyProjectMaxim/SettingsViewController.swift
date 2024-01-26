@@ -10,9 +10,20 @@ import UIKit
 class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        enterHeightField.text = Keys.height
+        enterWeightField.text = Keys.weight
+        enterAgeField.text = Keys.age
+        if Keys.gender == "Man" {
+            OutletManButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
+        } else {
+            OutletWomanButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
+        }
         StartEnterHeight.delegate = self
         StartEnterWeight.delegate = self
     }
+    @IBOutlet weak var enterHeightField: UITextField!
+    @IBOutlet weak var enterWeightField: UITextField!
+    @IBOutlet weak var enterAgeField: UITextField!
     func checkButtonManOrWoman(buttonMan:UIButton,buttonWoman:UIButton) -> String {
         if buttonMan.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
             return "Man"
@@ -78,6 +89,9 @@ class SettingViewController: UIViewController {
     }
     
     func resetProgressBar() {
+        
+        
+        
     }
     @IBOutlet weak var StartEnterWeight: UITextField!
     @IBOutlet weak var StartEnterHeight: UITextField!
@@ -131,10 +145,12 @@ class SettingViewController: UIViewController {
         
         if Keys.age != "Error" && Keys.gender != "Error" && Keys.height != "Error" && Keys.weight != "Error"{
             calculateStandarts()
-            
-            
-            
-            
+            let alert = UIAlertController(title: "Внимание", message: "Прогресс был сброшен.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in
+                print("Нажал Хорошо")
+            }))
+            present(alert, animated: true)
+            resetProgressBar() // TODO: ДОДЕЛАТЬ ФУНКЦИЮ РЕСЕТА ПРОГРЕСС БАРА
         }
     }
     
@@ -146,7 +162,7 @@ extension SettingViewController: UITextFieldDelegate {
         let allowedcharacterSet = CharacterSet(charactersIn: allowedcharacters)
         let typedCharactersetIn = CharacterSet(charactersIn: string)
         if textField.text?.count == 0 && string == "0" {
-                return false
+            return false
         }
         return allowedcharacterSet.isSuperset(of: typedCharactersetIn)
     }

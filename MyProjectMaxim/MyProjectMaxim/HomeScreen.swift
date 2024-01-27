@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 class HomeScreenViewController: UIViewController {
+    public static var shared = HomeScreenViewController()
+    
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
     @IBOutlet weak var backgroundOfEmojiSelectedBar: UIView!
@@ -83,7 +85,19 @@ class HomeScreenViewController: UIViewController {
             changeBarToFood()
         }
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        if Keys.selectedBar == "water" {
+            let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            CircularProgress.setProgressWithAnimation(duration: 0.0, value: Float(perc)/100 ,from: Float(perc)/100)
+            percentage.text = "\(Int(perc))%"
+            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
+        } else {
+            let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            CircularProgress.setProgressWithAnimation(duration: 0.0, value: Float(perc)/100 ,from: Float(perc)/100)
+            percentage.text = "\(Int(perc))%"
+            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
+        }
+    }
     func showAlertApsent(error: String){
         let alert = UIAlertController(title: "Внимание", message: "Уже выбран \(error).", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in

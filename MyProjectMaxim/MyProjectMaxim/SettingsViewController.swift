@@ -89,9 +89,9 @@ class SettingViewController: UIViewController {
     }
     
     func resetProgressBar() {
-        
-        
-        
+        Keys.usedKkal = 0
+        Keys.usedWater = 0
+        // HomeScreenViewController.shared
     }
     @IBOutlet weak var StartEnterWeight: UITextField!
     @IBOutlet weak var StartEnterHeight: UITextField!

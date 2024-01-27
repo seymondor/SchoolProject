@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NEE-zs-gJ9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NEE-zs-gJ9">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -743,84 +743,99 @@
                                     <constraint firstItem="rlX-vZ-hKV" firstAttribute="centerX" secondItem="OQc-lp-sen" secondAttribute="centerX" id="wLh-4h-158"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEP-6o-Nbb">
-                                <rect key="frame" x="128" y="478" width="137" height="40"/>
-                                <color key="backgroundColor" red="0.66946256213737088" green="0.75371416712844075" blue="0.73229302987740896" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OzA-Bw-hGE">
+                                <rect key="frame" x="2" y="478" width="389" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEP-6o-Nbb">
+                                        <rect key="frame" x="126" y="10" width="137" height="40"/>
+                                        <color key="backgroundColor" red="0.66946256213737088" green="0.75371416712844075" blue="0.73229302987740896" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="B2o-xB-b0f"/>
+                                            <constraint firstAttribute="width" constant="137" id="X1R-4X-l8B"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="  Добавить " image="plus" catalog="system">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="addAmountButton:" destination="4ZD-W7-cGn" eventType="touchUpInside" id="0LF-bl-K6G"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEr-hD-i4y">
+                                        <rect key="frame" x="20" y="10" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.57906624870624146" green="0.72741770679713469" blue="0.85168657399187186" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="hCg-DQ-F89"/>
+                                            <constraint firstAttribute="width" secondItem="NEr-hD-i4y" secondAttribute="height" multiplier="1:1" id="j3H-fN-T1w"/>
+                                            <constraint firstAttribute="height" constant="40" id="kAw-0f-MoJ"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="drop.fill" catalog="system">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="WaterChangeButton:" destination="4ZD-W7-cGn" eventType="touchUpInside" id="xyw-0V-ihR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQa-xt-aY4">
+                                        <rect key="frame" x="329" y="10" width="40" height="40"/>
+                                        <color key="backgroundColor" red="0.48457422320152005" green="0.71845970791999747" blue="0.49900532675889525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="WQa-xt-aY4" secondAttribute="height" multiplier="1:1" id="BtX-SC-gJw"/>
+                                            <constraint firstAttribute="height" constant="40" id="eW8-i0-2lP"/>
+                                            <constraint firstAttribute="width" constant="40" id="yV4-cd-I3C"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="carrot.fill" catalog="system">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="foodChangeButton:" destination="4ZD-W7-cGn" eventType="touchUpInside" id="2i9-nA-suM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="B2o-xB-b0f"/>
-                                    <constraint firstAttribute="width" constant="137" id="X1R-4X-l8B"/>
+                                    <constraint firstAttribute="trailing" secondItem="WQa-xt-aY4" secondAttribute="trailing" constant="20" id="4uW-iT-b17"/>
+                                    <constraint firstItem="NEr-hD-i4y" firstAttribute="baseline" secondItem="WQa-xt-aY4" secondAttribute="baseline" id="OJC-z6-3LH"/>
+                                    <constraint firstItem="WQa-xt-aY4" firstAttribute="leading" secondItem="NEP-6o-Nbb" secondAttribute="trailing" constant="66" id="Yl8-xj-ePw"/>
+                                    <constraint firstItem="NEr-hD-i4y" firstAttribute="centerY" secondItem="OzA-Bw-hGE" secondAttribute="centerY" id="jtR-79-rDF"/>
+                                    <constraint firstItem="NEr-hD-i4y" firstAttribute="leading" secondItem="OzA-Bw-hGE" secondAttribute="leading" constant="20" id="kAQ-gd-Igb"/>
+                                    <constraint firstItem="NEr-hD-i4y" firstAttribute="baseline" secondItem="NEP-6o-Nbb" secondAttribute="firstBaseline" id="mcK-rl-QMN"/>
+                                    <constraint firstItem="NEP-6o-Nbb" firstAttribute="leading" secondItem="NEr-hD-i4y" secondAttribute="trailing" constant="66" id="tcb-Qe-uq2"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="  Добавить " image="plus" catalog="system">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="addAmountButton:" destination="4ZD-W7-cGn" eventType="touchUpInside" id="0LF-bl-K6G"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NEr-hD-i4y">
-                                <rect key="frame" x="22" y="478" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.57906624870624146" green="0.72741770679713469" blue="0.85168657399187186" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="kAw-0f-MoJ"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="drop.fill" catalog="system">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="WaterChangeButton:" destination="4ZD-W7-cGn" eventType="touchUpInside" id="xyw-0V-ihR"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQa-xt-aY4">
-                                <rect key="frame" x="331" y="478" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.48457422320152005" green="0.71845970791999747" blue="0.49900532675889525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="eW8-i0-2lP"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="carrot.fill" catalog="system">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="foodChangeButton:" destination="4ZD-W7-cGn" eventType="touchUpInside" id="2i9-nA-suM"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hf8-6y-xEs"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="bottom" constant="30" id="AfL-qY-ja1"/>
-                            <constraint firstItem="WQa-xt-aY4" firstAttribute="leading" secondItem="NEP-6o-Nbb" secondAttribute="trailing" constant="66" id="Fah-wQ-9QC"/>
+                            <constraint firstItem="OzA-Bw-hGE" firstAttribute="centerX" secondItem="OQc-lp-sen" secondAttribute="centerX" id="Bf9-s4-dXq"/>
                             <constraint firstItem="OQc-lp-sen" firstAttribute="centerX" secondItem="wlx-bx-Zhx" secondAttribute="centerX" id="Ijs-43-ycR"/>
                             <constraint firstItem="OQc-lp-sen" firstAttribute="top" secondItem="Hf8-6y-xEs" secondAttribute="top" constant="41" id="Jsy-ND-6dq"/>
-                            <constraint firstItem="NEr-hD-i4y" firstAttribute="leading" secondItem="Hf8-6y-xEs" secondAttribute="leading" constant="22" id="KFS-EW-rhg"/>
-                            <constraint firstItem="WQa-xt-aY4" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="bottom" constant="30" id="LOO-7U-JES"/>
-                            <constraint firstItem="Hf8-6y-xEs" firstAttribute="trailing" secondItem="WQa-xt-aY4" secondAttribute="trailing" constant="22" id="ToB-Ed-Ec1"/>
-                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="leading" secondItem="NEr-hD-i4y" secondAttribute="trailing" constant="66" id="gv8-1Y-Pa3"/>
-                            <constraint firstItem="NEP-6o-Nbb" firstAttribute="centerX" secondItem="OQc-lp-sen" secondAttribute="centerX" id="suO-L7-9q0"/>
-                            <constraint firstItem="NEr-hD-i4y" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="bottom" constant="30" id="t70-oS-O30"/>
+                            <constraint firstItem="OzA-Bw-hGE" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="bottom" constant="30" id="Zmc-ef-9QK"/>
+                            <constraint firstItem="OzA-Bw-hGE" firstAttribute="leading" secondItem="Hf8-6y-xEs" secondAttribute="leading" constant="2" id="dZw-vf-s6g"/>
+                            <constraint firstItem="Hf8-6y-xEs" firstAttribute="bottom" secondItem="OzA-Bw-hGE" secondAttribute="bottom" constant="231" id="xUg-NA-pQM"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Главная" image="house.fill" catalog="system" id="jJ1-ja-0Cd"/>

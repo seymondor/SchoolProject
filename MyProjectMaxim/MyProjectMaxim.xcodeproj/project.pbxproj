@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		304BE4F79E40D84C774454F4 /* Pods_MyProjectMaximTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F25429AB9E46BDB38DC555 /* Pods_MyProjectMaximTests.framework */; };
+		4D43DDA1831D6BB21A827CB0 /* Pods_MyProjectMaxim.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B9D012CCA9BBC563BB7238B /* Pods_MyProjectMaxim.framework */; };
 		632494F72ADA75480028B95E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632494F62ADA75480028B95E /* AppDelegate.swift */; };
 		632494F92ADA75480028B95E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632494F82ADA75480028B95E /* SceneDelegate.swift */; };
 		632494FB2ADA75480028B95E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632494FA2ADA75480028B95E /* ViewController.swift */; };
@@ -20,6 +22,9 @@
 		63EC9AC22B527266000290FA /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC12B527266000290FA /* CircularProgressBar.swift */; };
 		63EC9AC42B528127000290FA /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC32B528127000290FA /* HomeScreen.swift */; };
 		63EC9AC62B5285FE000290FA /* RouterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC52B5285FE000290FA /* RouterViewController.swift */; };
+		8994C6257992685F2C9BF7C1 /* Pods_MyProjectMaxim_MyProjectMaximUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4576ACBF3BBF5CA85413D4FD /* Pods_MyProjectMaxim_MyProjectMaximUITests.framework */; };
+		B5073D282B6A5AE400129E77 /* FoodAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */; };
+		B5073D2A2B6A5B0000129E77 /* WaterAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */; };
 		B54FFFC42B62757C008E08EF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54FFFC32B62757C008E08EF /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03DA5E76B47534CD5411E15F /* Pods-MyProjectMaxim-MyProjectMaximUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaxim-MyProjectMaximUITests.debug.xcconfig"; path = "Target Support Files/Pods-MyProjectMaxim-MyProjectMaximUITests/Pods-MyProjectMaxim-MyProjectMaximUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		10F25429AB9E46BDB38DC555 /* Pods_MyProjectMaximTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyProjectMaximTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4576ACBF3BBF5CA85413D4FD /* Pods_MyProjectMaxim_MyProjectMaximUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyProjectMaxim_MyProjectMaximUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B11A8D14538B184647A66E3 /* Pods-MyProjectMaximTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaximTests.release.xcconfig"; path = "Target Support Files/Pods-MyProjectMaximTests/Pods-MyProjectMaximTests.release.xcconfig"; sourceTree = "<group>"; };
+		5B9D012CCA9BBC563BB7238B /* Pods_MyProjectMaxim.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyProjectMaxim.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		632494F32ADA75480028B95E /* MyProjectMaxim.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyProjectMaxim.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		632494F62ADA75480028B95E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		632494F82ADA75480028B95E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +68,13 @@
 		63EC9AC12B527266000290FA /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
 		63EC9AC32B528127000290FA /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		63EC9AC52B5285FE000290FA /* RouterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewController.swift; sourceTree = "<group>"; };
+		A4B47FECE047A070B7A75084 /* Pods-MyProjectMaxim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaxim.release.xcconfig"; path = "Target Support Files/Pods-MyProjectMaxim/Pods-MyProjectMaxim.release.xcconfig"; sourceTree = "<group>"; };
+		B2D0E88BB581E651FCF43A70 /* Pods-MyProjectMaxim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaxim.debug.xcconfig"; path = "Target Support Files/Pods-MyProjectMaxim/Pods-MyProjectMaxim.debug.xcconfig"; sourceTree = "<group>"; };
+		B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddViewController.swift; sourceTree = "<group>"; };
+		B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAddViewController.swift; sourceTree = "<group>"; };
 		B54FFFC32B62757C008E08EF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C6AD2231A4A06E65C892B767 /* Pods-MyProjectMaximTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaximTests.debug.xcconfig"; path = "Target Support Files/Pods-MyProjectMaximTests/Pods-MyProjectMaximTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CB775FE6CE68AB881E2BC621 /* Pods-MyProjectMaxim-MyProjectMaximUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaxim-MyProjectMaximUITests.release.xcconfig"; path = "Target Support Files/Pods-MyProjectMaxim-MyProjectMaximUITests/Pods-MyProjectMaxim-MyProjectMaximUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D43DDA1831D6BB21A827CB0 /* Pods_MyProjectMaxim.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				304BE4F79E40D84C774454F4 /* Pods_MyProjectMaximTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8994C6257992685F2C9BF7C1 /* Pods_MyProjectMaxim_MyProjectMaximUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +112,8 @@
 				6324950C2ADA754D0028B95E /* MyProjectMaximTests */,
 				632495162ADA754D0028B95E /* MyProjectMaximUITests */,
 				632494F42ADA75480028B95E /* Products */,
+				8274DEE7491B10E42451002A /* Pods */,
+				EE130DA28A02911DA47B1EC8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +138,8 @@
 				63EC9AC52B5285FE000290FA /* RouterViewController.swift */,
 				63EC9AC32B528127000290FA /* HomeScreen.swift */,
 				B54FFFC32B62757C008E08EF /* SettingsViewController.swift */,
+				B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */,
+				B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */,
 				632494FC2ADA75480028B95E /* Main.storyboard */,
 				632494FF2ADA754C0028B95E /* Assets.xcassets */,
 				632495012ADA754C0028B95E /* LaunchScreen.storyboard */,
@@ -142,6 +165,29 @@
 			path = MyProjectMaximUITests;
 			sourceTree = "<group>";
 		};
+		8274DEE7491B10E42451002A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B2D0E88BB581E651FCF43A70 /* Pods-MyProjectMaxim.debug.xcconfig */,
+				A4B47FECE047A070B7A75084 /* Pods-MyProjectMaxim.release.xcconfig */,
+				03DA5E76B47534CD5411E15F /* Pods-MyProjectMaxim-MyProjectMaximUITests.debug.xcconfig */,
+				CB775FE6CE68AB881E2BC621 /* Pods-MyProjectMaxim-MyProjectMaximUITests.release.xcconfig */,
+				C6AD2231A4A06E65C892B767 /* Pods-MyProjectMaximTests.debug.xcconfig */,
+				5B11A8D14538B184647A66E3 /* Pods-MyProjectMaximTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		EE130DA28A02911DA47B1EC8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B9D012CCA9BBC563BB7238B /* Pods_MyProjectMaxim.framework */,
+				4576ACBF3BBF5CA85413D4FD /* Pods_MyProjectMaxim_MyProjectMaximUITests.framework */,
+				10F25429AB9E46BDB38DC555 /* Pods_MyProjectMaximTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,9 +195,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6324951D2ADA754D0028B95E /* Build configuration list for PBXNativeTarget "MyProjectMaxim" */;
 			buildPhases = (
+				A2E642A6D17EECC15976509B /* [CP] Check Pods Manifest.lock */,
 				632494EF2ADA75480028B95E /* Sources */,
 				632494F02ADA75480028B95E /* Frameworks */,
 				632494F12ADA75480028B95E /* Resources */,
+				D3A75F3DB733F905FD4A0D7C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,6 +214,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 632495202ADA754D0028B95E /* Build configuration list for PBXNativeTarget "MyProjectMaximTests" */;
 			buildPhases = (
+				1DE77E48865EA77765191957 /* [CP] Check Pods Manifest.lock */,
 				632495052ADA754D0028B95E /* Sources */,
 				632495062ADA754D0028B95E /* Frameworks */,
 				632495072ADA754D0028B95E /* Resources */,
@@ -184,9 +233,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 632495232ADA754D0028B95E /* Build configuration list for PBXNativeTarget "MyProjectMaximUITests" */;
 			buildPhases = (
+				BD9047927BD6DCDEA026FCAF /* [CP] Check Pods Manifest.lock */,
 				6324950F2ADA754D0028B95E /* Sources */,
 				632495102ADA754D0028B95E /* Frameworks */,
 				632495112ADA754D0028B95E /* Resources */,
+				759113C875B1683262425636 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -268,6 +319,109 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1DE77E48865EA77765191957 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyProjectMaximTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		759113C875B1683262425636 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyProjectMaxim-MyProjectMaximUITests/Pods-MyProjectMaxim-MyProjectMaximUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyProjectMaxim-MyProjectMaximUITests/Pods-MyProjectMaxim-MyProjectMaximUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyProjectMaxim-MyProjectMaximUITests/Pods-MyProjectMaxim-MyProjectMaximUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2E642A6D17EECC15976509B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyProjectMaxim-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD9047927BD6DCDEA026FCAF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyProjectMaxim-MyProjectMaximUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3A75F3DB733F905FD4A0D7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyProjectMaxim/Pods-MyProjectMaxim-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyProjectMaxim/Pods-MyProjectMaxim-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyProjectMaxim/Pods-MyProjectMaxim-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		632494EF2ADA75480028B95E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -279,6 +433,8 @@
 				63EC9AC62B5285FE000290FA /* RouterViewController.swift in Sources */,
 				632494F72ADA75480028B95E /* AppDelegate.swift in Sources */,
 				632494F92ADA75480028B95E /* SceneDelegate.swift in Sources */,
+				B5073D2A2B6A5B0000129E77 /* WaterAddViewController.swift in Sources */,
+				B5073D282B6A5AE400129E77 /* FoodAddViewController.swift in Sources */,
 				63EC9AC22B527266000290FA /* CircularProgressBar.swift in Sources */,
 				B54FFFC42B62757C008E08EF /* SettingsViewController.swift in Sources */,
 			);
@@ -457,6 +613,7 @@
 		};
 		6324951E2ADA754D0028B95E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2D0E88BB581E651FCF43A70 /* Pods-MyProjectMaxim.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -464,6 +621,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3369S7XQ3Z;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyProjectMaxim/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -487,6 +645,7 @@
 		};
 		6324951F2ADA754D0028B95E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4B47FECE047A070B7A75084 /* Pods-MyProjectMaxim.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -494,6 +653,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3369S7XQ3Z;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyProjectMaxim/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -517,6 +677,7 @@
 		};
 		632495212ADA754D0028B95E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C6AD2231A4A06E65C892B767 /* Pods-MyProjectMaximTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -536,6 +697,7 @@
 		};
 		632495222ADA754D0028B95E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B11A8D14538B184647A66E3 /* Pods-MyProjectMaximTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -555,6 +717,7 @@
 		};
 		632495242ADA754D0028B95E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03DA5E76B47534CD5411E15F /* Pods-MyProjectMaxim-MyProjectMaximUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -572,6 +735,7 @@
 		};
 		632495252ADA754D0028B95E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB775FE6CE68AB881E2BC621 /* Pods-MyProjectMaxim-MyProjectMaximUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

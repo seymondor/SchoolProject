@@ -1,0 +1,6 @@
+framework module Pods_MyProjectMaxim {
+  umbrella header "Pods-MyProjectMaxim-umbrella.h"
+
+  export *
+  module * { export * }
+}

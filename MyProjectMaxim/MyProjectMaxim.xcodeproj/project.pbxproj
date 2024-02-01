@@ -20,7 +20,7 @@
 		6324951A2ADA754D0028B95E /* MyProjectMaximUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632495192ADA754D0028B95E /* MyProjectMaximUITestsLaunchTests.swift */; };
 		63BB96BE2AF633C900293D2E /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB96BD2AF633C900293D2E /* Keys.swift */; };
 		63EC9AC22B527266000290FA /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC12B527266000290FA /* CircularProgressBar.swift */; };
-		63EC9AC42B528127000290FA /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC32B528127000290FA /* HomeScreen.swift */; };
+		63EC9AC42B528127000290FA /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC32B528127000290FA /* HomeScreenViewController.swift */; };
 		63EC9AC62B5285FE000290FA /* RouterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC9AC52B5285FE000290FA /* RouterViewController.swift */; };
 		8994C6257992685F2C9BF7C1 /* Pods_MyProjectMaxim_MyProjectMaximUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4576ACBF3BBF5CA85413D4FD /* Pods_MyProjectMaxim_MyProjectMaximUITests.framework */; };
 		B5073D282B6A5AE400129E77 /* FoodAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */; };
@@ -66,7 +66,7 @@
 		632495192ADA754D0028B95E /* MyProjectMaximUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectMaximUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		63BB96BD2AF633C900293D2E /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		63EC9AC12B527266000290FA /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
-		63EC9AC32B528127000290FA /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		63EC9AC32B528127000290FA /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		63EC9AC52B5285FE000290FA /* RouterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterViewController.swift; sourceTree = "<group>"; };
 		A4B47FECE047A070B7A75084 /* Pods-MyProjectMaxim.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaxim.release.xcconfig"; path = "Target Support Files/Pods-MyProjectMaxim/Pods-MyProjectMaxim.release.xcconfig"; sourceTree = "<group>"; };
 		B2D0E88BB581E651FCF43A70 /* Pods-MyProjectMaxim.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaxim.debug.xcconfig"; path = "Target Support Files/Pods-MyProjectMaxim/Pods-MyProjectMaxim.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,14 +132,9 @@
 			children = (
 				632494F62ADA75480028B95E /* AppDelegate.swift */,
 				632494F82ADA75480028B95E /* SceneDelegate.swift */,
+				B5EE8EDE2B6B96C0004CD8EB /* ViewControllers */,
 				63BB96BD2AF633C900293D2E /* Keys.swift */,
-				632494FA2ADA75480028B95E /* ViewController.swift */,
 				63EC9AC12B527266000290FA /* CircularProgressBar.swift */,
-				63EC9AC52B5285FE000290FA /* RouterViewController.swift */,
-				63EC9AC32B528127000290FA /* HomeScreen.swift */,
-				B54FFFC32B62757C008E08EF /* SettingsViewController.swift */,
-				B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */,
-				B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */,
 				632494FC2ADA75480028B95E /* Main.storyboard */,
 				632494FF2ADA754C0028B95E /* Assets.xcassets */,
 				632495012ADA754C0028B95E /* LaunchScreen.storyboard */,
@@ -176,6 +171,19 @@
 				5B11A8D14538B184647A66E3 /* Pods-MyProjectMaximTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		B5EE8EDE2B6B96C0004CD8EB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				632494FA2ADA75480028B95E /* ViewController.swift */,
+				63EC9AC52B5285FE000290FA /* RouterViewController.swift */,
+				63EC9AC32B528127000290FA /* HomeScreenViewController.swift */,
+				B54FFFC32B62757C008E08EF /* SettingsViewController.swift */,
+				B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */,
+				B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		EE130DA28A02911DA47B1EC8 /* Frameworks */ = {
@@ -429,7 +437,7 @@
 			files = (
 				632494FB2ADA75480028B95E /* ViewController.swift in Sources */,
 				63BB96BE2AF633C900293D2E /* Keys.swift in Sources */,
-				63EC9AC42B528127000290FA /* HomeScreen.swift in Sources */,
+				63EC9AC42B528127000290FA /* HomeScreenViewController.swift in Sources */,
 				63EC9AC62B5285FE000290FA /* RouterViewController.swift in Sources */,
 				632494F72ADA75480028B95E /* AppDelegate.swift in Sources */,
 				632494F92ADA75480028B95E /* SceneDelegate.swift in Sources */,

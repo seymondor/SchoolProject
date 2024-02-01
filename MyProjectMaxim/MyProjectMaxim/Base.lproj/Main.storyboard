@@ -866,6 +866,9 @@
                                         <rect key="frame" x="272" y="49" width="101" height="35"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Добавить"/>
+                                        <connections>
+                                            <action selector="addCustomAmount:" destination="dQw-UX-AX1" eventType="touchUpInside" id="go4-aa-ZWM"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i1P-Th-0TJ">
                                         <rect key="frame" x="20" y="49" width="231" height="35"/>
@@ -899,8 +902,12 @@
                             <constraint firstItem="xea-1i-qLM" firstAttribute="leading" secondItem="Doj-d5-J5s" secondAttribute="leading" id="s9l-y8-urF"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addWaterTextField" destination="i1P-Th-0TJ" id="CdY-7R-UgR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZ1-ld-ZhA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="dQw-UX-AX1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-422.13740458015263" y="1495.7746478873239"/>
         </scene>
@@ -942,6 +949,9 @@
                                         <rect key="frame" x="272" y="49" width="101" height="35"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Добавить"/>
+                                        <connections>
+                                            <action selector="addCustomAmount:" destination="gzE-fV-HM6" eventType="touchUpInside" id="Wpr-kK-CNh"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iMM-z3-TUz">
                                         <rect key="frame" x="20" y="49" width="231" height="35"/>
@@ -975,6 +985,9 @@
                             <constraint firstItem="Hh9-X2-gAn" firstAttribute="trailing" secondItem="EOU-QI-2jY" secondAttribute="trailing" id="kL2-MI-zfu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addFoodTextField" destination="iMM-z3-TUz" id="5cc-KJ-XV7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aKw-JW-5gX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

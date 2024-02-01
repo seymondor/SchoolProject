@@ -26,19 +26,32 @@ class HomeScreenViewController: UIViewController {
         } else {
             changeBar(to: "food")
         }
-        
     }
-    func changeBarValue(on bar: String){
-        switch bar {
+//    func changeBarValue(on bar: String){
+//        switch bar {
+//        case "water":
+//            let usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+//            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedWaterPercentage)/100,from: 0)
+//            percentageLabel.text = "\(Int(usedWaterPercentage))%"
+//            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
+//        case "food":
+//            let usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+//            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedFoodPercentage)/100,from: 0)
+//            percentageLabel.text = "\(Int(usedFoodPercentage))%"
+//            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
+//        default:
+//            break
+//        }
+//    }
+    func changeBarValue(withKey keyBar: String, fromValuePercentage: Float, toValuePercentage: Float) {
+        switch keyBar {
         case "water":
-            let usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedWaterPercentage)/100,from: 0)
-            percentageLabel.text = "\(Int(usedWaterPercentage))%"
+            CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
+            percentageLabel.text = "\(Int(CircularProgress.usedWaterPercentage))%"
             amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
         case "food":
-            let usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedFoodPercentage)/100,from: 0)
-            percentageLabel.text = "\(Int(usedFoodPercentage))%"
+            CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
+            percentageLabel.text = "\(Int(CircularProgress.usedFoodPercentage))%"
             amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
         default:
             break
@@ -53,7 +66,7 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "drop.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6807348041, green: 0.8550895293, blue: 1, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4277995191, green: 0.7138730807, blue: 1, alpha: 1)
-            changeBarValue(on: Keys.selectedBar)
+            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: CircularProgress.usedWaterPercentage/100)
         case "food":
             Keys.selectedBar = "food"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
@@ -61,7 +74,7 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "carrot.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6870872528, green: 0.9167618414, blue: 0.7997073189, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
-            changeBarValue(on: Keys.selectedBar)
+            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: CircularProgress.usedFoodPercentage/100)
         default:
             break
         }
@@ -74,32 +87,25 @@ class HomeScreenViewController: UIViewController {
             waterVC.transitioningDelegate = self
             waterVC.modalPresentationStyle = .custom
             present(waterVC, animated:true, completion: nil)
-            var usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedWaterPercentage)/100 + 0.1 ,from: Float(usedWaterPercentage)/100)
-            Keys.usedWater = Keys.usedWater + Int((Double(Keys.water) * 0.1))
-            usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            percentageLabel.text = "\(Int(usedWaterPercentage))%"
-            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
+//            var usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+//            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedWaterPercentage)/100 + 0.1 ,from: Float(usedWaterPercentage)/100)
+//            Keys.usedWater = Keys.usedWater + Int((Double(Keys.water) * 0.1))
+//            usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+//            percentageLabel.text = "\(Int(usedWaterPercentage))%"
+//            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
         } else {
             let foodVC = storyboard!.instantiateViewController(withIdentifier:"FoodAddVC")
             foodVC.transitioningDelegate = self
             foodVC.modalPresentationStyle = .custom
             present(foodVC, animated:true, completion: nil)
-            var usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedFoodPercentage)/100 + 0.1 ,from: Float(usedFoodPercentage)/100)
-            Keys.usedKkal = Keys.usedKkal + Int((Double(Keys.kkal) * 0.1))
-            usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            percentageLabel.text = "\(Int(usedFoodPercentage))%"
-            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
+//            var usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+//            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedFoodPercentage)/100 + 0.1 ,from: Float(usedFoodPercentage)/100)
+//            Keys.usedKkal = Keys.usedKkal + Int((Double(Keys.kkal) * 0.1))
+//            usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+//            percentageLabel.text = "\(Int(usedFoodPercentage))%"
+//            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
         }
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is HomeScreenViewController {
-            segue.destination.transitioningDelegate = self
-            segue.destination.modalPresentationStyle = .custom
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         if Keys.selectedBar == "water" {
@@ -142,4 +148,7 @@ extension HomeScreenViewController: BonsaiControllerDelegate {
         // Slide animation from .left, .right, .top, .bottom
         return BonsaiController(fromDirection: .bottom, backgroundColor: UIColor(white: 0, alpha: 0.2), presentedViewController: presented, delegate: self)
     }
+}
+extension Notification.Name{
+    static let reload = Notification.Name()
 }

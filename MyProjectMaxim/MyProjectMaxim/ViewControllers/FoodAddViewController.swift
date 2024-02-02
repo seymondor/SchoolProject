@@ -11,10 +11,11 @@ class FoodAddViewController : UIViewController {
     @IBOutlet weak var addFoodTextField: UITextField!
     @IBAction func addCustomAmount(_ sender: Any) {
         if addFoodTextField.text != "" {
-            Keys.usedKkal = Keys.usedKkal + Int(addFoodTextField.text!)!
-
+            let foodCustomKkal = addFoodTextField.text
+            myNewLabelTxt = foodCustomKkal!
+            NotificationCenter.default.post(name: .reload, object: nil)
         } else {
-            showAlert(error: "Не введёно количество воды")
+            showAlert(error: "Не введёно количество еды")
         }
     }
     override func viewDidLoad() {

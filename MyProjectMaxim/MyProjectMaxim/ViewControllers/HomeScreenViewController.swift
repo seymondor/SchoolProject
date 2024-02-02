@@ -8,6 +8,7 @@
 import Foundation
 import UIKit	
 import BonsaiController
+var myNewLabelTxt = ""
 class HomeScreenViewController: UIViewController {
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
@@ -66,7 +67,7 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "drop.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6807348041, green: 0.8550895293, blue: 1, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4277995191, green: 0.7138730807, blue: 1, alpha: 1)
-            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: CircularProgress.usedWaterPercentage/100)
+            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(CircularProgress.usedWaterPercentage)/100)
         case "food":
             Keys.selectedBar = "food"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
@@ -74,7 +75,7 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "carrot.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6870872528, green: 0.9167618414, blue: 0.7997073189, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
-            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: CircularProgress.usedFoodPercentage/100)
+            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(CircularProgress.usedFoodPercentage)/100)
         default:
             break
         }
@@ -108,13 +109,34 @@ class HomeScreenViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         if Keys.selectedBar == "water" {
             changeBar(to: "water")
         } else {
             changeBar(to: "food")
         }
     }
-    override func viewDidAppear(_ animated: Bool) {
+    @objc func reloadLabel(notification: Notification){
+        switch Keys.selectedBar {
+        case "food":
+            let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            amountOfSomething.text = "\((Int(Keys.usedKkal)) + Int(myNewLabelTxt)!)/\(Int(Keys.kkal))kkal"
+            Keys.usedKkal = Keys.usedKkal + Int(myNewLabelTxt)!
+            let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            percentageLabel.text = "\(Int(perc))%"
+            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(perc)/100, from: Float(beforePerc)/100)
+        case "water":
+            let beforePerc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            amountOfSomething.text = "\((Int(Keys.usedWater)) + Int(myNewLabelTxt)!)/\(Int(Keys.water))ml"
+            Keys.usedWater = Keys.usedWater + Int(myNewLabelTxt)!
+            let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            percentageLabel.text = "\(Int(perc))%"
+            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(perc)/100, from: Float(beforePerc)/100)
+        default:
+            break
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
         if Keys.selectedBar == "water" {
             let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             CircularProgress.setProgressWithAnimation(duration: 0.0, value: Float(perc)/100 ,from: Float(perc)/100)
@@ -150,5 +172,5 @@ extension HomeScreenViewController: BonsaiControllerDelegate {
     }
 }
 extension Notification.Name{
-    static let reload = Notification.Name()
+    static let reload = Notification.Name("reload")
 }

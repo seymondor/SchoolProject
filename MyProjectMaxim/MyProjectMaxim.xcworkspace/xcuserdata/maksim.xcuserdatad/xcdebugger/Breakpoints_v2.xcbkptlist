@@ -14,10 +14,138 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "viewDidAppear(_:)"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "52931D4F-23B0-4E30-B836-D48510CA385B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/ViewControllers/FoodAddViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "addCustomAmount(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0094E7EC-8C12-44CB-866E-88D7E20F93CD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/ViewControllers/WaterAddViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "addCustomWaterButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "06689B6E-CC20-4F2B-B499-67B73724A667"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "reloadLabel(notification:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "06689B6E-CC20-4F2B-B499-67B73724A667 - a56a03c0f0560d0b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.HomeScreenViewController.reloadLabel(notification: Foundation.Notification) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "8011">
+               </Location>
+               <Location
+                  uuid = "06689B6E-CC20-4F2B-B499-67B73724A667 - a56a03c0f0560d0b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.HomeScreenViewController.reloadLabel(notification: Foundation.Notification) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "7353">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A4CB3D9C-3770-488D-8E44-81AABB7AB00C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A4CB3D9C-3770-488D-8E44-81AABB7AB00C - fdbaf47842921b23"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.HomeScreenViewController.viewDidAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "1268">
+               </Location>
+               <Location
+                  uuid = "A4CB3D9C-3770-488D-8E44-81AABB7AB00C - 36135d68a0e931b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyProjectMaxim.HomeScreenViewController.viewWillAppear(Swift.Bool) -&gt; ()"
+                  moduleName = "MyProjectMaxim"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "1268">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

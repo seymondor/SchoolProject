@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -863,15 +864,16 @@
                                 <rect key="frame" x="0.0" y="199" width="393" height="110"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DdR-Sl-Rm2">
-                                        <rect key="frame" x="272" y="49" width="101" height="35"/>
+                                        <rect key="frame" x="272.66666666666669" y="49" width="100.33333333333331" height="34.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Добавить"/>
                                         <connections>
                                             <action selector="addCustomAmount:" destination="dQw-UX-AX1" eventType="touchUpInside" id="go4-aa-ZWM"/>
+                                            <action selector="addCustomWaterButton:" destination="1QH-2m-NP2" eventType="touchUpInside" id="TFg-We-3Ho"/>
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i1P-Th-0TJ">
-                                        <rect key="frame" x="20" y="49" width="231" height="35"/>
+                                        <rect key="frame" x="19.999999999999986" y="49" width="231.66666666666663" height="34.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -892,14 +894,55 @@
                                     <constraint firstAttribute="trailing" secondItem="DdR-Sl-Rm2" secondAttribute="trailing" constant="20" id="ueF-iX-Ka3"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sSc-bc-yPo">
+                                <rect key="frame" x="16" y="74" width="361" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGZ-N1-ROA">
+                                        <rect key="frame" x="0.0" y="0.0" width="113.66666666666667" height="110"/>
+                                        <color key="backgroundColor" red="0.55717915875323909" green="0.69992334528384204" blue="0.81949519571974427" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="cup.and.saucer.fill" catalog="system" title="200ml"/>
+                                        <connections>
+                                            <action selector="add200mlButton:" destination="1QH-2m-NP2" eventType="touchUpInside" id="0mB-A6-X8Z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Xo-zl-TlZ">
+                                        <rect key="frame" x="123.66666666666666" y="0.0" width="113.66666666666666" height="110"/>
+                                        <color key="backgroundColor" red="0.55717915880000002" green="0.6999233453" blue="0.81949519569999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="waterbottle.fill" catalog="system" title="500ml"/>
+                                        <connections>
+                                            <action selector="add500mlButton:" destination="1QH-2m-NP2" eventType="touchUpInside" id="jpU-dZ-pHR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TqK-BY-q3R">
+                                        <rect key="frame" x="247.33333333333329" y="0.0" width="113.66666666666666" height="110"/>
+                                        <color key="backgroundColor" red="0.55717915880000002" green="0.6999233453" blue="0.81949519569999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="1500ml">
+                                            <imageReference key="image" image="takeoutbag.and.cup.and.straw.fill" catalog="system" symbolScale="medium"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="add1500mlButton:" destination="1QH-2m-NP2" eventType="touchUpInside" id="9pP-Tz-gmd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="TqK-BY-q3R" firstAttribute="leading" secondItem="0Xo-zl-TlZ" secondAttribute="trailing" constant="10" id="HT4-x5-SJq"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="m4h-No-lta"/>
                         <color key="backgroundColor" red="0.58110362289999995" green="0.72764891389999997" blue="0.852099359" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="m4h-No-lta" firstAttribute="bottom" secondItem="xea-1i-qLM" secondAttribute="bottom" constant="509" id="BDE-SH-f4m"/>
+                            <constraint firstItem="m4h-No-lta" firstAttribute="trailing" secondItem="sSc-bc-yPo" secondAttribute="trailing" constant="16" id="S1F-3g-QGN"/>
+                            <constraint firstItem="sSc-bc-yPo" firstAttribute="leading" secondItem="m4h-No-lta" secondAttribute="leading" constant="16" id="UGk-2W-MgT"/>
                             <constraint firstAttribute="trailing" secondItem="xea-1i-qLM" secondAttribute="trailing" id="Y3l-Ic-eIS"/>
                             <constraint firstItem="xea-1i-qLM" firstAttribute="top" secondItem="m4h-No-lta" secondAttribute="top" constant="140" id="khv-i9-LuD"/>
+                            <constraint firstItem="sSc-bc-yPo" firstAttribute="top" secondItem="m4h-No-lta" secondAttribute="top" constant="15" id="ofd-iT-7lM"/>
                             <constraint firstItem="xea-1i-qLM" firstAttribute="leading" secondItem="Doj-d5-J5s" secondAttribute="leading" id="s9l-y8-urF"/>
+                            <constraint firstItem="xea-1i-qLM" firstAttribute="top" secondItem="sSc-bc-yPo" secondAttribute="bottom" constant="15" id="ySc-FP-DWr"/>
                         </constraints>
                     </view>
                     <connections>
@@ -998,10 +1041,13 @@
     <resources>
         <image name="carrot.fill" catalog="system" width="128" height="122"/>
         <image name="clock.fill" catalog="system" width="128" height="123"/>
+        <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
         <image name="drop.fill" catalog="system" width="96" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="takeoutbag.and.cup.and.straw.fill" catalog="system" width="128" height="114"/>
+        <image name="waterbottle.fill" catalog="system" width="78" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

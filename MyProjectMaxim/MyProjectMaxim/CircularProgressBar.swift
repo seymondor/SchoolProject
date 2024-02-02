@@ -10,8 +10,8 @@ import UIKit
 class CircularProgressBar: UIView {
     fileprivate var progressLayer =  CAShapeLayer() // !
     fileprivate var trackLayer = CAShapeLayer() // !
-    lazy var usedWaterPercentage : Float = Float(ceil((Double(Keys.usedWater)/Double(Keys.water))*100))
-    lazy var usedFoodPercentage : Float = Float(ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100))
+    lazy var usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+    lazy var usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
     
     override init(frame: CGRect){
         super.init(frame: frame)

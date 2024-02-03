@@ -12,6 +12,7 @@ final class Keys {
         case weight
         case age
         case gender
+        case sport
     }
     private enum Standarts: String{
         case kkal
@@ -55,6 +56,17 @@ final class Keys {
         Keys.usedKkal = 0
         Keys.usedWater = 0
     }
+    static var sport: String! {
+        get{
+            return UserDefaults.standard.string(forKey: "sport")
+        }
+        set{
+            if let sport = newValue {
+                UserDefaults.standard.set(sport, forKey: "sport")
+            }
+        }
+    }
+
     static var selectedBar: String! {
         get{
             return UserDefaults.standard.string(forKey: "bar")

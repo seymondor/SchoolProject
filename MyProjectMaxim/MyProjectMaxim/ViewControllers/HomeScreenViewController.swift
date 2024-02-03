@@ -10,22 +10,23 @@ import UIKit
 import BonsaiController
 var addAmountVariable = ""
 class HomeScreenViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         switch Keys.selectedBar {
-        case "water": changeBar(to: "water")
-        default: changeBar(to: "food")
+        case "water": changeBar(to: "water"); setAlertLabel(on: Keys.selectedBar)
+        default: changeBar(to: "food"); setAlertLabel(on: Keys.selectedBar)
         }
     }
     override func viewWillAppear(_ animated: Bool) {
         if Keys.selectedBar == "water" {
             let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false } else { alertLabel.isHidden = true }
+            setAlertLabel(on: Keys.selectedBar)
             changeBarValue(withKey: "water", fromValuePercentage: Float(percentage)/100, toValuePercentage: Float(percentage)/100)
         } else {
             let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false } else { alertLabel.isHidden = true }
+            setAlertLabel(on: Keys.selectedBar)
             changeBarValue(withKey: "food", fromValuePercentage: Float(percentage)/100, toValuePercentage: Float(percentage)/100)
         }
     }
@@ -39,13 +40,13 @@ class HomeScreenViewController: UIViewController {
     @IBAction func WaterChangeButton(_ sender: UIButton!) {
         switch Keys.selectedBar {
         case "water": showAlert(error: "Уже выбран счетчик воды")
-        default: changeBar(to: "water")
+        default: changeBar(to: "water"); setAlertLabel(on: Keys.selectedBar)
         }
     }
     @IBAction func foodChangeButton(_ sender: UIButton!) {
         switch Keys.selectedBar {
         case "food": showAlert(error: "Уже выбран счетчик еды")
-        default: changeBar(to: "food")
+        default: changeBar(to: "food"); setAlertLabel(on: Keys.selectedBar)
         }
     }
     
@@ -110,7 +111,7 @@ class HomeScreenViewController: UIViewController {
             Keys.usedKkal = Keys.usedKkal + Int(addAmountVariable)!
             let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             percentageLabel.text = "\(Int(perc))%"
-            if perc > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false } else { alertLabel.isHidden = true }
+            setAlertLabel(on: Keys.selectedBar)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(perc)/100, from: Float(beforePerc)/100)
         case "water":
             let beforePercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
@@ -118,10 +119,20 @@ class HomeScreenViewController: UIViewController {
             Keys.usedWater = Keys.usedWater + Int(addAmountVariable)!
             let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             percentageLabel.text = "\(Int(percentage))%"
-            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
+            setAlertLabel(on: Keys.selectedBar)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(percentage)/100, from: Float(beforePercentage)/100)
         default:
             break
+        }
+    }
+    func setAlertLabel(on bar: String){
+        switch bar {
+        case "water":
+            let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
+        default:
+            let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
         }
     }
     func showAlert(error: String){

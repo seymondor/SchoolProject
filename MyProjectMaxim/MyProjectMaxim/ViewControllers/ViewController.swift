@@ -11,13 +11,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var weightTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
+    @IBOutlet weak var sportTextField: UITextField!
     @IBOutlet weak var outletManButton: UIButton!
     @IBOutlet weak var outletWomanButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         heightTextField.delegate = self
         weightTextField.delegate = self
         ageTextField.delegate = self
+        sportTextField.delegate = self
     }
     @IBAction func manButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletWomanButton)
@@ -48,7 +51,12 @@ class ViewController: UIViewController {
         case "Error": showAlert(error: "Не введен пол")
         default: Keys.gender = checkButtonManOrWoman(buttonMan: outletManButton, buttonWoman: outletWomanButton)
         }
-            
+        switch Keys.checkTextField(textField: sportTextField, fromNumber: 1, upToNumber: 1000) {
+        case (isEmpty: false, isInRange: true): Keys.sport = sportTextField.text
+        case (isEmpty: true, isInRange: false): showAlert(error: "Не введено занятие спортом")
+        case (isEmpty: false, isInRange: false): showAlert(error: "Неверно введено занятие спортом")
+        default: break
+        }
         if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil {
             Keys.calculateStandarts()
             let vc = storyboard!.instantiateViewController(withIdentifier: "Home") as UIViewController

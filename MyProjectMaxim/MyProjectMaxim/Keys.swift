@@ -13,6 +13,8 @@ final class Keys {
         case age
         case gender
         case sport
+        case minutesToEat
+        case minutesToDrink
     }
     private enum Standarts: String{
         case kkal
@@ -34,19 +36,22 @@ final class Keys {
         return (isEmpty, isInRange)
     }
     static func calculateStandarts(){
-        var beforeInitKkal : Int = 10 * Int(Keys.weight)!
-        beforeInitKkal = beforeInitKkal + (6 * Int(Keys.height)!)
-        beforeInitKkal = beforeInitKkal - (5 * Int(Keys.age)!)
         if Keys.gender == "Woman" {
-            Keys.kkal = beforeInitKkal - 161
-            var beforeInitWater : Double = Double(Keys.weight)! * 0.03
-            beforeInitWater = (beforeInitWater + 30 * 0.6) * 100
+            var beforeInitKkal = 9.6 * Double(Keys.weight!)!
+            beforeInitKkal = beforeInitKkal + 655 + (1.8 * Double(Keys.height!)!)
+            beforeInitKkal = beforeInitKkal - (4.7 * Double(Keys.age!)!)
+            Keys.kkal = Int(beforeInitKkal)
+            var beforeInitWater = Double(Keys.weight)! * 0.03
+            beforeInitWater = (beforeInitWater + (Double(Keys.sport!)! * 0.6)) * 100
             Keys.water = Int(beforeInitWater)
         }
         if Keys.gender == "Man" {
-            Keys.kkal = beforeInitKkal + 5
-            var beforeInitWater : Double = Double(Keys.weight)! * 0.04
-            beforeInitWater = (beforeInitWater + 30 * 0.6) * 100
+            var beforeInitKkal = 15 * Double(Keys.weight!)!
+            beforeInitKkal = beforeInitKkal + 66 + (5 * Double(Keys.height!)!)
+            beforeInitKkal = beforeInitKkal - (6.8 * Double(Keys.age!)!)
+            Keys.kkal = Int(beforeInitKkal)
+            var beforeInitWater = Double(Keys.weight)! * 0.04
+            beforeInitWater = (beforeInitWater + (Double(Keys.sport!)! * 0.7)) * 100
             Keys.water = Int(beforeInitWater)
         }
         print("KKAL - \(Keys.kkal ?? 0)")
@@ -55,6 +60,26 @@ final class Keys {
     static func resetValueUsedKeys() {
         Keys.usedKkal = 0
         Keys.usedWater = 0
+    }
+    static var minutesToDrink: String! {
+        get{
+            return UserDefaults.standard.string(forKey: "drink")
+        }
+        set{
+            if let minutesToDrink = newValue {
+                UserDefaults.standard.set(minutesToDrink, forKey: "drink")
+            }
+        }
+    }
+    static var minutesToEat: String! {
+        get{
+            return UserDefaults.standard.string(forKey: "eat")
+        }
+        set{
+            if let minutesToEat = newValue {
+                UserDefaults.standard.set(minutesToEat, forKey: "eat")
+            }
+        }
     }
     static var sport: String! {
         get{

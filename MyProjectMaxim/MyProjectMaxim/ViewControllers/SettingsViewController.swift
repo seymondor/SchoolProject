@@ -13,18 +13,34 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var outletManButton: UIButton!
     @IBOutlet weak var outletWomanButton: UIButton!
+    @IBOutlet weak var sportTextField: UITextField!
+    @IBOutlet weak var minutesEatTextField: UITextField!
+    @IBOutlet weak var minutesDrinkTextField: UITextField!
     override func viewDidLoad() {
-        super.viewDidLoad()
+        heightTextField.delegate = self
+        weightTextField.delegate = self
+        ageTextField.delegate = self
+        sportTextField.delegate = self
+        minutesEatTextField.delegate = self
+        minutesDrinkTextField.delegate = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
         heightTextField.text = Keys.height
         weightTextField.text = Keys.weight
         ageTextField.text = Keys.age
+        sportTextField.text = Keys.sport
+        minutesEatTextField.text = Keys.minutesToEat
+        minutesDrinkTextField.text = Keys.minutesToDrink
         switch Keys.gender {
         case "Man": outletManButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         default: outletWomanButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         }
-        heightTextField.delegate = self
-        weightTextField.delegate = self
-        ageTextField.delegate = self
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        switch Keys.gender {
+        case "Man": outletManButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1); outletWomanButton.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
+        default: outletWomanButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1); outletManButton.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
+        }
     }
     @IBAction func manButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletWomanButton)
@@ -55,7 +71,25 @@ class SettingViewController: UIViewController {
         case "": showError(error: "Не введен пол")
         default: Keys.gender = checkButtonManOrWoman(buttonMan: outletManButton, buttonWoman: outletWomanButton)
         }
-        if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil {
+        switch Keys.checkTextField(textField: sportTextField, fromNumber: 1, upToNumber: 1000) {
+        case (isEmpty: false, isInRange: true): Keys.sport = sportTextField.text
+        case (isEmpty: true, isInRange: false): showError(error: "Не введено занятие спортом")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено занятие спортом")
+        default: break
+        }
+        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 10, upToNumber: 1000) {
+        case (isEmpty: false, isInRange: true): Keys.minutesToEat = minutesEatTextField.text
+        case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о еде")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о еде")
+        default: break
+        }
+        switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 2, upToNumber: 500) {
+        case (isEmpty: false, isInRange: true): Keys.minutesToDrink = ageTextField.text
+        case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о воде")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о воде")
+        default: break
+        }
+        if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
             Keys.calculateStandarts()
             let alert = UIAlertController(title: "Внимание", message: "Прогресс был сброшен.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in

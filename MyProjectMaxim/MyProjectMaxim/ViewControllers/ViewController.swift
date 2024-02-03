@@ -14,7 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var sportTextField: UITextField!
     @IBOutlet weak var outletManButton: UIButton!
     @IBOutlet weak var outletWomanButton: UIButton!
-    
+    @IBOutlet weak var minutesEatTextField: UITextField!
+    @IBOutlet weak var minutesDrinkTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         heightTextField.delegate = self
@@ -31,33 +32,46 @@ class ViewController: UIViewController {
     @IBAction func startButton(_ sender: UIButton) {
         switch Keys.checkTextField(textField: heightTextField, fromNumber: 50, upToNumber: 300) {
         case (isEmpty: false, isInRange: true): Keys.height = heightTextField.text
-        case (isEmpty: true, isInRange: false): showAlert(error: "Не введен введен рост")
-        case (isEmpty: false, isInRange: false): showAlert(error: "Неверно введен рост")
+        case (isEmpty: true, isInRange: false): showError(error: "Не введен введен рост")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введен рост")
         default: break
         }
         switch Keys.checkTextField(textField: weightTextField, fromNumber: 30, upToNumber: 300) {
         case (isEmpty: false, isInRange: true): Keys.weight = weightTextField.text
-        case (isEmpty: true, isInRange: false): showAlert(error: "Не введен введен вес")
-        case (isEmpty: false, isInRange: false): showAlert(error: "Неверно введен вес")
+        case (isEmpty: true, isInRange: false): showError(error: "Не введен введен вес")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введен вес")
         default: break
         }
         switch Keys.checkTextField(textField: ageTextField, fromNumber: 3, upToNumber: 150) {
         case (isEmpty: false, isInRange: true): Keys.age = ageTextField.text
-        case (isEmpty: true, isInRange: false): showAlert(error: "Не введен введен возраст")
-        case (isEmpty: false, isInRange: false): showAlert(error: "Неверно введен возраст")
+        case (isEmpty: true, isInRange: false): showError(error: "Не введен введен возраст")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введен возраст")
         default: break
         }
         switch checkButtonManOrWoman(buttonMan: outletManButton, buttonWoman: outletWomanButton) {
-        case "Error": showAlert(error: "Не введен пол")
+        case "Error": showError(error: "Не введен пол")
         default: Keys.gender = checkButtonManOrWoman(buttonMan: outletManButton, buttonWoman: outletWomanButton)
         }
         switch Keys.checkTextField(textField: sportTextField, fromNumber: 1, upToNumber: 1000) {
         case (isEmpty: false, isInRange: true): Keys.sport = sportTextField.text
-        case (isEmpty: true, isInRange: false): showAlert(error: "Не введено занятие спортом")
-        case (isEmpty: false, isInRange: false): showAlert(error: "Неверно введено занятие спортом")
+        case (isEmpty: true, isInRange: false): showError(error: "Не введено занятие спортом")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено занятие спортом")
         default: break
         }
-        if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil {
+        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 10, upToNumber: 1000) {
+        case (isEmpty: false, isInRange: true): Keys.minutesToEat = minutesEatTextField.text
+        case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о еде")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о еде")
+        default: break
+        }
+        switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 2, upToNumber: 500) {
+        case (isEmpty: false, isInRange: true): Keys.minutesToDrink = ageTextField.text
+        case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о воде")
+        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о воде")
+        default: break
+        }
+
+        if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.sport != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
             Keys.calculateStandarts()
             let vc = storyboard!.instantiateViewController(withIdentifier: "Home") as UIViewController
             vc.modalPresentationStyle = .fullScreen
@@ -81,7 +95,7 @@ class ViewController: UIViewController {
             button.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         }
     }
-    func showAlert(error: String){
+    func showError(error: String){
         let alert = UIAlertController(title: "Ошибка", message: "\(error).", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in
             print("Нажал Хорошо")

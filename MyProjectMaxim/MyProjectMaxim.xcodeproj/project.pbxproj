@@ -176,10 +176,10 @@
 		B5EE8EDE2B6B96C0004CD8EB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				632494FA2ADA75480028B95E /* ViewController.swift */,
 				63EC9AC52B5285FE000290FA /* RouterViewController.swift */,
-				63EC9AC32B528127000290FA /* HomeScreenViewController.swift */,
+				632494FA2ADA75480028B95E /* ViewController.swift */,
 				B54FFFC32B62757C008E08EF /* SettingsViewController.swift */,
+				63EC9AC32B528127000290FA /* HomeScreenViewController.swift */,
 				B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */,
 				B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */,
 			);

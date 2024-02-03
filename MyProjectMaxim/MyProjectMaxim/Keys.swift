@@ -5,6 +5,7 @@
 //  Created by 1 on 04.11.2023.
 //
 import Foundation
+import UIKit
 final class Keys {
     private enum HumanSettings: String{
         case height
@@ -20,6 +21,39 @@ final class Keys {
         case usedKkal
         case usedWater
         case selectedBar
+    }
+    static func checkTextField(textField : UITextField, fromNumber : Int, upToNumber : Int) -> (isEmpty: Bool, isInRange: Bool) {
+        var isInRange = false
+        var isEmpty = true
+        let number = Int(textField.text!) ?? 0
+        if number != 0 { isEmpty = false }
+        if number < upToNumber && number > fromNumber {
+            isInRange = true
+        }
+        return (isEmpty, isInRange)
+    }
+    static func calculateStandarts(){
+        var beforeInitKkal : Int = 10 * Int(Keys.weight)!
+        beforeInitKkal = beforeInitKkal + (6 * Int(Keys.height)!)
+        beforeInitKkal = beforeInitKkal - (5 * Int(Keys.age)!)
+        if Keys.gender == "Woman" {
+            Keys.kkal = beforeInitKkal - 161
+            var beforeInitWater : Double = Double(Keys.weight)! * 0.03
+            beforeInitWater = (beforeInitWater + 30 * 0.6) * 100
+            Keys.water = Int(beforeInitWater)
+        }
+        if Keys.gender == "Man" {
+            Keys.kkal = beforeInitKkal + 5
+            var beforeInitWater : Double = Double(Keys.weight)! * 0.04
+            beforeInitWater = (beforeInitWater + 30 * 0.6) * 100
+            Keys.water = Int(beforeInitWater)
+        }
+        print("KKAL - \(Keys.kkal ?? 0)")
+        print("WATER - \(Keys.water ?? 0)")
+    }
+    static func resetValueUsedKeys() {
+        Keys.usedKkal = 0
+        Keys.usedWater = 0
     }
     static var selectedBar: String! {
         get{

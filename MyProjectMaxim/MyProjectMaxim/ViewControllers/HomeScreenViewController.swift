@@ -8,51 +8,58 @@
 import Foundation
 import UIKit	
 import BonsaiController
-var myNewLabelTxt = ""
+var addAmountVariable = ""
 class HomeScreenViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
+        switch Keys.selectedBar {
+        case "water": changeBar(to: "water")
+        default: changeBar(to: "food")
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if Keys.selectedBar == "water" {
+            let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false } else { alertLabel.isHidden = true }
+            changeBarValue(withKey: "water", fromValuePercentage: Float(percentage)/100, toValuePercentage: Float(percentage)/100)
+        } else {
+            let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false } else { alertLabel.isHidden = true }
+            changeBarValue(withKey: "food", fromValuePercentage: Float(percentage)/100, toValuePercentage: Float(percentage)/100)
+        }
+    }
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
     @IBOutlet weak var backgroundOfEmojiSelectedBar: UIView!
     @IBOutlet weak var emojiSelectedBar: UIImageView!
+    @IBOutlet weak var alertLabel: UILabel!
+    @IBOutlet weak var percentageLabel: UILabel!
+    @IBOutlet weak var amountOfSomething: UILabel!
     @IBAction func WaterChangeButton(_ sender: UIButton!) {
-        if Keys.selectedBar == "water" {
-            showAlert(error: "Уже выбран счетчик воды")
-        } else {
-            changeBar(to: "water")
+        switch Keys.selectedBar {
+        case "water": showAlert(error: "Уже выбран счетчик воды")
+        default: changeBar(to: "water")
         }
     }
     @IBAction func foodChangeButton(_ sender: UIButton!) {
-        if Keys.selectedBar == "food" {
-            showAlert(error: "Уже выбран счетчик еды")
-        } else {
-            changeBar(to: "food")
+        switch Keys.selectedBar {
+        case "food": showAlert(error: "Уже выбран счетчик еды")
+        default: changeBar(to: "food")
         }
     }
-//    func changeBarValue(on bar: String){
-//        switch bar {
-//        case "water":
-//            let usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-//            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedWaterPercentage)/100,from: 0)
-//            percentageLabel.text = "\(Int(usedWaterPercentage))%"
-//            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
-//        case "food":
-//            let usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-//            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedFoodPercentage)/100,from: 0)
-//            percentageLabel.text = "\(Int(usedFoodPercentage))%"
-//            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
-//        default:
-//            break
-//        }
-//    }
+    
     func changeBarValue(withKey keyBar: String, fromValuePercentage: Float, toValuePercentage: Float) {
         switch keyBar {
         case "water":
+            let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
-            percentageLabel.text = "\(Int(CircularProgress.usedWaterPercentage))%"
+            percentageLabel.text = "\(Int(perc))%"
             amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
         case "food":
+            let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
-            percentageLabel.text = "\(Int(CircularProgress.usedFoodPercentage))%"
+            percentageLabel.text = "\(Int(perc))%"
             amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
         default:
             break
@@ -67,7 +74,8 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "drop.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6807348041, green: 0.8550895293, blue: 1, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4277995191, green: 0.7138730807, blue: 1, alpha: 1)
-            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(CircularProgress.usedWaterPercentage)/100)
+            let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(perc)/100)
         case "food":
             Keys.selectedBar = "food"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
@@ -75,78 +83,45 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "carrot.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6870872528, green: 0.9167618414, blue: 0.7997073189, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
-            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(CircularProgress.usedFoodPercentage)/100)
+            let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(perc)/100)
         default:
             break
         }
     }
-    @IBOutlet weak var percentageLabel: UILabel!
-    @IBOutlet weak var amountOfSomething: UILabel!
     @IBAction func addAmountButton(_ sender: UIButton) {
         if Keys.selectedBar == "water" {
             let waterVC = storyboard!.instantiateViewController(withIdentifier:"WaterAddVC")
             waterVC.transitioningDelegate = self
             waterVC.modalPresentationStyle = .custom
             present(waterVC, animated:true, completion: nil)
-//            var usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-//            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedWaterPercentage)/100 + 0.1 ,from: Float(usedWaterPercentage)/100)
-//            Keys.usedWater = Keys.usedWater + Int((Double(Keys.water) * 0.1))
-//            usedWaterPercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-//            percentageLabel.text = "\(Int(usedWaterPercentage))%"
-//            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
         } else {
             let foodVC = storyboard!.instantiateViewController(withIdentifier:"FoodAddVC")
             foodVC.transitioningDelegate = self
             foodVC.modalPresentationStyle = .custom
             present(foodVC, animated:true, completion: nil)
-//            var usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-//            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(usedFoodPercentage)/100 + 0.1 ,from: Float(usedFoodPercentage)/100)
-//            Keys.usedKkal = Keys.usedKkal + Int((Double(Keys.kkal) * 0.1))
-//            usedFoodPercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-//            percentageLabel.text = "\(Int(usedFoodPercentage))%"
-//            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
-        }
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
-        if Keys.selectedBar == "water" {
-            changeBar(to: "water")
-        } else {
-            changeBar(to: "food")
         }
     }
     @objc func reloadLabel(notification: Notification){
         switch Keys.selectedBar {
         case "food":
             let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            amountOfSomething.text = "\((Int(Keys.usedKkal)) + Int(myNewLabelTxt)!)/\(Int(Keys.kkal))kkal"
-            Keys.usedKkal = Keys.usedKkal + Int(myNewLabelTxt)!
+            amountOfSomething.text = "\((Int(Keys.usedKkal)) + Int(addAmountVariable)!)/\(Int(Keys.kkal))kkal"
+            Keys.usedKkal = Keys.usedKkal + Int(addAmountVariable)!
             let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             percentageLabel.text = "\(Int(perc))%"
+            if perc > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false } else { alertLabel.isHidden = true }
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(perc)/100, from: Float(beforePerc)/100)
         case "water":
-            let beforePerc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            amountOfSomething.text = "\((Int(Keys.usedWater)) + Int(myNewLabelTxt)!)/\(Int(Keys.water))ml"
-            Keys.usedWater = Keys.usedWater + Int(myNewLabelTxt)!
-            let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            percentageLabel.text = "\(Int(perc))%"
-            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(perc)/100, from: Float(beforePerc)/100)
+            let beforePercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            amountOfSomething.text = "\((Int(Keys.usedWater)) + Int(addAmountVariable)!)/\(Int(Keys.water))ml"
+            Keys.usedWater = Keys.usedWater + Int(addAmountVariable)!
+            let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            percentageLabel.text = "\(Int(percentage))%"
+            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
+            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(percentage)/100, from: Float(beforePercentage)/100)
         default:
             break
-        }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        if Keys.selectedBar == "water" {
-            let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            CircularProgress.setProgressWithAnimation(duration: 0.0, value: Float(perc)/100 ,from: Float(perc)/100)
-            percentageLabel.text = "\(Int(perc))%"
-            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
-        } else {
-            let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            CircularProgress.setProgressWithAnimation(duration: 0.0, value: Float(perc)/100 ,from: Float(perc)/100)
-            percentageLabel.text = "\(Int(perc))%"
-            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
         }
     }
     func showAlert(error: String){
@@ -159,15 +134,10 @@ class HomeScreenViewController: UIViewController {
 }
 
 extension HomeScreenViewController: BonsaiControllerDelegate {
-    
-    // return the frame of your Bonsai View Controller
     func frameOfPresentedView(in containerViewFrame: CGRect) -> CGRect {
         return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height / 1.5), size: CGSize(width: containerViewFrame.width, height: containerViewFrame.height / (3/4)))
     }
-    // return a Bonsai Controller with SlideIn or Bubble transition animator
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        /// With Background Color ///
-        // Slide animation from .left, .right, .top, .bottom
         return BonsaiController(fromDirection: .bottom, backgroundColor: UIColor(white: 0, alpha: 0.2), presentedViewController: presented, delegate: self)
     }
 }

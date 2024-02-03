@@ -8,25 +8,27 @@
 import Foundation
 import UIKit
 class WaterAddViewController : UIViewController {
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addWaterTextField.delegate = self
+    }
     @IBOutlet weak var addWaterTextField: UITextField!
     @IBAction func add200mlButton(_ sender: Any) {
-        myNewLabelTxt = "200"
+        addAmountVariable = "200"
         NotificationCenter.default.post(name: .reload, object: nil)
     }
     @IBAction func add500mlButton(_ sender: Any) {
-        myNewLabelTxt = "500"
+        addAmountVariable = "500"
         NotificationCenter.default.post(name: .reload, object: nil)
     }
     @IBAction func add1500mlButton(_ sender: Any) {
-        myNewLabelTxt = "1500"
+        addAmountVariable = "1500"
         NotificationCenter.default.post(name: .reload, object: nil)
     }
-    
     @IBAction func addCustomWaterButton(_ sender: Any) {
         if addWaterTextField.text != "" {
             let waterCustomKkal = addWaterTextField.text
-            myNewLabelTxt = waterCustomKkal!
+            addAmountVariable = waterCustomKkal!
             NotificationCenter.default.post(name: .reload, object: nil)
         } else {
             showAlert(error: "Не введёно количество воды")
@@ -38,11 +40,6 @@ class WaterAddViewController : UIViewController {
             print("Нажал Хорошо")
         }))
         present(alert, animated: true)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addWaterTextField.delegate = self
     }
 }
 extension WaterAddViewController: UITextFieldDelegate {

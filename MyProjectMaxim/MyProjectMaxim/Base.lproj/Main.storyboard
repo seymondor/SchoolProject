@@ -230,7 +230,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="StartManButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vh1-ie-rnR"/>
+                                            <action selector="manButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qar-WX-iCx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Jj-lA-bzj">
@@ -254,7 +254,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="StartWomanButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pw5-wA-mD0"/>
+                                            <action selector="womanButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IOw-Jd-iMk"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -293,7 +293,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="StartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QsJ-OG-6zH"/>
+                                    <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RhO-KL-2WI"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCn-ld-pDb">
@@ -365,11 +365,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="OutletManButton" destination="Ce9-ua-oWs" id="fbm-cL-dsq"/>
-                        <outlet property="OutletWomanButton" destination="8Jj-lA-bzj" id="ypq-d3-4lV"/>
-                        <outlet property="StartEnterAge" destination="pZy-qV-d1A" id="ZlZ-Ml-CBg"/>
-                        <outlet property="StartEnterHeight" destination="RVg-FG-kcJ" id="4Nc-jQ-z7t"/>
-                        <outlet property="StartEnterWeight" destination="buy-pZ-TWw" id="kRg-G8-nnN"/>
+                        <outlet property="ageTextField" destination="pZy-qV-d1A" id="W0g-Me-smi"/>
+                        <outlet property="heightTextField" destination="RVg-FG-kcJ" id="r38-3s-Pdz"/>
+                        <outlet property="outletManButton" destination="Ce9-ua-oWs" id="1ON-E5-joT"/>
+                        <outlet property="outletWomanButton" destination="8Jj-lA-bzj" id="CzF-xl-q6g"/>
+                        <outlet property="weightTextField" destination="buy-pZ-TWw" id="7zZ-11-8Ct"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -405,7 +405,7 @@
                                         <rect key="frame" x="5" y="2" width="323" height="40"/>
                                         <color key="backgroundColor" red="0.63872278630000001" green="0.89570155289999998" blue="0.84437681119999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.63872278630000001" green="0.89570155289999998" blue="0.84437681119999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -443,7 +443,7 @@
                                         <rect key="frame" x="5" y="2" width="323" height="40"/>
                                         <color key="backgroundColor" red="0.63872278630000001" green="0.89570155289999998" blue="0.84437681119999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.63872278630000001" green="0.89570155289999998" blue="0.84437681119999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -481,10 +481,7 @@
                                         <rect key="frame" x="5" y="2" width="323" height="40"/>
                                         <color key="backgroundColor" red="0.63872278630000001" green="0.89570155289999998" blue="0.84437681119999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                        <connections>
-                                            <action selector="HeightEnterStart:" destination="Oyf-NY-q9l" eventType="editingDidEnd" id="Ieg-1f-nRt"/>
-                                        </connections>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" red="0.63872278630000001" green="0.89570155289999998" blue="0.84437681119999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -539,7 +536,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="StartManButton:" destination="qbw-IH-nWS" eventType="touchUpInside" id="s0t-DR-lH2"/>
+                                            <action selector="manButton:" destination="qbw-IH-nWS" eventType="touchUpInside" id="irq-m2-FqY"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egP-p6-Wfo">
@@ -563,8 +560,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="StartWomanButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FWl-HH-7GA"/>
-                                            <action selector="StartWomanButton:" destination="qbw-IH-nWS" eventType="touchUpInside" id="a1J-i4-QEf"/>
+                                            <action selector="womanButton:" destination="qbw-IH-nWS" eventType="touchUpInside" id="vWs-Oh-P0a"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -602,8 +598,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="StartButton:" destination="qbw-IH-nWS" eventType="touchUpInside" id="4vG-q9-ahk"/>
-                                    <action selector="StartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9bm-Yh-Kfe"/>
+                                    <action selector="startButton:" destination="qbw-IH-nWS" eventType="touchUpInside" id="WI2-A1-Wrg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -641,14 +636,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Настройки" image="gearshape.fill" catalog="system" id="9pL-cE-Kuj"/>
                     <connections>
-                        <outlet property="OutletManButton" destination="dJg-NT-6Pr" id="Xcc-hj-KDs"/>
-                        <outlet property="OutletWomanButton" destination="egP-p6-Wfo" id="bLC-Sv-NTM"/>
-                        <outlet property="StartEnterAge" destination="6cq-Bv-7pr" id="vqR-IY-J1d"/>
-                        <outlet property="StartEnterHeight" destination="1MS-lg-HoL" id="kfQ-r8-6OX"/>
-                        <outlet property="StartEnterWeight" destination="sJf-Kz-L2r" id="8Jq-cA-J7Q"/>
-                        <outlet property="enterAgeField" destination="6cq-Bv-7pr" id="BAt-Jf-WeV"/>
-                        <outlet property="enterHeightField" destination="1MS-lg-HoL" id="nmD-xD-rp9"/>
-                        <outlet property="enterWeightField" destination="sJf-Kz-L2r" id="fhB-b2-6hx"/>
+                        <outlet property="ageTextField" destination="6cq-Bv-7pr" id="ifc-aN-T4Z"/>
+                        <outlet property="heightTextField" destination="1MS-lg-HoL" id="iGx-bc-wzX"/>
+                        <outlet property="outletManButton" destination="dJg-NT-6Pr" id="4io-fO-YS2"/>
+                        <outlet property="outletWomanButton" destination="egP-p6-Wfo" id="eV1-tB-vqb"/>
+                        <outlet property="weightTextField" destination="sJf-Kz-L2r" id="DA5-xU-wfv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAa-3B-IOu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -725,10 +717,17 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❗️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Lt-AH-uoB">
+                                        <rect key="frame" x="162.33333333333334" y="257" width="23" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="bEQ-hv-bI2" firstAttribute="leading" secondItem="OQc-lp-sen" secondAttribute="leading" constant="22" id="2gZ-tN-F34"/>
+                                    <constraint firstItem="9Lt-AH-uoB" firstAttribute="centerX" secondItem="OQc-lp-sen" secondAttribute="centerX" id="Jts-Xp-seS"/>
                                     <constraint firstItem="BfT-D5-FG4" firstAttribute="top" secondItem="rlX-vZ-hKV" secondAttribute="bottom" constant="27" id="Lc7-MJ-azn"/>
                                     <constraint firstAttribute="trailing" secondItem="BfT-D5-FG4" secondAttribute="trailing" constant="8" id="MtF-mo-4QN"/>
                                     <constraint firstItem="uCH-rJ-z6y" firstAttribute="centerX" secondItem="OQc-lp-sen" secondAttribute="centerX" id="XXQ-Tm-mqa"/>
@@ -737,8 +736,10 @@
                                     <constraint firstItem="BfT-D5-FG4" firstAttribute="leading" secondItem="OQc-lp-sen" secondAttribute="leading" constant="8" id="eaD-jl-ZY1"/>
                                     <constraint firstItem="BfT-D5-FG4" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="top" constant="102" id="eek-ai-Sxc"/>
                                     <constraint firstAttribute="height" constant="348" id="gpI-Qw-jat"/>
+                                    <constraint firstItem="9Lt-AH-uoB" firstAttribute="top" secondItem="bEQ-hv-bI2" secondAttribute="bottom" constant="22" id="iGp-Yk-QHC"/>
                                     <constraint firstItem="rlX-vZ-hKV" firstAttribute="leading" secondItem="OQc-lp-sen" secondAttribute="leading" constant="155" id="joQ-sK-NFF"/>
                                     <constraint firstAttribute="width" constant="348" id="n1f-ik-Azc"/>
+                                    <constraint firstAttribute="bottom" secondItem="9Lt-AH-uoB" secondAttribute="bottom" constant="70" id="t50-oJ-G1m"/>
                                     <constraint firstItem="rlX-vZ-hKV" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="top" constant="37" id="tix-fb-0aI"/>
                                     <constraint firstItem="bEQ-hv-bI2" firstAttribute="top" secondItem="BfT-D5-FG4" secondAttribute="bottom" constant="30" id="vEo-Ms-VuL"/>
                                     <constraint firstItem="rlX-vZ-hKV" firstAttribute="centerX" secondItem="OQc-lp-sen" secondAttribute="centerX" id="wLh-4h-158"/>
@@ -842,10 +843,11 @@
                     <tabBarItem key="tabBarItem" title="Главная" image="house.fill" catalog="system" id="jJ1-ja-0Cd"/>
                     <connections>
                         <outlet property="CircularProgress" destination="OQc-lp-sen" id="ehw-SW-ZlA"/>
-                        <outlet property="amountOfSomething" destination="bEQ-hv-bI2" id="ziR-aU-UK6"/>
+                        <outlet property="alertLabel" destination="9Lt-AH-uoB" id="5si-gI-nqm"/>
+                        <outlet property="amountOfSomething" destination="bEQ-hv-bI2" id="C66-Su-RqB"/>
                         <outlet property="backgroundOfEmojiSelectedBar" destination="rlX-vZ-hKV" id="42O-Mf-9Hz"/>
                         <outlet property="emojiSelectedBar" destination="uCH-rJ-z6y" id="Ojx-ap-SJo"/>
-                        <outlet property="percentageLabel" destination="BfT-D5-FG4" id="igp-UE-uOw"/>
+                        <outlet property="percentageLabel" destination="BfT-D5-FG4" id="6Lh-hP-Myr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u40-Mu-Hgi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -989,7 +991,7 @@
                                 <rect key="frame" x="0.0" y="199" width="393" height="110"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xi1-Yh-4QD">
-                                        <rect key="frame" x="272" y="49" width="101" height="35"/>
+                                        <rect key="frame" x="272.66666666666669" y="49" width="100.33333333333331" height="34.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="gray" title="Добавить"/>
                                         <connections>
@@ -997,7 +999,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iMM-z3-TUz">
-                                        <rect key="frame" x="20" y="49" width="231" height="35"/>
+                                        <rect key="frame" x="19.999999999999986" y="49" width="231.66666666666663" height="34.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -1018,14 +1020,56 @@
                                     <constraint firstItem="iMM-z3-TUz" firstAttribute="leading" secondItem="EOU-QI-2jY" secondAttribute="leading" constant="20" symbolic="YES" id="xWj-Mn-SZo"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OtM-On-5x6">
+                                <rect key="frame" x="16" y="74" width="361" height="110"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bQ-Cj-BSv">
+                                        <rect key="frame" x="0.0" y="0.0" width="113.66666666666667" height="110"/>
+                                        <color key="backgroundColor" red="0.44294911671595333" green="0.6549381294635811" blue="0.46108899200580777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="100 kkal"/>
+                                        <connections>
+                                            <action selector="add100KkalButton:" destination="gzE-fV-HM6" eventType="touchUpInside" id="GsH-9T-hWS"/>
+                                            <action selector="add200mlButton:" destination="1QH-2m-NP2" eventType="touchUpInside" id="i51-zI-MSC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7NZ-OA-HHr">
+                                        <rect key="frame" x="123.66666666666666" y="0.0" width="113.66666666666666" height="110"/>
+                                        <color key="backgroundColor" red="0.44445288179999998" green="0.65499925609999998" blue="0.46411156650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="500 kkal"/>
+                                        <connections>
+                                            <action selector="add500KkalButton:" destination="gzE-fV-HM6" eventType="touchUpInside" id="vU6-Zc-Ecb"/>
+                                            <action selector="add500mlButton:" destination="1QH-2m-NP2" eventType="touchUpInside" id="u0O-hz-Slw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZq-a9-xlX">
+                                        <rect key="frame" x="247.33333333333329" y="0.0" width="113.66666666666666" height="110"/>
+                                        <color key="backgroundColor" red="0.44445288179999998" green="0.65499925609999998" blue="0.46411156650000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="1000 kkal"/>
+                                        <connections>
+                                            <action selector="add1000KkalButton:" destination="gzE-fV-HM6" eventType="touchUpInside" id="6Lq-6g-Vx2"/>
+                                            <action selector="add1500mlButton:" destination="1QH-2m-NP2" eventType="touchUpInside" id="agM-rM-9sV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="HZq-a9-xlX" firstAttribute="leading" secondItem="7NZ-OA-HHr" secondAttribute="trailing" constant="10" id="92z-tf-nzQ"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hh9-X2-gAn"/>
-                        <color key="backgroundColor" systemColor="systemMintColor"/>
+                        <color key="backgroundColor" red="0.48411637540000002" green="0.71722739930000001" blue="0.49954247470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EOU-QI-2jY" firstAttribute="leading" secondItem="N10-ud-0CE" secondAttribute="leading" id="6t0-yf-Kc0"/>
+                            <constraint firstItem="OtM-On-5x6" firstAttribute="top" secondItem="Hh9-X2-gAn" secondAttribute="top" constant="15" id="94b-jj-2MF"/>
                             <constraint firstItem="Hh9-X2-gAn" firstAttribute="bottom" secondItem="EOU-QI-2jY" secondAttribute="bottom" constant="509" id="LXp-fy-llx"/>
                             <constraint firstItem="EOU-QI-2jY" firstAttribute="top" secondItem="Hh9-X2-gAn" secondAttribute="top" constant="140" id="UZQ-BS-IEN"/>
+                            <constraint firstItem="Hh9-X2-gAn" firstAttribute="trailing" secondItem="OtM-On-5x6" secondAttribute="trailing" constant="16" id="aos-6J-aGS"/>
+                            <constraint firstItem="OtM-On-5x6" firstAttribute="leading" secondItem="Hh9-X2-gAn" secondAttribute="leading" constant="16" id="iF2-Rd-NuV"/>
                             <constraint firstItem="Hh9-X2-gAn" firstAttribute="trailing" secondItem="EOU-QI-2jY" secondAttribute="trailing" id="kL2-MI-zfu"/>
+                            <constraint firstItem="EOU-QI-2jY" firstAttribute="top" secondItem="OtM-On-5x6" secondAttribute="bottom" constant="15" id="pjc-WT-XsN"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1050,9 +1094,6 @@
         <image name="waterbottle.fill" catalog="system" width="78" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemMintColor">
-            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

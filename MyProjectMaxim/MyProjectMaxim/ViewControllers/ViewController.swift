@@ -16,12 +16,33 @@ class ViewController: UIViewController {
     @IBOutlet weak var outletWomanButton: UIButton!
     @IBOutlet weak var minutesEatTextField: UITextField!
     @IBOutlet weak var minutesDrinkTextField: UITextField!
+    @IBOutlet weak var getUpDatePicker: UIDatePicker!
+    @IBOutlet weak var goSleepDatePicker: UIDatePicker!
+    var eatTimePicker = UIPickerView()
+    var waterTimePicker = UIPickerView()
+    let timeEatArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
+    let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         heightTextField.delegate = self
         weightTextField.delegate = self
         ageTextField.delegate = self
         sportTextField.delegate = self
+        
+        minutesEatTextField.inputView = eatTimePicker
+        minutesDrinkTextField.inputView = waterTimePicker
+        
+        eatTimePicker.delegate = self
+        eatTimePicker.dataSource = self
+        waterTimePicker.delegate = self
+        waterTimePicker.dataSource = self
+        
+        eatTimePicker.tag = 1
+        waterTimePicker.tag = 2
     }
     @IBAction func manButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletWomanButton)
@@ -78,6 +99,10 @@ class ViewController: UIViewController {
             present(vc, animated: true, completion: nil)
         }
     }
+    
+    
+    
+    
     func checkButtonManOrWoman(buttonMan:UIButton, buttonWoman:UIButton) -> String {
         if buttonMan.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
             return "Man"
@@ -113,5 +138,43 @@ extension ViewController: UITextFieldDelegate {
                 return false
         }
         return allowedcharacterSet.isSuperset(of: typedCharactersetIn)
+    }
+}
+
+extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch pickerView.tag {
+        case 1:
+            return timeEatArray.count
+        case 2:
+            return timeWaterArray.count
+        default:
+            return 1
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch pickerView.tag {
+        case 1:
+            return "\(timeEatArray[row])"
+        case 2:
+            return "\(timeEatArray[row])"
+        default:
+            return "Data dont found"
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch pickerView.tag {
+        case 1:
+            minutesEatTextField.text = "\(timeEatArray[row])"
+            minutesEatTextField.resignFirstResponder()
+        case 2:
+            minutesDrinkTextField.text = "\(timeWaterArray[row])"
+            minutesDrinkTextField.resignFirstResponder()
+        default:
+            break
+        }
     }
 }

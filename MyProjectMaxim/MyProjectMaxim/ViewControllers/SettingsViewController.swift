@@ -16,6 +16,10 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var sportTextField: UITextField!
     @IBOutlet weak var minutesEatTextField: UITextField!
     @IBOutlet weak var minutesDrinkTextField: UITextField!
+    @IBOutlet weak var getUpDatePicker: UIDatePicker!
+    @IBOutlet weak var goSleepDatePicker: UIDatePicker!
+    
+    
     override func viewDidLoad() {
         heightTextField.delegate = self
         weightTextField.delegate = self

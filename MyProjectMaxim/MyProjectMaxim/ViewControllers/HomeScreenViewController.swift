@@ -129,10 +129,10 @@ class HomeScreenViewController: UIViewController {
         switch bar {
         case "water":
             let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
+            if percentage > 100 { alertLabel.text = "❗️Вы перепиваете"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
         default:
             let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            if percentage > 100 { alertLabel.text = "❗️"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
+            if percentage > 100 { alertLabel.text = "❗️Вы переедаете"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
         }
     }
     func showAlert(error: String){

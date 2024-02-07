@@ -15,16 +15,21 @@ final class Keys {
         case sport
         case minutesToEat
         case minutesToDrink
+        case timeGetUp
+        case timeGoSleep
     }
+    
     private enum Standarts: String{
         case kkal
         case water
     }
+    
     private enum UsedStandarts : String{
         case usedKkal
         case usedWater
         case selectedBar
     }
+    
     static func checkTextField(textField : UITextField, fromNumber : Int, upToNumber : Int) -> (isEmpty: Bool, isInRange: Bool) {
         var isInRange = false
         var isEmpty = true
@@ -35,6 +40,7 @@ final class Keys {
         }
         return (isEmpty, isInRange)
     }
+    
     static func calculateStandarts(){
         if Keys.gender == "Woman" {
             var beforeInitKkal = 9.6 * Double(Keys.weight!)!
@@ -57,143 +63,159 @@ final class Keys {
         print("KKAL - \(Keys.kkal ?? 0)")
         print("WATER - \(Keys.water ?? 0)")
     }
+    
     static func resetValueUsedKeys() {
         Keys.usedKkal = 0
         Keys.usedWater = 0
     }
+    
+    static var timeGetUp: String! {
+        get {
+            UserDefaults.standard.string(forKey: HumanSettings.timeGetUp.rawValue)
+        }
+        set {
+            if let timeGetUp = newValue {
+                UserDefaults.standard.setValue(timeGetUp, forKey: HumanSettings.timeGetUp.rawValue)
+            }
+        }
+    }
+    
+    static var timeGoSleep : String! {
+        set {
+            if let timeGoSleep = newValue {
+                UserDefaults.standard.setValue(timeGoSleep, forKey: HumanSettings.timeGoSleep.rawValue)
+            }
+        }
+        get {
+            UserDefaults.standard.string(forKey: HumanSettings.timeGoSleep.rawValue)
+        }
+    }
+    
     static var minutesToDrink: String! {
-        get{
-            return UserDefaults.standard.string(forKey: "drink")
+        get {
+            UserDefaults.standard.string(forKey: HumanSettings.minutesToDrink.rawValue)
         }
-        set{
+        set {
             if let minutesToDrink = newValue {
-                UserDefaults.standard.set(minutesToDrink, forKey: "drink")
+                UserDefaults.standard.set(minutesToDrink, forKey: HumanSettings.minutesToDrink.rawValue)
             }
         }
     }
+    
     static var minutesToEat: String! {
-        get{
-            return UserDefaults.standard.string(forKey: "eat")
+        get {
+            UserDefaults.standard.string(forKey: HumanSettings.minutesToEat.rawValue)
         }
-        set{
+        set {
             if let minutesToEat = newValue {
-                UserDefaults.standard.set(minutesToEat, forKey: "eat")
+                UserDefaults.standard.set(minutesToEat, forKey: HumanSettings.minutesToEat.rawValue)
             }
         }
     }
+    
     static var sport: String! {
-        get{
-            return UserDefaults.standard.string(forKey: "sport")
+        get {
+            UserDefaults.standard.string(forKey: HumanSettings.sport.rawValue)
         }
-        set{
+        set {
             if let sport = newValue {
-                UserDefaults.standard.set(sport, forKey: "sport")
+                UserDefaults.standard.set(sport, forKey: HumanSettings.sport.rawValue)
             }
         }
     }
 
     static var selectedBar: String! {
-        get{
-            return UserDefaults.standard.string(forKey: "bar")
+        get {
+            UserDefaults.standard.string(forKey: UsedStandarts.selectedBar.rawValue)
         }
-        set{
+        set {
             if let selectedBar = newValue {
-                UserDefaults.standard.set(selectedBar, forKey: "bar")
+                UserDefaults.standard.set(selectedBar, forKey: UsedStandarts.selectedBar.rawValue)
             }
         }
     }
+    
     static var usedKkal: Int! {
-        get{
-            return UserDefaults.standard.integer(forKey: "usedKkal")
+        get {
+            UserDefaults.standard.integer(forKey: UsedStandarts.usedKkal.rawValue)
         }
-        set{
+        set {
             if let usedKkal = newValue {
-                UserDefaults.standard.set(usedKkal, forKey: "usedKkal")
+                UserDefaults.standard.set(usedKkal, forKey: UsedStandarts.usedKkal.rawValue)
             }
         }
     }
+    
     static var usedWater: Int! {
-        get{
-            return UserDefaults.standard.integer(forKey: "usedWater")
+        get {
+            UserDefaults.standard.integer(forKey: UsedStandarts.usedWater.rawValue)
         }
-        set{
+        set {
             if let usedWater = newValue {
-                UserDefaults.standard.set(usedWater, forKey: "usedWater")
+                UserDefaults.standard.set(usedWater, forKey: UsedStandarts.usedWater.rawValue)
             }
         }
     }
+    
     static var kkal: Int! {
         get {
-            return UserDefaults.standard.integer(forKey: "kkal")
+            UserDefaults.standard.integer(forKey: Standarts.kkal.rawValue)
         } set {
             if let kkal = newValue {
-                UserDefaults.standard.set(kkal, forKey: "kkal")
+                UserDefaults.standard.set(kkal, forKey: Standarts.kkal.rawValue)
             }
         }
-        
     }
+    
     static var water: Int! {
         get {
-            return UserDefaults.standard.integer(forKey: "water")
+            UserDefaults.standard.integer(forKey: Standarts.water.rawValue)
         } set {
             let defaults = UserDefaults.standard
             if let water = newValue {
-                defaults.set(water, forKey: "water")
+                defaults.set(water, forKey: Standarts.water.rawValue)
             }
         }
-        
     }
+    
     static var height: String! {
         get {
-            return UserDefaults.standard.string(forKey: HumanSettings.height.rawValue)
+            UserDefaults.standard.string(forKey: HumanSettings.height.rawValue)
         } set {
-            let defaults = UserDefaults.standard
-            let key = HumanSettings.height.rawValue
             if let height = newValue {
-                defaults.set(height, forKey: key)
+                UserDefaults.standard.set(height, forKey: HumanSettings.height.rawValue)
             }
         }
-        
     }
     
     static var weight: String! {
         get {
-            return UserDefaults.standard.string(forKey: HumanSettings.weight.rawValue)
+            UserDefaults.standard.string(forKey: HumanSettings.weight.rawValue)
         } set {
-            let defults = UserDefaults.standard
-            let key = HumanSettings.weight.rawValue
             if let weight = newValue {
-                defults.set(weight, forKey: key)
+                UserDefaults.standard.set(weight, forKey: HumanSettings.weight.rawValue)
             }
         }
-        
     }
     
     static var age: String! {
         get {
-            return UserDefaults.standard.string(forKey: HumanSettings.age.rawValue)
+            UserDefaults.standard.string(forKey: HumanSettings.age.rawValue)
         } set {
-            let defaults = UserDefaults.standard
-            let key = HumanSettings.age.rawValue
             if let age = newValue {
-                defaults.set(age, forKey: key)
+                UserDefaults.standard.set(age, forKey: HumanSettings.age.rawValue)
             }
         }
-        
     }
     
     static var gender: String! {
         get {
-            return UserDefaults.standard.string(forKey: HumanSettings.gender.rawValue)
+            UserDefaults.standard.string(forKey: HumanSettings.gender.rawValue)
         } set {
-            let defaults = UserDefaults.standard
-            let key = HumanSettings.gender.rawValue
             if let gender = newValue {
-                defaults.set(gender, forKey: key)
+                UserDefaults.standard.set(gender, forKey: HumanSettings.gender.rawValue)
             }
         }
-        
     }
-    
     
 }

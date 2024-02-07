@@ -20,11 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var goSleepDatePicker: UIDatePicker!
     var eatTimePicker = UIPickerView()
     var waterTimePicker = UIPickerView()
-    let timeEatArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
+    let timeEatArray = [10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
     let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +29,11 @@ class ViewController: UIViewController {
         weightTextField.delegate = self
         ageTextField.delegate = self
         sportTextField.delegate = self
+        
+        minutesDrinkTextField.tag = 1
+        minutesDrinkTextField.delegate = self
+        minutesEatTextField.tag = 2
+        minutesEatTextField.delegate = self
         
         minutesEatTextField.inputView = eatTimePicker
         minutesDrinkTextField.inputView = waterTimePicker
@@ -41,8 +43,8 @@ class ViewController: UIViewController {
         waterTimePicker.delegate = self
         waterTimePicker.dataSource = self
         
-        eatTimePicker.tag = 1
-        waterTimePicker.tag = 2
+        eatTimePicker.tag = 2
+        waterTimePicker.tag = 1
     }
     @IBAction func manButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletWomanButton)
@@ -79,29 +81,33 @@ class ViewController: UIViewController {
         case (isEmpty: false, isInRange: false): showError(error: "Неверно введено занятие спортом")
         default: break
         }
-        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 10, upToNumber: 1000) {
+        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 9, upToNumber: 1000) {
         case (isEmpty: false, isInRange: true): Keys.minutesToEat = minutesEatTextField.text
-        case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о еде")
-        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о еде")
+        case (isEmpty: true, isInRange: false): showError(error: "Не выбрано уведомление о еде")
         default: break
         }
         switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 2, upToNumber: 500) {
         case (isEmpty: false, isInRange: true): Keys.minutesToDrink = ageTextField.text
-        case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о воде")
-        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о воде")
+        case (isEmpty: true, isInRange: false): showError(error: "Не выбрано уведомление о воде")
         default: break
         }
+        Keys.timeGetUp = formatDatePicker(sender: getUpDatePicker)
+        Keys.timeGoSleep = formatDatePicker(sender: goSleepDatePicker)
 
         if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.sport != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
             Keys.calculateStandarts()
+            
             let vc = storyboard!.instantiateViewController(withIdentifier: "Home") as UIViewController
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }
     }
     
-    
-    
+    func formatDatePicker(sender: UIDatePicker) -> String {
+        let timeFormatter = DateFormatter()
+        timeFormatter.timeStyle = DateFormatter.Style.short
+        return timeFormatter.string(from: sender.date)
+    }
     
     func checkButtonManOrWoman(buttonMan:UIButton, buttonWoman:UIButton) -> String {
         if buttonMan.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
@@ -131,6 +137,12 @@ class ViewController: UIViewController {
 
 extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField.tag {
+        case 1, 2:
+            return false
+        default:
+            break
+        }
         let allowedcharacters = "0123456789"
         let allowedcharacterSet = CharacterSet(charactersIn: allowedcharacters)
         let typedCharactersetIn = CharacterSet(charactersIn: string)
@@ -141,40 +153,43 @@ extension ViewController: UITextFieldDelegate {
     }
 }
 
-extension ViewController : UIPickerViewDataSource, UIPickerViewDelegate {
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case 1:
-            return timeEatArray.count
-        case 2:
             return timeWaterArray.count
+        case 2:
+            return timeEatArray.count
         default:
             return 1
         }
     }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch pickerView.tag {
-        case 1:
-            return "\(timeEatArray[row])"
-        case 2:
-            return "\(timeEatArray[row])"
-        default:
-            return "Data dont found"
-        }
-    }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch pickerView.tag {
         case 1:
-            minutesEatTextField.text = "\(timeEatArray[row])"
-            minutesEatTextField.resignFirstResponder()
-        case 2:
             minutesDrinkTextField.text = "\(timeWaterArray[row])"
             minutesDrinkTextField.resignFirstResponder()
+        case 2:
+            minutesEatTextField.text = "\(timeEatArray[row])"
+            minutesEatTextField.resignFirstResponder()
         default:
             break
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch pickerView.tag {
+        case 1:
+            return "\(timeWaterArray[row])"
+        case 2:
+            return "\(timeEatArray[row])"
+        default:
+            return ""
         }
     }
 }

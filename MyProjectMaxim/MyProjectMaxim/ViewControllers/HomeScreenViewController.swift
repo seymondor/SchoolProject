@@ -10,9 +10,25 @@ import UIKit
 import BonsaiController
 var addAmountVariable = ""
 class HomeScreenViewController: UIViewController {
-    
+    @IBOutlet weak var historyStackView: UIStackView!
+    var slotHistory1 = UIStackView()
+    var slotHistory2 = UIStackView()
+    var slotHistory3 = UIStackView()
+    var slotHistory4 = UIStackView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        slotHistory1.axis = .horizontal
+        slotHistory1.distribution = .equalSpacing
+        slotHistory2.axis = .horizontal
+
+        slotHistory3.axis = .horizontal
+
+        slotHistory4.axis = .horizontal
+
+        historyStackView.addArrangedSubview(slotHistory1)
+        historyStackView.addArrangedSubview(slotHistory2)
+        historyStackView.addArrangedSubview(slotHistory3)
+        historyStackView.addArrangedSubview(slotHistory4)
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         switch Keys.selectedBar {
         case "water": changeBar(to: "water"); setAlertLabel(on: Keys.selectedBar)
@@ -30,6 +46,7 @@ class HomeScreenViewController: UIViewController {
             changeBarValue(withKey: "food", fromValuePercentage: Float(percentage)/100, toValuePercentage: Float(percentage)/100)
         }
     }
+    // slotHistory1.accessibilityElementCount() !
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
     @IBOutlet weak var backgroundOfEmojiSelectedBar: UIView!
@@ -106,6 +123,18 @@ class HomeScreenViewController: UIViewController {
     @objc func reloadLabel(notification: Notification){
         switch Keys.selectedBar {
         case "food":
+            let foodImageView = UIImageView()
+            foodImageView.translatesAutoresizingMaskIntoConstraints = false
+            foodImageView.heightAnchor.constraint(equalTo: foodImageView.widthAnchor, multiplier: 1.0/1.0).isActive = true
+            foodImageView.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
+            foodImageView.image = UIImage(systemName: "carrot.fill")
+            let label = UILabel()
+            label.text = "------------"
+            let addAmountView = UILabel()
+            addAmountView.text = "\(addAmountVariable)"
+            slotHistory1.addArrangedSubview(foodImageView)
+            slotHistory1.addArrangedSubview(label)
+            slotHistory1.addArrangedSubview(addAmountView)
             let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             amountOfSomething.text = "\((Int(Keys.usedKkal)) + Int(addAmountVariable)!)/\(Int(Keys.kkal))kkal"
             Keys.usedKkal = Keys.usedKkal + Int(addAmountVariable)!
@@ -154,4 +183,10 @@ extension HomeScreenViewController: BonsaiControllerDelegate {
 }
 extension Notification.Name{
     static let reload = Notification.Name("reload")
+}
+
+extension NSLayoutConstraint {
+    func constraintWithMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
+    }
 }

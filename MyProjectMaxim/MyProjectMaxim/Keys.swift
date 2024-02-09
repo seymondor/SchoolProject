@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 final class Keys {
-    private enum HumanSettings: String{
+    private enum HumanSettings: String {
         case height
         case weight
         case age
@@ -19,12 +19,17 @@ final class Keys {
         case timeGoSleep
     }
     
-    private enum Standarts: String{
+    private enum Standarts: String {
         case kkal
         case water
     }
     
-    private enum UsedStandarts : String{
+    private enum History : String {
+        case historyWater
+        case historyFood
+    }
+    
+    private enum UsedStandarts : String {
         case usedKkal
         case usedWater
         case selectedBar
@@ -68,6 +73,33 @@ final class Keys {
         Keys.usedKkal = 0
         Keys.usedWater = 0
     }
+    
+    
+    // TODO: спросить
+    static var historyWater : Dictionary<String, Int>! {
+        get {
+            UserDefaults.standard.value(forKey: History.historyWater.rawValue) as? Dictionary<String, Int>
+        }
+        set {
+            if let historyWater = newValue {
+                UserDefaults.standard.set(historyWater, forKey: History.historyWater.rawValue)
+            }
+        }
+    }
+    
+    static var historyFood : Dictionary<String, Int>! {
+        get {
+            UserDefaults.standard.value(forKey: History.historyFood.rawValue) as? Dictionary<String, Int>
+        }
+        set {
+            if let historyFood = newValue {
+                UserDefaults.standard.set(historyFood, forKey: History.historyFood.rawValue)
+            }
+        }
+    }
+
+    
+    
     
     static var timeGetUp: String! {
         get {

@@ -19,16 +19,21 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         slotHistory1.axis = .horizontal
         slotHistory1.distribution = .equalSpacing
+        slotHistory1.alignment = .center
         slotHistory2.axis = .horizontal
-
+        slotHistory2.distribution = .equalSpacing
+        slotHistory2.alignment = .center
         slotHistory3.axis = .horizontal
-
+        slotHistory3.distribution = .equalSpacing
+        slotHistory3.alignment = .center
         slotHistory4.axis = .horizontal
-
+        slotHistory4.alignment = .center
+        slotHistory4.distribution = .equalSpacing
         historyStackView.addArrangedSubview(slotHistory1)
         historyStackView.addArrangedSubview(slotHistory2)
         historyStackView.addArrangedSubview(slotHistory3)
         historyStackView.addArrangedSubview(slotHistory4)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         switch Keys.selectedBar {
         case "water": changeBar(to: "water"); setAlertLabel(on: Keys.selectedBar)
@@ -86,6 +91,13 @@ class HomeScreenViewController: UIViewController {
     func changeBar(to bar: String) {
         switch bar {
         case "water":
+            slotHistory1.deleteAllSubviews()
+            slotHistory2.deleteAllSubviews()
+            slotHistory3.deleteAllSubviews()
+            slotHistory4.deleteAllSubviews()
+            
+            //TODO: Доделать появление слотов
+            
             Keys.selectedBar = "water"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.5811036229, green: 0.7276489139, blue: 0.852099359, alpha: 1)
             backgroundOfEmojiSelectedBar.backgroundColor = #colorLiteral(red: 0.5811036229, green: 0.7276489139, blue: 0.852099359, alpha: 1)
@@ -95,6 +107,13 @@ class HomeScreenViewController: UIViewController {
             let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(perc)/100)
         case "food":
+            slotHistory1.deleteAllSubviews()
+            slotHistory2.deleteAllSubviews()
+            slotHistory3.deleteAllSubviews()
+            slotHistory4.deleteAllSubviews()
+            
+            //TODO: Доделать появление слотов
+            
             Keys.selectedBar = "food"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
             backgroundOfEmojiSelectedBar.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
@@ -124,17 +143,21 @@ class HomeScreenViewController: UIViewController {
         switch Keys.selectedBar {
         case "food":
             let foodImageView = UIImageView()
-            foodImageView.translatesAutoresizingMaskIntoConstraints = false
-            foodImageView.heightAnchor.constraint(equalTo: foodImageView.widthAnchor, multiplier: 1.0/1.0).isActive = true
-            foodImageView.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
-            foodImageView.image = UIImage(systemName: "carrot.fill")
             let label = UILabel()
-            label.text = "------------"
+            label.text = "\(getTime(type: "short"))"
             let addAmountView = UILabel()
-            addAmountView.text = "\(addAmountVariable)"
-            slotHistory1.addArrangedSubview(foodImageView)
-            slotHistory1.addArrangedSubview(label)
-            slotHistory1.addArrangedSubview(addAmountView)
+            addAmountView.text = "\(addAmountVariable) kkal"
+            foodImageView.layer.masksToBounds = true
+            foodImageView.layer.cornerRadius = 3
+            foodImageView.translatesAutoresizingMaskIntoConstraints = true
+            foodImageView.heightAnchor.constraint(equalTo:foodImageView.widthAnchor, multiplier: 1.0/1.0).isActive = true
+            foodImageView.backgroundColor = .white
+            foodImageView.image = UIImage(named: "carrot")
+            addNewValueInHistory(image: foodImageView, label: label, amountLabel: addAmountView)
+            var currentHistoryFood = Keys.historyFood ?? Dictionary<String, Int>()
+            currentHistoryFood["\(getDate()) \(getTime(type: "medium"))"] = Int(addAmountVariable)!
+            Keys.historyFood = currentHistoryFood
+            print(Keys.historyFood)
             let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             amountOfSomething.text = "\((Int(Keys.usedKkal)) + Int(addAmountVariable)!)/\(Int(Keys.kkal))kkal"
             Keys.usedKkal = Keys.usedKkal + Int(addAmountVariable)!
@@ -154,6 +177,67 @@ class HomeScreenViewController: UIViewController {
             break
         }
     }
+    func addNewValueInFirstStackViewHistory(image: UIImageView, label: UILabel, amountLabel: UILabel) {
+        slotHistory1.addArrangedSubview(image)
+        slotHistory1.addArrangedSubview(label)
+        slotHistory1.addArrangedSubview(amountLabel)
+    }
+    func addNewValueInHistory(image: UIImageView, label: UILabel, amountLabel: UILabel) {
+        if slotHistory1.subviews.count > 0 {
+            if slotHistory2.subviews.count > 0 {
+                if slotHistory3.subviews.count > 0 {
+                    if slotHistory4.subviews.count > 0 {
+                        slotHistory4.deleteAllSubviews()
+                        copyAllSubviews(from: slotHistory3, to: slotHistory4)
+                        copyAllSubviews(from: slotHistory2, to: slotHistory3)
+                        copyAllSubviews(from: slotHistory1, to: slotHistory2)
+                        slotHistory1.deleteAllSubviews()
+                        addNewValueInFirstStackViewHistory(image: image, label: label, amountLabel: amountLabel)
+                    } else {
+                        copyAllSubviews(from: slotHistory3, to: slotHistory4)
+                        copyAllSubviews(from: slotHistory2, to: slotHistory3)
+                        copyAllSubviews(from: slotHistory1, to: slotHistory2)
+                        slotHistory1.deleteAllSubviews()
+                        addNewValueInFirstStackViewHistory(image: image, label: label, amountLabel: amountLabel)
+                    }
+                } else {
+                    copyAllSubviews(from: slotHistory2, to: slotHistory3)
+                    copyAllSubviews(from: slotHistory1, to: slotHistory2)
+                    slotHistory1.deleteAllSubviews()
+                    addNewValueInFirstStackViewHistory(image: image, label: label, amountLabel: amountLabel)
+                }
+            } else {
+                copyAllSubviews(from: slotHistory1, to: slotHistory2)
+                slotHistory1.deleteAllSubviews()
+                addNewValueInFirstStackViewHistory(image: image, label: label, amountLabel: amountLabel)
+            }
+        } else {
+            addNewValueInFirstStackViewHistory(image: image, label: label, amountLabel: amountLabel)
+        }
+        
+    }
+    func copyAllSubviews(from stackView1: UIStackView, to stackView2: UIStackView) {
+        for subview in stackView1.arrangedSubviews {
+            stackView2.addArrangedSubview(subview)
+        }
+    }
+    func getTime(type: String) -> String {
+        let formatter = DateFormatter()
+        switch type {
+        case "short":
+            formatter.timeStyle = .short
+        case "medium":
+            formatter.timeStyle = .medium
+        default:
+            return ""
+        }
+        return formatter.string(from: Date())
+    }
+    func getDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        return formatter.string(from: Date())
+    }
     func setAlertLabel(on bar: String){
         switch bar {
         case "water":
@@ -172,7 +256,14 @@ class HomeScreenViewController: UIViewController {
         present(alert, animated: true)
     }
 }
-
+extension UIStackView {
+    func deleteAllSubviews() {
+        for item in arrangedSubviews {
+            removeArrangedSubview(item)
+            item.removeFromSuperview()
+        }
+    }
+}
 extension HomeScreenViewController: BonsaiControllerDelegate {
     func frameOfPresentedView(in containerViewFrame: CGRect) -> CGRect {
         return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height / 1.5), size: CGSize(width: containerViewFrame.width, height: containerViewFrame.height / (3/4)))
@@ -183,10 +274,4 @@ extension HomeScreenViewController: BonsaiControllerDelegate {
 }
 extension Notification.Name{
     static let reload = Notification.Name("reload")
-}
-
-extension NSLayoutConstraint {
-    func constraintWithMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
-    }
 }

@@ -15,33 +15,28 @@ class HomeScreenViewController: UIViewController {
     lazy var historyFoodArray = Keys.historyFood ?? []
     lazy var historyWaterArray = Keys.historyWater ?? []
     @IBOutlet weak var historyView: UIView!
+    @IBOutlet weak var historyLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
+
+        historyFoodTableView.translatesAutoresizingMaskIntoConstraints = false
+        historyFoodTableView.tag = 2
+    
+        historyWaterTableView.translatesAutoresizingMaskIntoConstraints = false
+        historyWaterTableView.tag = 1
+        
+        
         switch Keys.selectedBar {
         case "water": 
             changeBar(to: "water")
             setAlertLabel(on: Keys.selectedBar)
-            historyView.addSubview(historyWaterTableView)
-            let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
-            let displayWidth: CGFloat = self.historyView.frame.width
-            let displayHeight: CGFloat = self.historyView.frame.height
-            historyWaterTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
-            historyWaterTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
-            historyWaterTableView.dataSource = self
-            historyWaterTableView.delegate = self
-//            historyWaterTableView.translatesAutoresizingMaskIntoConstraints = true
-//            historyWaterTableView.topAnchor.constraint(equalTo: historyWaterTableView.bottomAnchor, constant: 10).isActive = true
-//            historyWaterTableView.leftAnchor.constraint(equalTo: historyWaterTableView.rightAnchor, constant: 10).isActive = true
+            
+
         default:
             changeBar(to: "food")
             setAlertLabel(on: Keys.selectedBar)
-            historyView.addSubview(historyFoodTableView)
-            historyFoodTableView.dataSource = self
-            historyFoodTableView.delegate = self
-//            historyFoodTableView.translatesAutoresizingMaskIntoConstraints = true
-//            historyFoodTableView.topAnchor.constraint(equalTo: historyFoodTableView.bottomAnchor, constant: 10).isActive = true
-//            historyFoodTableView.leftAnchor.constraint(equalTo: historyFoodTableView.rightAnchor, constant: 10).isActive = true
+            
         }
     }
     
@@ -96,10 +91,20 @@ class HomeScreenViewController: UIViewController {
     func changeBar(to bar: String) {
         switch bar {
         case "water":
-            // slotHistory1.deleteAllSubviews()
-            
+            historyFoodTableView.isHidden = true
             //TODO: Доделать появление слотов
-
+            historyView.addSubview(historyWaterTableView)
+            
+            historyWaterTableView.leftAnchor.constraint(equalTo: historyView.leftAnchor, constant: 10).isActive = true
+            historyWaterTableView.topAnchor.constraint(equalTo: historyLabel.bottomAnchor, constant: 10).isActive = true
+            historyWaterTableView.rightAnchor.constraint(equalTo: historyView.rightAnchor, constant: -10).isActive = true
+            historyWaterTableView.bottomAnchor.constraint(equalTo: historyView.bottomAnchor, constant: -10).isActive = true
+            
+            historyWaterTableView.dataSource = self
+            historyWaterTableView.delegate = self
+            
+            historyWaterTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            historyWaterTableView.isHidden = false
             Keys.selectedBar = "water"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.5811036229, green: 0.7276489139, blue: 0.852099359, alpha: 1)
             backgroundOfEmojiSelectedBar.backgroundColor = #colorLiteral(red: 0.5811036229, green: 0.7276489139, blue: 0.852099359, alpha: 1)
@@ -109,7 +114,19 @@ class HomeScreenViewController: UIViewController {
             let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(perc)/100)
         case "food":
-            // slotHistory1.deleteAllSubviews()
+            historyWaterTableView.isHidden = true
+            historyView.addSubview(historyFoodTableView)
+            
+            historyFoodTableView.leftAnchor.constraint(equalTo: historyView.leftAnchor, constant: 10).isActive = true
+            historyFoodTableView.topAnchor.constraint(equalTo: historyLabel.bottomAnchor, constant: 10).isActive = true
+            historyFoodTableView.rightAnchor.constraint(equalTo: historyView.rightAnchor, constant: -10).isActive = true
+            historyFoodTableView.bottomAnchor.constraint(equalTo: historyView.bottomAnchor, constant: -10).isActive = true
+            
+            historyFoodTableView.dataSource = self
+            historyFoodTableView.delegate = self
+            
+            historyFoodTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            historyFoodTableView.isHidden = false
             //TODO: Доделать появление слотов
             let foodImageView = UIImageView()
             let timeLabel = UILabel()
@@ -250,20 +267,27 @@ extension UIStackView {
 extension HomeScreenViewController: BonsaiControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableView.tag {
-        case 1 :
-            return historyWaterArray.count
-        case 2 :
-            return historyFoodArray.count
-        default:
-            return 0
-        }
+        return 25
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Hello"
-        return cell
+        switch tableView.tag {
+        case 1 :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = "Water"
+            return cell
+        case 2 :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = "Food"
+            return cell
+        default :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+            cell.textLabel?.text = "Error"
+            return cell
+        }
     }
     
     func frameOfPresentedView(in containerViewFrame: CGRect) -> CGRect {

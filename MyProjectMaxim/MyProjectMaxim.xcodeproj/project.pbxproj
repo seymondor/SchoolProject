@@ -26,6 +26,8 @@
 		B5073D282B6A5AE400129E77 /* FoodAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */; };
 		B5073D2A2B6A5B0000129E77 /* WaterAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */; };
 		B54FFFC42B62757C008E08EF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54FFFC32B62757C008E08EF /* SettingsViewController.swift */; };
+		B5B634512B7790630012AB74 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B634502B7790630012AB74 /* HistoryViewController.swift */; };
+		B5B634532B77A4CD0012AB74 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B634522B77A4CD0012AB74 /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodAddViewController.swift; sourceTree = "<group>"; };
 		B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterAddViewController.swift; sourceTree = "<group>"; };
 		B54FFFC32B62757C008E08EF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B5B634502B7790630012AB74 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		B5B634522B77A4CD0012AB74 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		C6AD2231A4A06E65C892B767 /* Pods-MyProjectMaximTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaximTests.debug.xcconfig"; path = "Target Support Files/Pods-MyProjectMaximTests/Pods-MyProjectMaximTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CB775FE6CE68AB881E2BC621 /* Pods-MyProjectMaxim-MyProjectMaximUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyProjectMaxim-MyProjectMaximUITests.release.xcconfig"; path = "Target Support Files/Pods-MyProjectMaxim-MyProjectMaximUITests/Pods-MyProjectMaxim-MyProjectMaximUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,6 +138,7 @@
 				632494F82ADA75480028B95E /* SceneDelegate.swift */,
 				B5EE8EDE2B6B96C0004CD8EB /* ViewControllers */,
 				63BB96BD2AF633C900293D2E /* Keys.swift */,
+				B5B634522B77A4CD0012AB74 /* Cell.swift */,
 				63EC9AC12B527266000290FA /* CircularProgressBar.swift */,
 				632494FC2ADA75480028B95E /* Main.storyboard */,
 				632494FF2ADA754C0028B95E /* Assets.xcassets */,
@@ -180,6 +185,7 @@
 				632494FA2ADA75480028B95E /* ViewController.swift */,
 				B54FFFC32B62757C008E08EF /* SettingsViewController.swift */,
 				63EC9AC32B528127000290FA /* HomeScreenViewController.swift */,
+				B5B634502B7790630012AB74 /* HistoryViewController.swift */,
 				B5073D272B6A5AE400129E77 /* FoodAddViewController.swift */,
 				B5073D292B6A5B0000129E77 /* WaterAddViewController.swift */,
 			);
@@ -440,6 +446,8 @@
 				63EC9AC42B528127000290FA /* HomeScreenViewController.swift in Sources */,
 				63EC9AC62B5285FE000290FA /* RouterViewController.swift in Sources */,
 				632494F72ADA75480028B95E /* AppDelegate.swift in Sources */,
+				B5B634532B77A4CD0012AB74 /* Cell.swift in Sources */,
+				B5B634512B7790630012AB74 /* HistoryViewController.swift in Sources */,
 				632494F92ADA75480028B95E /* SceneDelegate.swift in Sources */,
 				B5073D2A2B6A5B0000129E77 /* WaterAddViewController.swift in Sources */,
 				B5073D282B6A5AE400129E77 /* FoodAddViewController.swift in Sources */,

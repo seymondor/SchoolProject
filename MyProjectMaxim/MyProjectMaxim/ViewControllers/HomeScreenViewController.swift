@@ -10,16 +10,41 @@ import UIKit
 import BonsaiController
 var addAmountVariable = " "
 class HomeScreenViewController: UIViewController {
-    var historyTableView = UITableView()
+    var historyFoodTableView = UITableView()
+    var historyWaterTableView = UITableView()
+    lazy var historyFoodArray = Keys.historyFood ?? []
+    lazy var historyWaterArray = Keys.historyWater ?? []
+    @IBOutlet weak var historyView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         switch Keys.selectedBar {
-        case "water": changeBar(to: "water"); setAlertLabel(on: Keys.selectedBar)
-        default: changeBar(to: "food"); setAlertLabel(on: Keys.selectedBar)
+        case "water": 
+            changeBar(to: "water")
+            setAlertLabel(on: Keys.selectedBar)
+            historyView.addSubview(historyWaterTableView)
+            let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+            let displayWidth: CGFloat = self.historyView.frame.width
+            let displayHeight: CGFloat = self.historyView.frame.height
+            historyWaterTableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
+            historyWaterTableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+            historyWaterTableView.dataSource = self
+            historyWaterTableView.delegate = self
+//            historyWaterTableView.translatesAutoresizingMaskIntoConstraints = true
+//            historyWaterTableView.topAnchor.constraint(equalTo: historyWaterTableView.bottomAnchor, constant: 10).isActive = true
+//            historyWaterTableView.leftAnchor.constraint(equalTo: historyWaterTableView.rightAnchor, constant: 10).isActive = true
+        default:
+            changeBar(to: "food")
+            setAlertLabel(on: Keys.selectedBar)
+            historyView.addSubview(historyFoodTableView)
+            historyFoodTableView.dataSource = self
+            historyFoodTableView.delegate = self
+//            historyFoodTableView.translatesAutoresizingMaskIntoConstraints = true
+//            historyFoodTableView.topAnchor.constraint(equalTo: historyFoodTableView.bottomAnchor, constant: 10).isActive = true
+//            historyFoodTableView.leftAnchor.constraint(equalTo: historyFoodTableView.rightAnchor, constant: 10).isActive = true
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         if Keys.selectedBar == "water" {
             let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
@@ -31,7 +56,7 @@ class HomeScreenViewController: UIViewController {
             changeBarValue(withKey: "food", fromValuePercentage: Float(percentage)/100, toValuePercentage: Float(percentage)/100)
         }
     }
-    // slotHistory1.accessibilityElementCount() !
+    
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
     @IBOutlet weak var backgroundOfEmojiSelectedBar: UIView!
@@ -89,14 +114,13 @@ class HomeScreenViewController: UIViewController {
             let foodImageView = UIImageView()
             let timeLabel = UILabel()
             let addAmountView = UILabel()
-            let historyFood = Keys.historyFood ?? []
             
             foodImageView.translatesAutoresizingMaskIntoConstraints = true
             foodImageView.heightAnchor.constraint(equalTo:foodImageView.widthAnchor, multiplier: 1.0/1.0).isActive = true
             foodImageView.backgroundColor = .white
             foodImageView.image = UIImage(named: "carrot")
             
-            for items in historyFood {
+            for items in historyFoodArray {
                 let timeMedium = getKeyFromDictionary(fromDictionary: items).suffix(8).prefix(5)
                 timeLabel.text = "\(timeMedium)"
                 let kkal = getValueFromDictionary(fromDictionary: items)
@@ -154,9 +178,8 @@ class HomeScreenViewController: UIViewController {
             foodImageView.heightAnchor.constraint(equalTo:foodImageView.widthAnchor, multiplier: 1.0/1.0).isActive = true
             foodImageView.backgroundColor = .white
             foodImageView.image = UIImage(named: "carrot")
-            var currentHistoryFood = Keys.historyFood ?? [Dictionary<String, Int>]()
-            currentHistoryFood.append(["\(getDate()) \(getTime(type: "medium"))" : Int(addAmountVariable)!])
-            Keys.historyFood = currentHistoryFood
+            historyFoodArray.append(["\(getDate()) \(getTime(type: "medium"))" : Int(addAmountVariable)!])
+            Keys.historyFood = historyFoodArray
             let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             amountOfSomething.text = "\((Int(Keys.usedKkal)) + Int(addAmountVariable)!)/\(Int(Keys.kkal))kkal"
             Keys.usedKkal = Keys.usedKkal + Int(addAmountVariable)!
@@ -224,7 +247,25 @@ extension UIStackView {
         }
     }
 }
-extension HomeScreenViewController: BonsaiControllerDelegate {
+extension HomeScreenViewController: BonsaiControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableView.tag {
+        case 1 :
+            return historyWaterArray.count
+        case 2 :
+            return historyFoodArray.count
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = "Hello"
+        return cell
+    }
+    
     func frameOfPresentedView(in containerViewFrame: CGRect) -> CGRect {
         return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height / 1.5), size: CGSize(width: containerViewFrame.width, height: containerViewFrame.height / (3/4)))
     }

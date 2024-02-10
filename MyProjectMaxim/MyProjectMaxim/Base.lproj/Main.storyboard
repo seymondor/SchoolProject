@@ -1754,6 +1754,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="gFK-B2-YMF"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="  Добавить " image="plus" catalog="system">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1786,7 +1787,7 @@
                                 <rect key="frame" x="0.0" y="521.33333333333337" width="393" height="247.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="История" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLJ-bG-gTV">
-                                        <rect key="frame" x="15" y="1" width="74.333333333333329" height="21.666666666666668"/>
+                                        <rect key="frame" x="15" y="16" width="74.333333333333329" height="21.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1801,7 +1802,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="wLJ-bG-gTV" firstAttribute="top" secondItem="AFR-0b-j7M" secondAttribute="bottom" id="A2h-GV-opZ"/>
+                                    <constraint firstItem="wLJ-bG-gTV" firstAttribute="top" secondItem="AFR-0b-j7M" secondAttribute="bottom" constant="15" id="A2h-GV-opZ"/>
                                     <constraint firstItem="wLJ-bG-gTV" firstAttribute="leading" secondItem="cQQ-9J-YMP" secondAttribute="leading" constant="15" id="HgI-3K-83u"/>
                                     <constraint firstItem="AFR-0b-j7M" firstAttribute="leading" secondItem="cQQ-9J-YMP" secondAttribute="leading" id="TJr-VW-qky"/>
                                     <constraint firstItem="AFR-0b-j7M" firstAttribute="top" secondItem="cQQ-9J-YMP" secondAttribute="top" id="aYD-q5-XdE"/>
@@ -1837,6 +1838,7 @@
                         <outlet property="amountOfSomething" destination="bEQ-hv-bI2" id="C66-Su-RqB"/>
                         <outlet property="backgroundOfEmojiSelectedBar" destination="rlX-vZ-hKV" id="42O-Mf-9Hz"/>
                         <outlet property="emojiSelectedBar" destination="uCH-rJ-z6y" id="Ojx-ap-SJo"/>
+                        <outlet property="historyView" destination="cQQ-9J-YMP" id="1hy-Wl-adh"/>
                         <outlet property="percentageLabel" destination="BfT-D5-FG4" id="6Lh-hP-Myr"/>
                     </connections>
                 </viewController>

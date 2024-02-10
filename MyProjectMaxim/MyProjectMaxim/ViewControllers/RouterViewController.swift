@@ -14,7 +14,6 @@ class RouterViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         if Keys.age != "Error" && Keys.age != nil && Keys.gender != "Error" && Keys.gender != nil && Keys.height != "Error" && Keys.height != nil && Keys.weight != "Error" && Keys.weight != nil {
-            // доделать роутер чтобы показывался главный экран
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "Home")
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: false, completion: nil)

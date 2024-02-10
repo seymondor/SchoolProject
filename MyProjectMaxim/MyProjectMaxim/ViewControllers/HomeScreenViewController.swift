@@ -8,35 +8,11 @@
 import Foundation
 import UIKit	
 import BonsaiController
-var addAmountVariable = ""
+var addAmountVariable = " "
 class HomeScreenViewController: UIViewController {
-    @IBOutlet weak var historyStackView: UIStackView!
-    var slotHistory1 = UIStackView()
-    var slotHistory2 = UIStackView()
-    var slotHistory3 = UIStackView()
-    var slotHistory4 = UIStackView()
+    var historyTableView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        slotHistory1.axis = .horizontal
-        slotHistory1.distribution = .equalSpacing
-        slotHistory1.alignment = .center
-        slotHistory1.tag = 1
-        slotHistory2.axis = .horizontal
-        slotHistory2.distribution = .equalSpacing
-        slotHistory2.alignment = .center
-        slotHistory2.tag = 2
-        slotHistory3.axis = .horizontal
-        slotHistory3.distribution = .equalSpacing
-        slotHistory3.alignment = .center
-        slotHistory3.tag = 3
-        slotHistory4.axis = .horizontal
-        slotHistory4.alignment = .center
-        slotHistory4.distribution = .equalSpacing
-        slotHistory4.tag = 4
-        historyStackView.addArrangedSubview(slotHistory1)
-        historyStackView.addArrangedSubview(slotHistory2)
-        historyStackView.addArrangedSubview(slotHistory3)
-        historyStackView.addArrangedSubview(slotHistory4)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         switch Keys.selectedBar {
@@ -95,10 +71,7 @@ class HomeScreenViewController: UIViewController {
     func changeBar(to bar: String) {
         switch bar {
         case "water":
-            slotHistory1.deleteAllSubviews()
-            slotHistory2.deleteAllSubviews()
-            slotHistory3.deleteAllSubviews()
-            slotHistory4.deleteAllSubviews()
+            // slotHistory1.deleteAllSubviews()
             
             //TODO: Доделать появление слотов
 
@@ -111,40 +84,23 @@ class HomeScreenViewController: UIViewController {
             let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(perc)/100)
         case "food":
-            slotHistory1.deleteAllSubviews()
-            slotHistory2.deleteAllSubviews()
-            slotHistory3.deleteAllSubviews()
-            slotHistory4.deleteAllSubviews()
-            
-            
+            // slotHistory1.deleteAllSubviews()
             //TODO: Доделать появление слотов
             let foodImageView = UIImageView()
             let timeLabel = UILabel()
             let addAmountView = UILabel()
-            let historyFood = Keys.historyFood
+            let historyFood = Keys.historyFood ?? []
             
             foodImageView.translatesAutoresizingMaskIntoConstraints = true
             foodImageView.heightAnchor.constraint(equalTo:foodImageView.widthAnchor, multiplier: 1.0/1.0).isActive = true
             foodImageView.backgroundColor = .white
             foodImageView.image = UIImage(named: "carrot")
             
-            if let historyDictionary = historyFood?.last {
-                print(historyDictionary)
-                let timeMedium = getKeyFromDictionary(fromDictionary: historyDictionary).suffix(8).prefix(5)
+            for items in historyFood {
+                let timeMedium = getKeyFromDictionary(fromDictionary: items).suffix(8).prefix(5)
                 timeLabel.text = "\(timeMedium)"
-                let kkal = getValueFromDictionary(fromDictionary: historyDictionary)
+                let kkal = getValueFromDictionary(fromDictionary: items)
                 addAmountView.text = "\(kkal) kkal"
-                addNewValueInStackViewHistory(stackView: slotHistory1, image: foodImageView, label: timeLabel, amountLabel: addAmountView)
-            }
-            
-            if let historyDictionary = historyFood?[(historyFood?.count ?? 0) - 2] {
-                print(historyDictionary)
-                let timeMedium = getKeyFromDictionary(fromDictionary: historyDictionary).suffix(8).prefix(5)
-                timeLabel.text = "\(timeMedium)"
-                let kkal = getValueFromDictionary(fromDictionary: historyDictionary)
-                addAmountView.text = "\(kkal) kkal"
-                addNewValueInStackViewHistory(stackView: slotHistory2, image: foodImageView, label: timeLabel, amountLabel: addAmountView)
-
             }
             
             Keys.selectedBar = "food"
@@ -198,11 +154,9 @@ class HomeScreenViewController: UIViewController {
             foodImageView.heightAnchor.constraint(equalTo:foodImageView.widthAnchor, multiplier: 1.0/1.0).isActive = true
             foodImageView.backgroundColor = .white
             foodImageView.image = UIImage(named: "carrot")
-            addNewValueInHistory(image: foodImageView, label: label, amountLabel: addAmountView)
             var currentHistoryFood = Keys.historyFood ?? [Dictionary<String, Int>]()
             currentHistoryFood.append(["\(getDate()) \(getTime(type: "medium"))" : Int(addAmountVariable)!])
             Keys.historyFood = currentHistoryFood
-            print(Keys.historyFood)
             let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             amountOfSomething.text = "\((Int(Keys.usedKkal)) + Int(addAmountVariable)!)/\(Int(Keys.kkal))kkal"
             Keys.usedKkal = Keys.usedKkal + Int(addAmountVariable)!
@@ -223,65 +177,9 @@ class HomeScreenViewController: UIViewController {
         }
     }
     func addNewValueInStackViewHistory(stackView: UIStackView,image: UIImageView, label: UILabel, amountLabel: UILabel) {
-        switch stackView.tag {
-        case 1:
-            slotHistory1.addArrangedSubview(image)
-            slotHistory1.addArrangedSubview(label)
-            slotHistory1.addArrangedSubview(amountLabel)
-        case 2:
-            slotHistory2.addArrangedSubview(image)
-            slotHistory2.addArrangedSubview(label)
-            slotHistory2.addArrangedSubview(amountLabel)
-        case 3:
-            slotHistory3.addArrangedSubview(image)
-            slotHistory3.addArrangedSubview(label)
-            slotHistory3.addArrangedSubview(amountLabel)
-        case 4:
-            slotHistory4.addArrangedSubview(image)
-            slotHistory4.addArrangedSubview(label)
-            slotHistory4.addArrangedSubview(amountLabel)
-        default:
-            break
-        }
-    }
-    func addNewValueInHistory(image: UIImageView, label: UILabel, amountLabel: UILabel) {
-        if slotHistory1.subviews.count > 0 {
-            if slotHistory2.subviews.count > 0 {
-                if slotHistory3.subviews.count > 0 {
-                    if slotHistory4.subviews.count > 0 {
-                        slotHistory4.deleteAllSubviews()
-                        copyAllSubviews(from: slotHistory3, to: slotHistory4)
-                        copyAllSubviews(from: slotHistory2, to: slotHistory3)
-                        copyAllSubviews(from: slotHistory1, to: slotHistory2)
-                        slotHistory1.deleteAllSubviews()
-                        addNewValueInStackViewHistory(stackView: slotHistory1, image: image, label: label, amountLabel: amountLabel)
-                    } else {
-                        copyAllSubviews(from: slotHistory3, to: slotHistory4)
-                        copyAllSubviews(from: slotHistory2, to: slotHistory3)
-                        copyAllSubviews(from: slotHistory1, to: slotHistory2)
-                        slotHistory1.deleteAllSubviews()
-                        addNewValueInStackViewHistory(stackView: slotHistory1, image: image, label: label, amountLabel: amountLabel)
-                    }
-                } else {
-                    copyAllSubviews(from: slotHistory2, to: slotHistory3)
-                    copyAllSubviews(from: slotHistory1, to: slotHistory2)
-                    slotHistory1.deleteAllSubviews()
-                    addNewValueInStackViewHistory(stackView: slotHistory1, image: image, label: label, amountLabel: amountLabel)
-                }
-            } else {
-                copyAllSubviews(from: slotHistory1, to: slotHistory2)
-                slotHistory1.deleteAllSubviews()
-                addNewValueInStackViewHistory(stackView: slotHistory1, image: image, label: label, amountLabel: amountLabel)
-            }
-        } else {
-            addNewValueInStackViewHistory(stackView: slotHistory1, image: image, label: label, amountLabel: amountLabel)
-        }
-        
-    }
-    func copyAllSubviews(from stackView1: UIStackView, to stackView2: UIStackView) {
-        for subview in stackView1.arrangedSubviews {
-            stackView2.addArrangedSubview(subview)
-        }
+        stackView.addArrangedSubview(image)
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(amountLabel)
     }
     func getTime(type: String) -> String {
         let formatter = DateFormatter()

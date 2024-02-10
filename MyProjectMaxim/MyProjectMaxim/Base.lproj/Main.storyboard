@@ -1602,32 +1602,8 @@
                     <view key="view" contentMode="scaleToFill" id="EFB-f1-fIk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9NP-Zu-UBy">
-                                <rect key="frame" x="0.0" y="239" width="393" height="120"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V6U-nb-Tgb">
-                                        <rect key="frame" x="0.0" y="20" width="140" height="80"/>
-                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jcT-FY-ktM">
-                                        <rect key="frame" x="150" y="10" width="243" height="100"/>
-                                        <color key="backgroundColor" systemColor="systemBrownColor"/>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="V6U-nb-Tgb" secondAttribute="bottom" constant="20" id="GpO-L9-Iz4"/>
-                                    <constraint firstItem="jcT-FY-ktM" firstAttribute="top" secondItem="9NP-Zu-UBy" secondAttribute="top" constant="10" id="V7l-Ic-6lm"/>
-                                    <constraint firstItem="V6U-nb-Tgb" firstAttribute="top" secondItem="9NP-Zu-UBy" secondAttribute="top" constant="20" id="zZC-1i-cVU"/>
-                                </constraints>
-                            </stackView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="bfg-6N-dvo"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="9NP-Zu-UBy" firstAttribute="leading" secondItem="bfg-6N-dvo" secondAttribute="leading" id="Yjn-80-PcO"/>
-                            <constraint firstItem="bfg-6N-dvo" firstAttribute="trailing" secondItem="9NP-Zu-UBy" secondAttribute="trailing" id="jyR-yK-ib0"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="История" image="clock.fill" catalog="system" id="i4k-Br-diX">
                         <color key="badgeColor" red="0.60856501760000004" green="0.85753862790000002" blue="0.80903288709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2114,12 +2090,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

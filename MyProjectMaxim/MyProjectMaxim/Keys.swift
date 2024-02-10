@@ -76,9 +76,9 @@ final class Keys {
     
     
     // TODO: спросить
-    static var historyWater : Dictionary<String, Int>! {
+    static var historyWater : [Dictionary<String, Int>]! {
         get {
-            UserDefaults.standard.value(forKey: History.historyWater.rawValue) as? Dictionary<String, Int>
+            UserDefaults.standard.value(forKey: History.historyWater.rawValue) as? [Dictionary<String, Int>]
         }
         set {
             if let historyWater = newValue {
@@ -87,9 +87,9 @@ final class Keys {
         }
     }
     
-    static var historyFood : Dictionary<String, Int>! {
+    static var historyFood : [Dictionary<String, Int>]! {
         get {
-            UserDefaults.standard.value(forKey: History.historyFood.rawValue) as? Dictionary<String, Int>
+            UserDefaults.standard.value(forKey: History.historyFood.rawValue) as? [Dictionary<String, Int>]
         }
         set {
             if let historyFood = newValue {

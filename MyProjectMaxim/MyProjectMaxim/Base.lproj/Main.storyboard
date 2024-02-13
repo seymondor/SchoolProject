@@ -1833,10 +1833,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Главная" image="house.fill" catalog="system" id="jJ1-ja-0Cd"/>
                     <connections>
-                        <outlet property="CircularProgress" destination="OQc-lp-sen" id="ehw-SW-ZlA"/>
+                        <outlet property="CircularProgress" destination="OQc-lp-sen" id="F0v-IA-3zm"/>
                         <outlet property="alertLabel" destination="9Lt-AH-uoB" id="5si-gI-nqm"/>
                         <outlet property="amountOfSomething" destination="bEQ-hv-bI2" id="C66-Su-RqB"/>
-                        <outlet property="backgroundOfEmojiSelectedBar" destination="rlX-vZ-hKV" id="42O-Mf-9Hz"/>
+                        <outlet property="backgroundOfEmojiSelectedBar" destination="rlX-vZ-hKV" id="g6m-lg-Uoc"/>
                         <outlet property="emojiSelectedBar" destination="uCH-rJ-z6y" id="Ojx-ap-SJo"/>
                         <outlet property="historyLabel" destination="wLJ-bG-gTV" id="4H5-Ye-Fb0"/>
                         <outlet property="historyView" destination="cQQ-9J-YMP" id="1hy-Wl-adh"/>

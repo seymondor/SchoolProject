@@ -7,33 +7,40 @@
 
 import Foundation
 import UIKit
+
 class FoodAddViewController : UIViewController {
+    @IBOutlet weak var addFoodTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addFoodTextField.delegate = self
     }
-    @IBOutlet weak var addFoodTextField: UITextField!
+    
     @IBAction func add100KkalButton(_ sender: Any) {
-        addAmountVariable = "100"
+        addAmountVariable = 100
         NotificationCenter.default.post(name: .reload, object: nil)
     }
+    
     @IBAction func add500KkalButton(_ sender: Any) {
-        addAmountVariable = "500"
+        addAmountVariable = 500
         NotificationCenter.default.post(name: .reload, object: nil)
     }
+    
     @IBAction func add1000KkalButton(_ sender: Any) {
-        addAmountVariable = "1000"
+        addAmountVariable = 1000
         NotificationCenter.default.post(name: .reload, object: nil)
     }
+    
     @IBAction func addCustomAmount(_ sender: Any) {
         if addFoodTextField.text != "" {
             let foodCustomKkal = addFoodTextField.text
-            addAmountVariable = foodCustomKkal!
+            addAmountVariable = Int(foodCustomKkal ?? "" ) ?? 0
             NotificationCenter.default.post(name: .reload, object: nil)
         } else {
             showAlert(error: "Не введёно количество еды")
         }
     }
+    
     func showAlert(error: String){
         let alert = UIAlertController(title: "Ошибка", message: "\(error).", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in
@@ -41,7 +48,6 @@ class FoodAddViewController : UIViewController {
         }))
         present(alert, animated: true)
     }
-
 }
 
 extension FoodAddViewController: UITextFieldDelegate {

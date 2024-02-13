@@ -25,33 +25,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        heightTextField.delegate = self
-        weightTextField.delegate = self
-        ageTextField.delegate = self
-        sportTextField.delegate = self
-        
-        minutesDrinkTextField.tag = 1
-        minutesDrinkTextField.delegate = self
-        minutesEatTextField.tag = 2
-        minutesEatTextField.delegate = self
-        
-        minutesEatTextField.inputView = eatTimePicker
-        minutesDrinkTextField.inputView = waterTimePicker
-        
-        eatTimePicker.delegate = self
-        eatTimePicker.dataSource = self
-        waterTimePicker.delegate = self
-        waterTimePicker.dataSource = self
-        
-        eatTimePicker.tag = 2
-        waterTimePicker.tag = 1
+        setSubviews()
     }
+    
     @IBAction func manButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletWomanButton)
     }
+    
     @IBAction func womanButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletManButton)
     }
+    
     @IBAction func startButton(_ sender: UIButton) {
         switch Keys.checkTextField(textField: heightTextField, fromNumber: 50, upToNumber: 300) {
         case (isEmpty: false, isInRange: true): Keys.height = heightTextField.text
@@ -118,6 +102,7 @@ class ViewController: UIViewController {
             return "Error"
         }
     }
+    
     func createFrameForButton(button: UIButton, button2: UIButton){
         if button2.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
             button2.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
@@ -126,6 +111,30 @@ class ViewController: UIViewController {
             button.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         }
     }
+    
+    func setSubviews() {
+        heightTextField.delegate = self
+        weightTextField.delegate = self
+        ageTextField.delegate = self
+        sportTextField.delegate = self
+        
+        minutesDrinkTextField.tag = 1
+        minutesDrinkTextField.delegate = self
+        minutesEatTextField.tag = 2
+        minutesEatTextField.delegate = self
+        
+        minutesEatTextField.inputView = eatTimePicker
+        minutesDrinkTextField.inputView = waterTimePicker
+        
+        eatTimePicker.delegate = self
+        eatTimePicker.dataSource = self
+        waterTimePicker.delegate = self
+        waterTimePicker.dataSource = self
+        
+        eatTimePicker.tag = 2
+        waterTimePicker.tag = 1
+    }
+    
     func showError(error: String){
         let alert = UIAlertController(title: "Ошибка", message: "\(error).", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in

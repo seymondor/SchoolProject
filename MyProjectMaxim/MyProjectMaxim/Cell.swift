@@ -23,6 +23,7 @@ class Cell : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupCell()
     }
     	
     required init?(coder: NSCoder) {
@@ -49,9 +50,17 @@ class Cell : UITableViewCell {
             amountLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
         ])
     }
+    
     // TODO: ДОделать
-    func configure(slotHistory: HistoryFoodSlot) {
-        
+    func configure(slotHistory: HistorySlot) {
+        image.image = slotHistory.image.image
+        timeLabel.text = formatDate(date: slotHistory.date)
+        amountLabel.text = "\(slotHistory.amount)"
     }
     
+    func formatDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
+    }
 }

@@ -12,8 +12,8 @@ var addAmountVariable = 0
 class HomeScreenViewController: UIViewController {
     var historyFoodTableView = UITableView()
     var historyWaterTableView = UITableView()
-    lazy var historyFoodArray = Keys.historyFood ?? []
-    lazy var historyWaterArray = Keys.historyWater ?? []
+    var historyFoodArray : [HistoryFoodSlot] = []
+    var historyWaterArray : [HistoryWaterSlot] = []
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
     @IBOutlet weak var backgroundOfEmojiSelectedBar: UIView!
@@ -24,10 +24,17 @@ class HomeScreenViewController: UIViewController {
     @IBOutlet weak var percentageLabel: UILabel!
     @IBOutlet weak var amountOfSomething: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
-        setTableView()
+        switch Keys.selectedBar {
+        case "water":
+            setupTableView(tableView: historyWaterTableView)
+        case "food":
+            setupTableView(tableView: historyFoodTableView)
+        default: break
+        }
         setBars()
     }
     
@@ -41,6 +48,7 @@ class HomeScreenViewController: UIViewController {
         default: changeBar(to: "water"); setAlertLabel(on: Keys.selectedBar)
         }
     }
+    
     @IBAction func foodChangeButton(_ sender: UIButton!) {
         switch Keys.selectedBar {
         case "food": showAlert(error: "Уже выбран счетчик еды")
@@ -78,23 +86,12 @@ class HomeScreenViewController: UIViewController {
             break
         }
     }
+    
     func changeBar(to bar: String) {
         switch bar {
         case "water":
             historyFoodTableView.isHidden = true
-            //TODO: Доделать появление слотов
-            historyView.addSubview(historyWaterTableView)
-            
-            historyWaterTableView.leftAnchor.constraint(equalTo: historyView.leftAnchor, constant: 10).isActive = true
-            historyWaterTableView.topAnchor.constraint(equalTo: historyLabel.bottomAnchor, constant: 10).isActive = true
-            historyWaterTableView.rightAnchor.constraint(equalTo: historyView.rightAnchor, constant: -10).isActive = true
-            historyWaterTableView.bottomAnchor.constraint(equalTo: historyView.bottomAnchor, constant: -10).isActive = true
-            
-            historyWaterTableView.dataSource = self
-            historyWaterTableView.delegate = self
-            
-            historyWaterTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-            historyWaterTableView.isHidden = false
+            setupTableView(tableView: historyWaterTableView)
             Keys.selectedBar = "water"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.5811036229, green: 0.7276489139, blue: 0.852099359, alpha: 1)
             backgroundOfEmojiSelectedBar.backgroundColor = #colorLiteral(red: 0.5811036229, green: 0.7276489139, blue: 0.852099359, alpha: 1)
@@ -105,22 +102,9 @@ class HomeScreenViewController: UIViewController {
             changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(perc)/100)
         case "food":
             historyWaterTableView.isHidden = true
-            historyView.addSubview(historyFoodTableView)
-            
-            historyFoodTableView.leftAnchor.constraint(equalTo: historyView.leftAnchor, constant: 10).isActive = true
-            historyFoodTableView.topAnchor.constraint(equalTo: historyLabel.bottomAnchor, constant: 10).isActive = true
-            historyFoodTableView.rightAnchor.constraint(equalTo: historyView.rightAnchor, constant: -10).isActive = true
-            historyFoodTableView.bottomAnchor.constraint(equalTo: historyView.bottomAnchor, constant: -10).isActive = true
-            
-            historyFoodTableView.dataSource = self
-            historyFoodTableView.delegate = self
-            
-            historyFoodTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-            historyFoodTableView.isHidden = false
-            //TODO: Доделать появление слотов
+            setupTableView(tableView: historyFoodTableView)
             let foodImageView = UIImageView()
             foodImageView.image = UIImage(named: "carrot")
-            
 //            for items in historyFoodArray {
 //                let timeMedium = getKeyFromDictionary(fromDictionary: items).suffix(8).prefix(5)
 //                timeLabel.text = "\(timeMedium)"
@@ -146,21 +130,24 @@ class HomeScreenViewController: UIViewController {
         }
         return ""
     }
+    
     func getValueFromDictionary(fromDictionary : Dictionary<String, Int>) -> Int {
         for value in fromDictionary.values {
             return value
         }
         return 0
     }
+    
     @objc func reloadLabel(notification: Notification){
         switch Keys.selectedBar {
         case "food":
             let foodImageView = UIImageView()
             foodImageView.backgroundColor = .white
             foodImageView.image = UIImage(named: "carrot")
-            
-            let historySlot = HistoryFoodSlot(image: foodImageView, date: Date(), amount: addAmountVariable)
-            
+            historyFoodArray = addNewValueInArray(array: historyFoodArray, value: HistoryFoodSlot(image: foodImageView, date: Date(), amount: addAmountVariable))
+            historyFoodTableView.beginUpdates()
+            historyFoodTableView.insertRows(at: [IndexPath(row: historyFoodArray.count - 1 , section: 0)], with: .automatic)
+            historyFoodTableView.endUpdates()
             let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             amountOfSomething.text = "\((Int(Keys.usedKkal)) + addAmountVariable)/\(Int(Keys.kkal))kkal"
             Keys.usedKkal = Keys.usedKkal + addAmountVariable
@@ -180,45 +167,41 @@ class HomeScreenViewController: UIViewController {
             break
         }
     }
-    func addNewValueInStackViewHistory(stackView: UIStackView,image: UIImageView, label: UILabel, amountLabel: UILabel) {
-        stackView.addArrangedSubview(image)
-        stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(amountLabel)
-    }
-//    func getTime(type: String) -> String {
-//        let formatter = DateFormatter()
-//        switch type {
-//        case "short":
-//            formatter.timeStyle = .short
-//        case "medium":
-//            formatter.timeStyle = .medium
-//        default:
-//            return ""
-//        }
-//        return formatter.string(from: Date())
-//    }
-//    func getDate() -> String {
-//        let formatter = DateFormatter()
-//        formatter.dateStyle = .short
-//        return formatter.string(from: Date())
-//    }
+
     func setAlertLabel(on bar: String){
         switch bar {
         case "water":
             let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            if percentage > 100 { alertLabel.text = "❗️Вы перепиваете"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
+            
+            if percentage > 100 {
+                alertLabel.text = "❗️Вы перепиваете"
+                alertLabel.isHidden = false
+            } else { alertLabel.isHidden = true }
         default:
             let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            if percentage > 100 { alertLabel.text = "❗️Вы переедаете"; alertLabel.isHidden = false; } else { alertLabel.isHidden = true }
+            
+            if percentage > 100 {
+                alertLabel.text = "❗️Вы переедаете"
+                alertLabel.isHidden = false
+            } else { alertLabel.isHidden = true }
         }
     }
     
-    func setTableView() {
-        historyFoodTableView.translatesAutoresizingMaskIntoConstraints = false
-        historyFoodTableView.tag = 2
-    
-        historyWaterTableView.translatesAutoresizingMaskIntoConstraints = false
+    func setupTableView(tableView : UITableView) {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        historyView.addSubview(tableView)
         historyWaterTableView.tag = 1
+        historyFoodTableView.tag = 2
+        tableView.leftAnchor.constraint(equalTo: historyView.leftAnchor, constant: 10).isActive = true
+        tableView.topAnchor.constraint(equalTo: historyLabel.bottomAnchor, constant: 10).isActive = true
+        tableView.rightAnchor.constraint(equalTo: historyView.rightAnchor, constant: -10).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: historyView.bottomAnchor, constant: -10).isActive = true
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.register(Cell.self, forCellReuseIdentifier: "HistorySlot")
+        tableView.isHidden = false
     }
     
     func setBars() {
@@ -231,6 +214,13 @@ class HomeScreenViewController: UIViewController {
             setAlertLabel(on: Keys.selectedBar)
         }
     }
+    //TODO: ДОделать
+    
+    func addNewValueInArray(array: [HistoryFoodSlot], value: HistorySlot) -> [HistoryFoodSlot] {
+        var copyArray = Array(array.reversed())
+        copyArray.append(value as! ReversedCollection<[HistoryFoodSlot]>.Element)
+        return Array(copyArray.reversed())
+    }
     
     func showAlert(error: String){
         let alert = UIAlertController(title: "Внимание", message: "\(error).", preferredStyle: .alert)
@@ -241,48 +231,57 @@ class HomeScreenViewController: UIViewController {
     }
 }
 
-extension UIStackView {
-    func deleteAllSubviews() {
-        for item in arrangedSubviews {
-            removeArrangedSubview(item)
-            item.removeFromSuperview()
-        }
-    }
-}
 
-extension HomeScreenViewController: BonsaiControllerDelegate, UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 25
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch tableView.tag {
-        case 1 :
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = "Water"
-            return cell
-        case 2 :
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = "Food"
-            return cell
-        default :
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            cell.textLabel?.text = "Error"
-            return cell
-        }
-    }
-    
+extension HomeScreenViewController: BonsaiControllerDelegate {
     func frameOfPresentedView(in containerViewFrame: CGRect) -> CGRect {
         return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height / 1.5), size: CGSize(width: containerViewFrame.width, height: containerViewFrame.height / (3/4)))
     }
+    
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return BonsaiController(fromDirection: .bottom, backgroundColor: UIColor(white: 0, alpha: 0.2), presentedViewController: presented, delegate: self)
     }
 }
+
+extension HomeScreenViewController: UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+}
+    
+extension HomeScreenViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch tableView.tag {
+        case 1:
+            return historyWaterArray.count
+        case 2 :
+            return historyFoodArray.count
+        default :
+            return 0
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableView.tag {
+//        case 1 :
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath) as? Cell else { fatalError() }
+//            cell.textLabel?.text = "Water"
+//            cell.configure(slotHistory: historyWaterArray[indexPath.row])
+//            return cell
+        case 2 :
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath) as? Cell else { fatalError() }
+            if historyFoodArray[indexPath.row] != nil {
+                cell.configure(slotHistory: historyFoodArray[indexPath.row])
+            }
+            return cell
+        default :
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath)
+            cell.textLabel?.text = "Error"
+            return cell
+        }
+    }
+}
+
 extension Notification.Name{
     static let reload = Notification.Name("reload")
 }

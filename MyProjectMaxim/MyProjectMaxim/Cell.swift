@@ -12,12 +12,12 @@ class Cell : UITableViewCell {
     let image = UIImageView()
     let timeLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
     let amountLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 10)
+        label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
     
@@ -36,18 +36,17 @@ class Cell : UITableViewCell {
             contentView.addSubview($0)
         }
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            image.widthAnchor.constraint(equalToConstant: 32),
-            image.heightAnchor.constraint(equalToConstant: 32),
+            image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            image.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+            image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            image.widthAnchor.constraint(equalToConstant: 45),
+            image.heightAnchor.constraint(equalToConstant: 45),
             
-            timeLabel.topAnchor.constraint(equalTo: image.topAnchor, constant: 16),
-            timeLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 8),
+            timeLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            timeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            amountLabel.topAnchor.constraint(equalTo: image.bottomAnchor),
-            amountLabel.leadingAnchor.constraint(equalTo: image.trailingAnchor, constant: 8),
-            amountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            amountLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            amountLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            amountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
         ])
     }
     
@@ -55,7 +54,11 @@ class Cell : UITableViewCell {
     func configure(slotHistory: HistorySlot) {
         image.image = slotHistory.image.image
         timeLabel.text = formatDate(date: slotHistory.date)
-        amountLabel.text = "\(slotHistory.amount)"
+        if slotHistory is HistoryFoodSlot {
+            amountLabel.text = "\(slotHistory.amount) ккал"
+        } else if slotHistory is HistoryWaterSlot {
+            amountLabel.text = "\(slotHistory.amount) мл"
+        }
     }
     
     func formatDate(date: Date) -> String {

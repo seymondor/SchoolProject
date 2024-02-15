@@ -28,7 +28,9 @@ class HistoryFoodSlot : HistorySlot {
     override init(image: UIImageView, date: Date, amount: Int) {
         if image.image == UIImage(named: "carrot") {
             var historyFoodDictionary = Keys.historyFood ?? []
-            let formattedDate = date.formatted()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let formattedDate = dateFormatter.string(from: date)
             historyFoodDictionary.append([formattedDate : amount])
             Keys.historyFood = historyFoodDictionary
             super.init(image: image, date: date, amount: amount)

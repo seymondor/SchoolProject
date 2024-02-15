@@ -28,6 +28,7 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
+        historyFoodArray = setArrayFromFoodKeys(array: historyFoodArray)
         switch Keys.selectedBar {
         case "water":
             setupTableView(tableView: historyWaterTableView)
@@ -39,6 +40,7 @@ class HomeScreenViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        historyFoodArray = setArrayFromFoodKeys(array: historyFoodArray)
         setBars()
     }
     
@@ -76,12 +78,12 @@ class HomeScreenViewController: UIViewController {
             let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
             percentageLabel.text = "\(Int(perc))%"
-            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water))ml"
+            amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water)) мл"
         case "food":
             let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
             percentageLabel.text = "\(Int(perc))%"
-            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal))kkal"
+            amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal)) ккал"
         default:
             break
         }
@@ -144,12 +146,17 @@ class HomeScreenViewController: UIViewController {
             let foodImageView = UIImageView()
             foodImageView.backgroundColor = .white
             foodImageView.image = UIImage(named: "carrot")
+            
             historyFoodArray = addNewValueInArray(array: historyFoodArray, value: HistoryFoodSlot(image: foodImageView, date: Date(), amount: addAmountVariable))
-            historyFoodTableView.beginUpdates()
+            
             historyFoodTableView.insertRows(at: [IndexPath(row: historyFoodArray.count - 1 , section: 0)], with: .automatic)
-            historyFoodTableView.endUpdates()
+            historyFoodTableView.reloadData()
+            
+            
+            print(Keys.historyFood)
+            
             let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            amountOfSomething.text = "\((Int(Keys.usedKkal)) + addAmountVariable)/\(Int(Keys.kkal))kkal"
+            amountOfSomething.text = "\((Int(Keys.usedKkal)) + addAmountVariable)/\(Int(Keys.kkal)) ккал"
             Keys.usedKkal = Keys.usedKkal + addAmountVariable
             let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             percentageLabel.text = "\(Int(perc))%"
@@ -157,7 +164,7 @@ class HomeScreenViewController: UIViewController {
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(perc)/100, from: Float(beforePerc)/100)
         case "water":
             let beforePercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            amountOfSomething.text = "\((Int(Keys.usedWater)) + addAmountVariable)/\(Int(Keys.water))ml"
+            amountOfSomething.text = "\((Int(Keys.usedWater)) + addAmountVariable)/\(Int(Keys.water)) мл"
             Keys.usedWater = Keys.usedWater + addAmountVariable
             let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             percentageLabel.text = "\(Int(percentage))%"
@@ -216,11 +223,45 @@ class HomeScreenViewController: UIViewController {
     }
     //TODO: ДОделать
     
+    func setArrayFromFoodKeys(array: [HistoryFoodSlot]) -> [HistoryFoodSlot] {
+        let foodImageView = UIImageView()
+        foodImageView.backgroundColor = .white
+        foodImageView.image = UIImage(named: "carrot")
+        var copyArray = array
+        if Keys.historyFood != nil {
+            for items in Keys.historyFood {
+                print(getDateDictionary(fromDictionary: items))
+                copyArray.append(HistoryFoodSlot(image: foodImageView, date: getDateDictionary(fromDictionary: items), amount: getValueDictionary(fromDictionary: items)))
+            }
+            copyArray = Array(copyArray.reversed())
+        }
+        return copyArray
+    }
+    
     func addNewValueInArray(array: [HistoryFoodSlot], value: HistorySlot) -> [HistoryFoodSlot] {
         var copyArray = Array(array.reversed())
         copyArray.append(value as! ReversedCollection<[HistoryFoodSlot]>.Element)
         return Array(copyArray.reversed())
     }
+    
+    func getDateDictionary(fromDictionary : Dictionary<String, Int>) -> Date {
+        for key in fromDictionary.keys {
+            let dateFormatter = DateFormatter()
+            print(key)
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            dateFormatter.timeZone =  .current
+            return dateFormatter.date(from: key)!
+        }
+        return Date()
+    }
+    
+    func getValueDictionary(fromDictionary : [String : Int]) -> Int {
+        for value in fromDictionary.values {
+            return value
+        }
+        return 0
+    }
+    
     
     func showAlert(error: String){
         let alert = UIAlertController(title: "Внимание", message: "\(error).", preferredStyle: .alert)

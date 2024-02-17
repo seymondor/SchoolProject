@@ -8,7 +8,10 @@
 import Foundation
 import UIKit	
 import BonsaiController
+import UserNotifications
+
 var addAmountVariable = 0
+
 class HomeScreenViewController: UIViewController {
     
     var historyFoodTableView = UITableView()
@@ -33,6 +36,7 @@ class HomeScreenViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dayChanged(notification:)), name: UIApplication.significantTimeChangeNotification, object: nil)
         
+        checkForPermission()
         setupWaterHistoryTableView()
         setupFoodHistoryTableView()
         switch Keys.selectedBar {
@@ -113,8 +117,8 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "drop.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6807348041, green: 0.8550895293, blue: 1, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4277995191, green: 0.7138730807, blue: 1, alpha: 1)
-            var percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-
+            let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            
             changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(percentage)/100)
         case "food":
             historyWaterTableView.isHidden = true
@@ -127,7 +131,7 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "carrot.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6870872528, green: 0.9167618414, blue: 0.7997073189, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
-            var percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
 
             changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(percentage)/100)
         default:
@@ -168,7 +172,7 @@ class HomeScreenViewController: UIViewController {
             let beforePercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             amountOfSomething.text = "\((Int(Keys.usedKkal)) + addAmountVariable)/\(Int(Keys.kkal)) ккал"
             Keys.usedKkal = Keys.usedKkal + addAmountVariable
-            var percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             percentageLabel.text = "\(Int(percentage))%"
             setAlertLabel(on: Keys.selectedBar)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(percentage)/100, from: Float(beforePercentage)/100)
@@ -324,10 +328,43 @@ class HomeScreenViewController: UIViewController {
         return 0
     }
     
-    func application(application : UIApplication) {
-        
+    func checkForPermission() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    if didAllow{
+//                        self.dispatchNotification()
+                    }
+                }
+            case .denied:
+                return
+            case .authorized:
+//                self.dispatchNotification()
+            default:
+                return
+            }
+        }
     }
     
+    private func dispatchNotification(indentifier: String, title: String, body: String, timeInterval: Int, isDaily: Bool) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        /// сделать ифку если попадает в временной промежуток то отпраить нотификацию :)
+        
+        let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: trigger)
+        
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [indentifier])
+        notificationCenter.add(request)
+    }
     
     func showAlert(error: String){
         let alert = UIAlertController(title: "Внимание", message: "\(error).", preferredStyle: .alert)

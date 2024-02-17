@@ -79,9 +79,9 @@ final class Keys {
         }
     }
     
-    static var minutesToDrink: String! {
+    static var minutesToDrink: Int! {
         get {
-            UserDefaults.standard.string(forKey: HumanSettings.minutesToDrink.rawValue)
+            UserDefaults.standard.integer(forKey: HumanSettings.minutesToDrink.rawValue)
         }
         set {
             if let minutesToDrink = newValue {
@@ -90,9 +90,9 @@ final class Keys {
         }
     }
     
-    static var minutesToEat: String! {
+    static var minutesToEat: Int! {
         get {
-            UserDefaults.standard.string(forKey: HumanSettings.minutesToEat.rawValue)
+            UserDefaults.standard.integer(forKey: HumanSettings.minutesToEat.rawValue)
         }
         set {
             if let minutesToEat = newValue {

@@ -52,8 +52,8 @@ class SettingViewController: UIViewController {
         weightTextField.text = Keys.weight
         ageTextField.text = Keys.age
         sportTextField.text = Keys.sport
-        minutesEatTextField.text = Keys.minutesToEat
-        minutesDrinkTextField.text = Keys.minutesToDrink
+        minutesEatTextField.text = "\(Keys.minutesToDrink ?? 0)"
+        minutesDrinkTextField.text = "\(Keys.minutesToDrink ?? 0)"
         switch Keys.gender {
         case "Man": outletManButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         default: outletWomanButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
@@ -123,13 +123,13 @@ class SettingViewController: UIViewController {
         default: break
         }
         switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 9, upToNumber: 1000) {
-        case (isEmpty: false, isInRange: true): Keys.minutesToEat = minutesEatTextField.text
+        case (isEmpty: false, isInRange: true): Keys.minutesToEat = Int(minutesEatTextField.text ?? "") ?? 0
         case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о еде")
         case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о еде")
         default: break
         }
         switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 2, upToNumber: 500) {
-        case (isEmpty: false, isInRange: true): Keys.minutesToDrink = ageTextField.text
+        case (isEmpty: false, isInRange: true): Keys.minutesToDrink = Int(minutesDrinkTextField.text ?? "") ?? 0
         case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о воде")
         case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о воде")
         default: break

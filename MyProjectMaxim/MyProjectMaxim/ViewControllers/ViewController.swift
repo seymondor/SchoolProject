@@ -66,12 +66,12 @@ class ViewController: UIViewController {
         default: break
         }
         switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 9, upToNumber: 1000) {
-        case (isEmpty: false, isInRange: true): Keys.minutesToEat = minutesEatTextField.text
+        case (isEmpty: false, isInRange: true): Keys.minutesToEat = Int(minutesEatTextField.text ?? "") ?? 0
         case (isEmpty: true, isInRange: false): showError(error: "Не выбрано уведомление о еде")
         default: break
         }
         switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 2, upToNumber: 500) {
-        case (isEmpty: false, isInRange: true): Keys.minutesToDrink = ageTextField.text
+        case (isEmpty: false, isInRange: true): Keys.minutesToDrink = Int(minutesDrinkTextField.text ?? "") ?? 0
         case (isEmpty: true, isInRange: false): showError(error: "Не выбрано уведомление о воде")
         default: break
         }

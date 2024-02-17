@@ -35,8 +35,12 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dayChanged(notification:)), name: UIApplication.significantTimeChangeNotification, object: nil)
+        Keys.minutesToDrink = 1
+        Keys.minutesToEat = 1
         
         checkForPermission()
+        checkForPermissionFood()
+        
         setupWaterHistoryTableView()
         setupFoodHistoryTableView()
         switch Keys.selectedBar {
@@ -334,21 +338,63 @@ class HomeScreenViewController: UIViewController {
             switch setting.authorizationStatus {
             case .notDetermined:
                 notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow{
-//                        self.dispatchNotification()
+                    if didAllow {
+                        if Keys.minutesToDrink != nil {
+                            self.dispatchNotification(indentifier: "message-water",
+                                                      title: "Пора попить воды!",
+                                                      body: "Заходи в приложение и отмечай!",
+                                                      timeIntervalSec: Double(Keys.minutesToDrink)*60)
+                        }
                     }
                 }
             case .denied:
                 return
             case .authorized:
-//                self.dispatchNotification()
+                if Keys.minutesToDrink != nil {
+                    self.dispatchNotification(indentifier: "message-water",
+                                              title: "Пора попить воды!",
+                                              body: "Заходи в приложение и отмечай!",
+                                              timeIntervalSec: Double(Keys.minutesToDrink)*60)
+                }
             default:
                 return
             }
         }
     }
     
-    private func dispatchNotification(indentifier: String, title: String, body: String, timeInterval: Int, isDaily: Bool) {
+    func checkForPermissionFood() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    if didAllow {
+                        if Keys.minutesToEat != nil {
+                            self.dispatchNotification(indentifier: "message-food",
+                                                      title: "Пора поесть!",
+                                                      body: "Заходи в приложение и отмечай!",
+                                                      timeIntervalSec: Double(Keys.minutesToEat)*60)
+                        }
+                    }
+                }
+            case .denied:
+                return
+            case .authorized:
+                if Keys.minutesToEat != nil {
+                    self.dispatchNotification(indentifier: "message-food",
+                                              title: "Пора поесть!",
+                                              body: "Заходи в приложение и отмечай!",
+                                              timeIntervalSec: Double(Keys.minutesToEat)*60)
+                }
+            default:
+                return
+            }
+        }
+    }
+
+    
+    func dispatchNotification(indentifier: String, title: String, body: String, timeIntervalSec: Double ) {
+        
         let notificationCenter = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
@@ -356,14 +402,35 @@ class HomeScreenViewController: UIViewController {
         content.body = body
         content.sound = .default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalSec, repeats: true)
+
+        let currentHour = Calendar.current.component(.hour, from: Date())
+        let currentMinute = Calendar.current.component(.minute, from: Date())
+        let totalCurrentMinutes = (currentHour*60) + currentMinute
         
-        /// сделать ифку если попадает в временной промежуток то отпраить нотификацию :)
+        let keysTimeGetUpDate = formatString(dateString: Keys.timeGetUp, dateFormat: "HH:mm")
+        let keysTimeGoSleepDate = formatString(dateString: Keys.timeGoSleep, dateFormat: "HH:mm")
         
-        let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: trigger)
+        let hourGetUp = Calendar.current.component(.hour, from: keysTimeGetUpDate)
+        let minuteGetUp = Calendar.current.component(.minute, from: keysTimeGetUpDate)
+        let totalMinutesGetUp = (hourGetUp*60) + minuteGetUp
         
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [indentifier])
-        notificationCenter.add(request)
+        let hourGoSleep = Calendar.current.component(.hour, from: keysTimeGoSleepDate)
+        let minuteGoSleep = Calendar.current.component(.minute, from: keysTimeGoSleepDate)
+        let totalMinutesGoSleep = (hourGoSleep*60) + minuteGoSleep
+        
+        if totalCurrentMinutes > totalMinutesGetUp && totalCurrentMinutes < totalMinutesGoSleep {
+            let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: trigger)
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: [indentifier])
+            notificationCenter.add(request)
+       }
+    }
+    
+    func formatString(dateString: String, dateFormat: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = dateFormat
+        formatter.timeZone =  .current
+        return formatter.date(from: dateString) ?? Date()
     }
     
     func showAlert(error: String){

@@ -114,8 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				632494F52ADA75480028B95E /* MyProjectMaxim */,
-				6324950C2ADA754D0028B95E /* MyProjectMaximTests */,
-				632495162ADA754D0028B95E /* MyProjectMaximUITests */,
 				632494F42ADA75480028B95E /* Products */,
 				8274DEE7491B10E42451002A /* Pods */,
 				EE130DA28A02911DA47B1EC8 /* Frameworks */,
@@ -147,6 +145,8 @@
 				632494FF2ADA754C0028B95E /* Assets.xcassets */,
 				632495012ADA754C0028B95E /* LaunchScreen.storyboard */,
 				632495042ADA754C0028B95E /* Info.plist */,
+				632495162ADA754D0028B95E /* MyProjectMaximUITests */,
+				6324950C2ADA754D0028B95E /* MyProjectMaximTests */,
 			);
 			path = MyProjectMaxim;
 			sourceTree = "<group>";

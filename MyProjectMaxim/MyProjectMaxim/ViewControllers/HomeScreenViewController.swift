@@ -11,13 +11,20 @@ import BonsaiController
 import UserNotifications
 
 var addAmountVariable = 0
+var addTimerFood: Timer? = nil
+var addTimerWater: Timer? = nil
 
+var timerFood: Timer? = nil
+var timerWater: Timer? = nil
 class HomeScreenViewController: UIViewController {
     
     var historyFoodTableView = UITableView()
     var historyWaterTableView = UITableView()
     var historyFoodArray : [HistoryFoodSlot] = []
     var historyWaterArray : [HistoryWaterSlot] = []
+    
+    var foodNotificationID = 1
+    var waterNotificationID = 1
     
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
@@ -34,13 +41,13 @@ class HomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeFoodTimer(notification:)), name: Notification.Name("addFuncFoodTimer"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.changeWaterTimer(notification:)), name: Notification.Name("addFuncWaterTimer"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dayChanged(notification:)), name: UIApplication.significantTimeChangeNotification, object: nil)
-        Keys.minutesToDrink = 1
-        Keys.minutesToEat = 1
         
-        checkForPermission()
-        checkForPermissionFood()
-        
+        timerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(self.updateByTimerFood), userInfo: nil, repeats: true)
+        timerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(self.updateByTimerWater), userInfo: nil, repeats: true)
+
         setupWaterHistoryTableView()
         setupFoodHistoryTableView()
         switch Keys.selectedBar {
@@ -88,24 +95,18 @@ class HomeScreenViewController: UIViewController {
     func changeBarValue(withKey keyBar: String, fromValuePercentage: Float, toValuePercentage: Float) {
         switch keyBar {
         case "water":
-            var percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
             percentageLabel.text = "\(Int(percentage))%"
             amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water)) мл"
         case "food":
-            var percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
             percentageLabel.text = "\(Int(percentage))%"
             amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal)) ккал"
         default:
             break
         }
-    }
-    
-    @objc func dayChanged(notification: Notification){
-        Keys.resetValueUsedKeys()
-        changeBarValue(withKey: "water", fromValuePercentage: 0, toValuePercentage: 0)
-        changeBarValue(withKey: "food", fromValuePercentage: 0, toValuePercentage: 0)
     }
     
     func changeBar(to bar: String) {
@@ -157,7 +158,35 @@ class HomeScreenViewController: UIViewController {
         return 0
     }
     
-    @objc func reloadLabel(notification: Notification){
+    @objc func dayChanged(notification: Notification) {
+        Keys.resetValueUsedKeys()
+        changeBarValue(withKey: "water", fromValuePercentage: 0, toValuePercentage: 0)
+        changeBarValue(withKey: "food", fromValuePercentage: 0, toValuePercentage: 0)
+    }
+    
+    @objc func updateByTimerFood() {
+        foodNotificationID += 1
+        var foodNotificationIDString = "food-notification-\(foodNotificationID)"
+        checkForPermissionFood(with: foodNotificationIDString)
+    }
+    
+    @objc func updateByTimerWater() {
+        waterNotificationID += 1
+        var waterNotificationIDString = "water-notification-\(waterNotificationID)"
+        checkForPermissionWater(with: waterNotificationIDString)
+    }
+    
+    @objc func changeFoodTimer(notification: Notification) {
+        timerFood?.invalidate()
+        timerFood = nil
+    }
+
+    @objc func changeWaterTimer(notification: Notification) {
+        timerWater?.invalidate()
+        timerWater = nil
+    }
+    
+    @objc func reloadLabel(notification: Notification) {
         switch Keys.selectedBar {
         case "food":
             let foodImageView = UIImageView()
@@ -197,7 +226,7 @@ class HomeScreenViewController: UIViewController {
             let beforePercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             amountOfSomething.text = "\((Int(Keys.usedWater)) + addAmountVariable)/\(Int(Keys.water)) мл"
             Keys.usedWater = Keys.usedWater + addAmountVariable
-            var percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             percentageLabel.text = "\(Int(percentage))%"
             setAlertLabel(on: Keys.selectedBar)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(percentage)/100, from: Float(beforePercentage)/100)
@@ -332,37 +361,7 @@ class HomeScreenViewController: UIViewController {
         return 0
     }
     
-    func checkForPermission() {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { setting in
-            switch setting.authorizationStatus {
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow {
-                        if Keys.minutesToDrink != nil {
-                            self.dispatchNotification(indentifier: "message-water",
-                                                      title: "Пора попить воды!",
-                                                      body: "Заходи в приложение и отмечай!",
-                                                      timeIntervalSec: Double(Keys.minutesToDrink)*60)
-                        }
-                    }
-                }
-            case .denied:
-                return
-            case .authorized:
-                if Keys.minutesToDrink != nil {
-                    self.dispatchNotification(indentifier: "message-water",
-                                              title: "Пора попить воды!",
-                                              body: "Заходи в приложение и отмечай!",
-                                              timeIntervalSec: Double(Keys.minutesToDrink)*60)
-                }
-            default:
-                return
-            }
-        }
-    }
-    
-    func checkForPermissionFood() {
+    func checkForPermissionFood(with indentifier: String) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.getNotificationSettings { setting in
             switch setting.authorizationStatus {
@@ -370,10 +369,10 @@ class HomeScreenViewController: UIViewController {
                 notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
                     if didAllow {
                         if Keys.minutesToEat != nil {
-                            self.dispatchNotification(indentifier: "message-food",
+                            self.dispatchNotification(indentifier: indentifier,
                                                       title: "Пора поесть!",
                                                       body: "Заходи в приложение и отмечай!",
-                                                      timeIntervalSec: Double(Keys.minutesToEat)*60)
+                                                      timeIntervalSec: 1)
                         }
                     }
                 }
@@ -381,19 +380,48 @@ class HomeScreenViewController: UIViewController {
                 return
             case .authorized:
                 if Keys.minutesToEat != nil {
-                    self.dispatchNotification(indentifier: "message-food",
+                    self.dispatchNotification(indentifier: indentifier,
                                               title: "Пора поесть!",
                                               body: "Заходи в приложение и отмечай!",
-                                              timeIntervalSec: Double(Keys.minutesToEat)*60)
+                                              timeIntervalSec: 1)
                 }
             default:
                 return
             }
         }
     }
-
     
-    func dispatchNotification(indentifier: String, title: String, body: String, timeIntervalSec: Double ) {
+    func checkForPermissionWater(with indentifier: String) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    if didAllow {
+                        if Keys.minutesToDrink != nil {
+                            self.dispatchNotification(indentifier: indentifier,
+                                                      title: "Пора попить воды!",
+                                                      body: "Заходи в приложение и отмечай!",
+                                                      timeIntervalSec: 1)
+                        }
+                    }
+                }
+            case .denied:
+                return
+            case .authorized:
+                if Keys.minutesToDrink != nil {
+                    self.dispatchNotification(indentifier: indentifier,
+                                              title: "Пора попить воды!",
+                                              body: "Заходи в приложение и отмечай!",
+                                              timeIntervalSec: 1)
+                }
+            default:
+                return
+            }
+        }
+    }
+    
+    func dispatchNotification(indentifier: String, title: String, body: String, timeIntervalSec: Double) {
         
         let notificationCenter = UNUserNotificationCenter.current()
         
@@ -402,7 +430,7 @@ class HomeScreenViewController: UIViewController {
         content.body = body
         content.sound = .default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalSec, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalSec, repeats: false)
 
         let currentHour = Calendar.current.component(.hour, from: Date())
         let currentMinute = Calendar.current.component(.minute, from: Date())
@@ -420,8 +448,8 @@ class HomeScreenViewController: UIViewController {
         let totalMinutesGoSleep = (hourGoSleep*60) + minuteGoSleep
         
         if totalCurrentMinutes > totalMinutesGetUp && totalCurrentMinutes < totalMinutesGoSleep {
-            let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: trigger)
-            notificationCenter.removePendingNotificationRequests(withIdentifiers: [indentifier])
+            let request = UNNotificationRequest(identifier: "\(indentifier)", content: content, trigger: trigger)
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: ["\(indentifier)"])
             notificationCenter.add(request)
        }
     }
@@ -514,4 +542,6 @@ extension HomeScreenViewController : UITableViewDataSource {
 
 extension Notification.Name {
     static let reload = Notification.Name("reload")
+    static let addFuncFoodTimer = Notification.Name("addFuncFoodTimer")
+    static let addFuncWaterTimer = Notification.Name("addFuncWaterTimer")
 }

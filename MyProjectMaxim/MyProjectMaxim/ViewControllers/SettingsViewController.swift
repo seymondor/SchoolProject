@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import UserNotifications
+
 class SettingViewController: UIViewController {
     @IBOutlet weak var waterTextField: UITextField!
     @IBOutlet weak var foodTextField: UITextField!
@@ -47,6 +49,7 @@ class SettingViewController: UIViewController {
         timeWaterPickerView.delegate = self
         timeEatPickerView.delegate = self
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         waterTextField.text = "\(Keys.water ?? 0)"
         foodTextField.text = "\(Keys.kkal ?? 0)"
@@ -61,18 +64,22 @@ class SettingViewController: UIViewController {
         default: outletWomanButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         switch Keys.gender {
         case "Man": outletManButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1); outletWomanButton.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
         default: outletWomanButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1); outletManButton.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
         }
     }
+    
     @IBAction func manButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletWomanButton)
     }
+    
     @IBAction func womanButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletManButton)
     }
+    
     @IBAction func calculateStandartsButton(_ sender: Any) {
         if checkAllTextFields() == true {
             Keys.calculateStandarts()
@@ -80,9 +87,11 @@ class SettingViewController: UIViewController {
             foodTextField.text = "\(Keys.kkal ?? 0)"
         }
     }
+    
     @IBAction func startButton(_ sender: UIButton) {
         checkAllTextFields()
     }
+    
     func checkAllTextFields() -> Bool {
         switch Keys.checkTextField(textField: waterTextField, fromNumber: 100, upToNumber: 10000) {
         case (isEmpty: false, isInRange: true): Keys.water = Int(waterTextField.text!)
@@ -141,12 +150,12 @@ class SettingViewController: UIViewController {
         if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
             showAlert(alert: "Прогресс сброшен")
             
-            var timerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(self.updateByTimerFood), userInfo: nil, repeats: true)
-//            NotificationCenter.default.post(name: .addFuncFoodTimer, object: nil)
+            addTimerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(self.updateByTimerFood), userInfo: nil, repeats: true)
+            NotificationCenter.default.post(name: .addFuncFoodTimer, object: nil)
             
-            var timerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(self.updateByTimerWater), userInfo: nil, repeats: true)
-//            NotificationCenter.default.post(name: .addFuncWaterTimer, object: nil)
-        
+            addTimerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(self.updateByTimerWater), userInfo: nil, repeats: true)
+            NotificationCenter.default.post(name: .addFuncWaterTimer, object: nil)
+            
             Keys.resetValueUsedKeys()
             return true
         }
@@ -317,6 +326,7 @@ extension SettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case 1:
@@ -327,6 +337,7 @@ extension SettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             return 1
         }
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case 1:
@@ -337,6 +348,7 @@ extension SettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             return ""
         }
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch pickerView.tag {
         case 1:

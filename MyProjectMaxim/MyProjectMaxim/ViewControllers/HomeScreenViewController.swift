@@ -14,14 +14,14 @@ var addAmountVariable = 0
 var addTimerFood: Timer? = nil
 var addTimerWater: Timer? = nil
 
-var timerFood: Timer? = nil
-var timerWater: Timer? = nil
 class HomeScreenViewController: UIViewController {
     
     var historyFoodTableView = UITableView()
     var historyWaterTableView = UITableView()
     var historyFoodArray : [HistoryFoodSlot] = []
     var historyWaterArray : [HistoryWaterSlot] = []
+    var timerFood: Timer? = nil
+    var timerWater: Timer? = nil
     
     var foodNotificationID = 1
     var waterNotificationID = 1
@@ -177,13 +177,15 @@ class HomeScreenViewController: UIViewController {
     }
     
     @objc func changeFoodTimer(notification: Notification) {
-        timerFood?.invalidate()
-        timerFood = nil
+        timerFood = addTimerFood
+        addTimerFood?.invalidate()
+        addTimerFood = nil
     }
 
     @objc func changeWaterTimer(notification: Notification) {
-        timerWater?.invalidate()
-        timerWater = nil
+        timerWater = addTimerWater
+        addTimerWater?.invalidate()
+        addTimerWater = nil
     }
     
     @objc func reloadLabel(notification: Notification) {

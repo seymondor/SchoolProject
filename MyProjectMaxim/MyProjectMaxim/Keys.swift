@@ -240,8 +240,11 @@ final class Keys {
         print("WATER - \(Keys.water ?? 0)")
     }
     
-    static func resetValueUsedKeys() {
+    static func resetValueUsedKeysKkal() {
         Keys.usedKkal = 0
+    }
+    
+    static func resetValueUsedKeysWater() {
         Keys.usedWater = 0
     }
 }

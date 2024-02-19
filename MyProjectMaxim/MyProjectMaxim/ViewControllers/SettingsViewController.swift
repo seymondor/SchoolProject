@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import UserNotifications
+
 class SettingViewController: UIViewController {
     @IBOutlet weak var waterTextField: UITextField!
     @IBOutlet weak var foodTextField: UITextField!
@@ -65,12 +67,15 @@ class SettingViewController: UIViewController {
         default: outletWomanButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1); outletManButton.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
         }
     }
+    
     @IBAction func manButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletWomanButton)
     }
+    
     @IBAction func womanButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletManButton)
     }
+    
     @IBAction func calculateStandartsButton(_ sender: Any) {
         if checkAllTextFields() == true {
             Keys.calculateStandarts()
@@ -78,18 +83,23 @@ class SettingViewController: UIViewController {
             foodTextField.text = "\(Keys.kkal ?? 0)"
         }
     }
+    
     @IBAction func startButton(_ sender: UIButton) {
         checkAllTextFields()
     }
+    
     func checkAllTextFields() -> Bool {
+        var keysBeforeFood : Int? = nil
+        var keysBeforeWater : Int? = nil
+        
         switch Keys.checkTextField(textField: waterTextField, fromNumber: 100, upToNumber: 10000) {
-        case (isEmpty: false, isInRange: true): Keys.water = Int(waterTextField.text!)
+        case (isEmpty: false, isInRange: true): keysBeforeWater = Keys.water; Keys.water = Int(waterTextField.text!)
         case (isEmpty: true, isInRange: true): showError(error: "Не введено количество воды")
         case(isEmpty: false, isInRange: false): showError(error: "Неверно введено количество воды")
         default: break
         }
         switch Keys.checkTextField(textField: foodTextField, fromNumber: 100, upToNumber: 10000) {
-        case (isEmpty: false, isInRange: true): Keys.kkal = Int(foodTextField.text!)
+        case (isEmpty: false, isInRange: true): keysBeforeFood = Keys.kkal; Keys.kkal = Int(foodTextField.text!)
         case (isEmpty: true, isInRange: true): showError(error: "Не введено количество воды")
         case(isEmpty: false, isInRange: false): showError(error: "Неверно введено количество воды")
         default: break
@@ -138,11 +148,23 @@ class SettingViewController: UIViewController {
         Keys.timeGoSleep = formatDatePicker(sender: goSleepDatePicker)
         if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
             showAlert(alert: "Прогресс сброшен")
-            Keys.resetValueUsedKeys()
+            
+            FoodNotification.timerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(FoodNotification.checkForPermissionFood), userInfo: nil, repeats: true)
+            
+            WaterNotification.timerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(WaterNotification.checkForPermissionWater), userInfo: nil, repeats: true)
+
+            
+            if keysBeforeFood != Keys.kkal {
+                Keys.resetValueUsedKeysKkal()
+            }
+            if keysBeforeWater != Keys.water {
+                Keys.resetValueUsedKeysWater()
+            }
             return true
         }
         return false
     }
+    
     func formatDatePicker(sender: UIDatePicker) -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = DateFormatter.Style.short

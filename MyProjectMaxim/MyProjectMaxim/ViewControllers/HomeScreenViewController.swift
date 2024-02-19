@@ -35,12 +35,13 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dayChanged(notification:)), name: UIApplication.significantTimeChangeNotification, object: nil)
+        
         Keys.minutesToDrink = 1
         Keys.minutesToEat = 1
-        
-        checkForPermission()
-        checkForPermissionFood()
-        
+
+        FoodNotification.timerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(FoodNotification.checkForPermissionFood), userInfo: nil, repeats: true)
+        WaterNotification.timerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(WaterNotification.checkForPermissionWater), userInfo: nil, repeats: true)
+
         setupWaterHistoryTableView()
         setupFoodHistoryTableView()
         switch Keys.selectedBar {
@@ -103,7 +104,8 @@ class HomeScreenViewController: UIViewController {
     }
     
     @objc func dayChanged(notification: Notification){
-        Keys.resetValueUsedKeys()
+        Keys.resetValueUsedKeysKkal()
+        Keys.resetValueUsedKeysWater()
         changeBarValue(withKey: "water", fromValuePercentage: 0, toValuePercentage: 0)
         changeBarValue(withKey: "food", fromValuePercentage: 0, toValuePercentage: 0)
     }
@@ -157,7 +159,7 @@ class HomeScreenViewController: UIViewController {
         return 0
     }
     
-    @objc func reloadLabel(notification: Notification){
+    @objc func reloadLabel(notification: Notification) {
         switch Keys.selectedBar {
         case "food":
             let foodImageView = UIImageView()
@@ -332,100 +334,6 @@ class HomeScreenViewController: UIViewController {
         return 0
     }
     
-    func checkForPermission() {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { setting in
-            switch setting.authorizationStatus {
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow {
-                        if Keys.minutesToDrink != nil {
-                            self.dispatchNotification(indentifier: "message-water",
-                                                      title: "Пора попить воды!",
-                                                      body: "Заходи в приложение и отмечай!",
-                                                      timeIntervalSec: Double(Keys.minutesToDrink)*60)
-                        }
-                    }
-                }
-            case .denied:
-                return
-            case .authorized:
-                if Keys.minutesToDrink != nil {
-                    self.dispatchNotification(indentifier: "message-water",
-                                              title: "Пора попить воды!",
-                                              body: "Заходи в приложение и отмечай!",
-                                              timeIntervalSec: Double(Keys.minutesToDrink)*60)
-                }
-            default:
-                return
-            }
-        }
-    }
-    
-    func checkForPermissionFood() {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { setting in
-            switch setting.authorizationStatus {
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow {
-                        if Keys.minutesToEat != nil {
-                            self.dispatchNotification(indentifier: "message-food",
-                                                      title: "Пора поесть!",
-                                                      body: "Заходи в приложение и отмечай!",
-                                                      timeIntervalSec: Double(Keys.minutesToEat)*60)
-                        }
-                    }
-                }
-            case .denied:
-                return
-            case .authorized:
-                if Keys.minutesToEat != nil {
-                    self.dispatchNotification(indentifier: "message-food",
-                                              title: "Пора поесть!",
-                                              body: "Заходи в приложение и отмечай!",
-                                              timeIntervalSec: Double(Keys.minutesToEat)*60)
-                }
-            default:
-                return
-            }
-        }
-    }
-
-    
-    func dispatchNotification(indentifier: String, title: String, body: String, timeIntervalSec: Double ) {
-        
-        let notificationCenter = UNUserNotificationCenter.current()
-        
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.sound = .default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalSec, repeats: true)
-
-        let currentHour = Calendar.current.component(.hour, from: Date())
-        let currentMinute = Calendar.current.component(.minute, from: Date())
-        let totalCurrentMinutes = (currentHour*60) + currentMinute
-        
-        let keysTimeGetUpDate = formatString(dateString: Keys.timeGetUp, dateFormat: "HH:mm")
-        let keysTimeGoSleepDate = formatString(dateString: Keys.timeGoSleep, dateFormat: "HH:mm")
-        
-        let hourGetUp = Calendar.current.component(.hour, from: keysTimeGetUpDate)
-        let minuteGetUp = Calendar.current.component(.minute, from: keysTimeGetUpDate)
-        let totalMinutesGetUp = (hourGetUp*60) + minuteGetUp
-        
-        let hourGoSleep = Calendar.current.component(.hour, from: keysTimeGoSleepDate)
-        let minuteGoSleep = Calendar.current.component(.minute, from: keysTimeGoSleepDate)
-        let totalMinutesGoSleep = (hourGoSleep*60) + minuteGoSleep
-        
-        if totalCurrentMinutes > totalMinutesGetUp && totalCurrentMinutes < totalMinutesGoSleep {
-            let request = UNNotificationRequest(identifier: indentifier, content: content, trigger: trigger)
-            notificationCenter.removePendingNotificationRequests(withIdentifiers: [indentifier])
-            notificationCenter.add(request)
-       }
-    }
-    
     func formatString(dateString: String, dateFormat: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
@@ -492,19 +400,19 @@ extension HomeScreenViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView.tag {
-        case 1 :
+        case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath) as? Cell else { fatalError() }
             if historyWaterArray[indexPath.row] != nil {
                 cell.configure(slotHistory: historyWaterArray[indexPath.row])
             }
             return cell
-        case 2 :
+        case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath) as? Cell else { fatalError() }
             if historyFoodArray[indexPath.row] != nil {
                 cell.configure(slotHistory: historyFoodArray[indexPath.row])
             }
             return cell
-        default :
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath)
             cell.textLabel?.text = "Error"
             return cell

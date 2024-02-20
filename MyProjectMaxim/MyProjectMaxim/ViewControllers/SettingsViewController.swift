@@ -24,8 +24,8 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var goSleepDatePicker: UIDatePicker!
     var timeEatPickerView = UIPickerView()
     var timeWaterPickerView = UIPickerView()
-    let timeEatArray = [10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
-    let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
+    let timeEatArray = [1, 2, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350] // delete
+    let timeWaterArray = [1, 2, 5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200] // delete
     
     override func viewDidLoad() {
         heightTextField.delegate = self
@@ -132,13 +132,13 @@ class SettingViewController: UIViewController {
         case (isEmpty: false, isInRange: false): showError(error: "Неверно введено занятие спортом")
         default: break
         }
-        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 9, upToNumber: 1000) {
+        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 0, upToNumber: 1000) { // !
         case (isEmpty: false, isInRange: true): Keys.minutesToEat = Int(minutesEatTextField.text ?? "") ?? 0
         case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о еде")
         case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о еде")
         default: break
         }
-        switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 2, upToNumber: 500) {
+        switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 0, upToNumber: 500) { // !
         case (isEmpty: false, isInRange: true): Keys.minutesToDrink = Int(minutesDrinkTextField.text ?? "") ?? 0
         case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о воде")
         case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о воде")
@@ -148,11 +148,6 @@ class SettingViewController: UIViewController {
         Keys.timeGoSleep = formatDatePicker(sender: goSleepDatePicker)
         if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
             showAlert(alert: "Прогресс сброшен")
-            
-            FoodNotification.timerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(FoodNotification.checkForPermissionFood), userInfo: nil, repeats: true)
-            
-            WaterNotification.timerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(WaterNotification.checkForPermissionWater), userInfo: nil, repeats: true)
-
             
             if keysBeforeFood != Keys.kkal {
                 Keys.resetValueUsedKeysKkal()
@@ -180,6 +175,7 @@ class SettingViewController: UIViewController {
         }
         return result
     }
+    
     func createFrameForButton(button: UIButton, button2: UIButton){
         if button2.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
             button2.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
@@ -188,6 +184,7 @@ class SettingViewController: UIViewController {
             button.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         }
     }
+    
     func showError(error: String){
         let alert = UIAlertController(title: "Ошибка", message: "\(error).", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in

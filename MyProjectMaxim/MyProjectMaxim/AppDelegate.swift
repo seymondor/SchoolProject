@@ -9,11 +9,7 @@ import UIKit
 import UserNotifications
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    
-    // TODO: Удалить уведомл
-    
-    
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate { 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let notificationCenter = UNUserNotificationCenter.current()

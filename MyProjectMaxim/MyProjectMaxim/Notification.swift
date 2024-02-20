@@ -9,7 +9,7 @@ import Foundation
 import UserNotifications
 
 class NotificationClass {
-    func dispatchNotification(indentifier: String, title: String, body: String, timeIntervalSec: Double ) {
+    static func dispatchNotification(indentifier: String, title: String, body: String, timeIntervalSec: Double ) {
         let notificationCenter = UNUserNotificationCenter.current()
         
         let content = UNMutableNotificationContent()
@@ -17,7 +17,7 @@ class NotificationClass {
         content.body = body
         content.sound = .default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalSec, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalSec, repeats: false)
 
         let currentHour = Calendar.current.component(.hour, from: Date())
         let currentMinute = Calendar.current.component(.minute, from: Date())
@@ -41,7 +41,7 @@ class NotificationClass {
        }
     }
     
-    func formatString(dateString: String, dateFormat: String) -> Date {
+    static func formatString(dateString: String, dateFormat: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
         formatter.timeZone =  .current
@@ -50,75 +50,9 @@ class NotificationClass {
 }
 
 class WaterNotification : NotificationClass {
-    static var timerWater : Timer? = nil
-    var waterNotificationID = 0
-    
-    @objc func checkForPermissionWater() {
-        waterNotificationID += 1
-        
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { setting in
-            switch setting.authorizationStatus {
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow {
-                        if Keys.minutesToDrink != nil {
-                            self.dispatchNotification(indentifier: "message-water",
-                                                      title: "Пора попить воды!",
-                                                      body: "Заходи в приложение и отмечай!",
-                                                      timeIntervalSec: Double(Keys.minutesToDrink)*60)
-                        }
-                    }
-                }
-            case .denied:
-                return
-            case .authorized:
-                if Keys.minutesToDrink != nil {
-                    self.dispatchNotification(indentifier: "message-water",
-                                              title: "Пора попить воды!",
-                                              body: "Заходи в приложение и отмечай!",
-                                              timeIntervalSec: Double(Keys.minutesToDrink)*60)
-                }
-            default:
-                return
-            }
-        }
-    }
+    static var waterNotificationID = 0
 }
 
 class FoodNotification : NotificationClass {
-    static var timerFood : Timer? = nil
-    var foodNotificationID = 0
-    
-    @objc func checkForPermissionFood() {
-        foodNotificationID += 1
-        
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { setting in
-            switch setting.authorizationStatus {
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow {
-                        if Keys.minutesToEat != nil {
-                            self.dispatchNotification(indentifier: "message-food",
-                                                      title: "Пора поесть!",
-                                                      body: "Заходи в приложение и отмечай!",
-                                                      timeIntervalSec: Double(Keys.minutesToEat)*60)
-                        }
-                    }
-                }
-            case .denied:
-                return
-            case .authorized:
-                if Keys.minutesToEat != nil {
-                    self.dispatchNotification(indentifier: "message-food",
-                                              title: "Пора поесть!",
-                                              body: "Заходи в приложение и отмечай!",
-                                              timeIntervalSec: Double(Keys.minutesToEat)*60)
-                }
-            default:
-                return
-            }
-        }
-    }
+    static var foodNotificationID = 0
 }

@@ -20,8 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var goSleepDatePicker: UIDatePicker!
     var eatTimePicker = UIPickerView()
     var waterTimePicker = UIPickerView()
-    let timeEatArray = [10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
-    let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
+    let timeEatArray = [1, 2, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350] // delete
+    let timeWaterArray = [1, 2, 5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200] // delete
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,12 +65,12 @@ class ViewController: UIViewController {
         case (isEmpty: false, isInRange: false): showError(error: "Неверно введено занятие спортом")
         default: break
         }
-        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 9, upToNumber: 1000) {
+        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 0, upToNumber: 1000) {
         case (isEmpty: false, isInRange: true): Keys.minutesToEat = Int(minutesEatTextField.text ?? "") ?? 0
         case (isEmpty: true, isInRange: false): showError(error: "Не выбрано уведомление о еде")
         default: break
         }
-        switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 2, upToNumber: 500) {
+        switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 0, upToNumber: 500) {
         case (isEmpty: false, isInRange: true): Keys.minutesToDrink = Int(minutesDrinkTextField.text ?? "") ?? 0
         case (isEmpty: true, isInRange: false): showError(error: "Не выбрано уведомление о воде")
         default: break

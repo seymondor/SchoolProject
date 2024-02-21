@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class Cell : UITableViewCell {
-    
     let image = UIImageView()
     
     let timeLabel : UILabel = {

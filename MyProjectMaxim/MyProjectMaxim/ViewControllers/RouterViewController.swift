@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+
 class RouterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         clearDefaults()
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         if Keys.age != "Error" && Keys.age != nil && Keys.gender != "Error" && Keys.gender != nil && Keys.height != "Error" && Keys.height != nil && Keys.weight != "Error" && Keys.weight != nil {
             let vc = self.storyboard!.instantiateViewController(withIdentifier: "Home")
@@ -23,6 +25,7 @@ class RouterViewController: UIViewController {
             self.present(vc, animated: false, completion: nil)
         }
     }
+    
     func clearDefaults() {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
@@ -30,5 +33,4 @@ class RouterViewController: UIViewController {
             defaults.removeObject(forKey: key)
         }
     }
-
 }

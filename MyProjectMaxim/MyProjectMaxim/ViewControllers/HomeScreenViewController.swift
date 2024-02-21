@@ -13,10 +13,6 @@ import UserNotifications
 var addAmountVariable = 0
 
 class HomeScreenViewController: UIViewController {
-    
-    var timerFood : Timer? = nil
-    var timerWater : Timer? = nil
-    
     var historyFoodTableView = UITableView()
     var historyWaterTableView = UITableView()
     var historyFoodArray : [HistoryFoodSlot] = []
@@ -24,11 +20,9 @@ class HomeScreenViewController: UIViewController {
     
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
-    
     @IBOutlet weak var backgroundOfEmojiSelectedBar: UIView!
     @IBOutlet weak var emojiSelectedBar: UIImageView!
     @IBOutlet weak var historyView: UIView!
-    
     @IBOutlet weak var historyLabel: UILabel!
     @IBOutlet weak var alertLabel: UILabel!
     @IBOutlet weak var percentageLabel: UILabel!
@@ -38,13 +32,11 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dayChanged(notification:)), name: UIApplication.significantTimeChangeNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.funcAddTimerFood(notification:)), name: Notification.Name("addTimerFoodName"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.funcAddTimerWater(notification:)), name: Notification.Name("addTimerWaterName"), object: nil)
         
-        timerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(checkForPermissionFood), userInfo: nil, repeats: true)
+        var timerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(checkForPermissionFood), userInfo: nil, repeats: true)
         print("Keys minutes to eat \(Keys.minutesToEat)")
         
-        timerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(checkForPermissionWater), userInfo: nil, repeats: true)
+        var timerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(checkForPermissionWater), userInfo: nil, repeats: true)
         print("Keys minutes to drink \(Keys.minutesToDrink)")
 
         setupWaterHistoryTableView()
@@ -105,77 +97,6 @@ class HomeScreenViewController: UIViewController {
             amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal)) ккал"
         default:
             break
-        }
-    }
-    
-    @objc func dayChanged(notification: Notification){
-        Keys.resetValueUsedKeysKkal()
-        Keys.resetValueUsedKeysWater()
-        changeBarValue(withKey: "water", fromValuePercentage: 0, toValuePercentage: 0)
-        changeBarValue(withKey: "food", fromValuePercentage: 0, toValuePercentage: 0)
-    }
-    
-    @objc func checkForPermissionWater() {
-        WaterNotification.waterNotificationID += 1
-        
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { setting in
-            switch setting.authorizationStatus {
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow {
-                        if Keys.minutesToDrink != nil {
-                            NotificationClass.dispatchNotification(indentifier: "message-water-\(WaterNotification.waterNotificationID)",
-                                                      title: "Пора попить воды!",
-                                                      body: "Заходи в приложение и отмечай!",
-                                                      timeIntervalSec: 1)
-                        }
-                    }
-                }
-            case .denied:
-                return
-            case .authorized:
-                if Keys.minutesToDrink != nil {
-                    NotificationClass.dispatchNotification(indentifier: "message-water-\(WaterNotification.waterNotificationID)",
-                                              title: "Пора попить воды!",
-                                              body: "Заходи в приложение и отмечай!",
-                                              timeIntervalSec: 1)
-                }
-            default:
-                return
-            }
-        }
-    }
-    
-    @objc func checkForPermissionFood() {
-        FoodNotification.foodNotificationID += 1
-        
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { setting in
-            switch setting.authorizationStatus {
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow {
-                        if Keys.minutesToEat != nil {
-                            NotificationClass.dispatchNotification(indentifier: "message-food-\(FoodNotification.foodNotificationID)",
-                                                      title: "Пора поесть!",
-                                                      body: "Заходи в приложение и отмечай!",
-                                                      timeIntervalSec: 1)
-                        }
-                    }
-                }
-            case .denied:
-                return
-            case .authorized:
-                if Keys.minutesToEat != nil {
-                    NotificationClass.dispatchNotification(indentifier: "message-food-\(FoodNotification.foodNotificationID)",
-                                              title: "Пора поесть!",
-                                              body: "Заходи в приложение и отмечай!",
-                                              timeIntervalSec: 1)
-                }
-            default:
-                return
-            }
         }
     }
     
@@ -277,6 +198,77 @@ class HomeScreenViewController: UIViewController {
         }
     }
 
+    @objc func dayChanged(notification: Notification){
+        Keys.resetValueUsedKeysKkal()
+        Keys.resetValueUsedKeysWater()
+        changeBarValue(withKey: "water", fromValuePercentage: 0, toValuePercentage: 0)
+        changeBarValue(withKey: "food", fromValuePercentage: 0, toValuePercentage: 0)
+    }
+    
+    @objc func checkForPermissionWater() {
+        WaterNotification.waterNotificationID += 1
+        
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    if didAllow {
+                        if Keys.minutesToDrink != nil {
+                            NotificationClass.dispatchNotification(indentifier: "message-water-\(WaterNotification.waterNotificationID)",
+                                                      title: "Пора попить воды!",
+                                                      body: "Заходи в приложение и отмечай!",
+                                                      timeIntervalSec: 1)
+                        }
+                    }
+                }
+            case .denied:
+                return
+            case .authorized:
+                if Keys.minutesToDrink != nil {
+                    NotificationClass.dispatchNotification(indentifier: "message-water-\(WaterNotification.waterNotificationID)",
+                                              title: "Пора попить воды!",
+                                              body: "Заходи в приложение и отмечай!",
+                                              timeIntervalSec: 1)
+                }
+            default:
+                return
+            }
+        }
+    }
+    
+    @objc func checkForPermissionFood() {
+        FoodNotification.foodNotificationID += 1
+        
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    if didAllow {
+                        if Keys.minutesToEat != nil {
+                            NotificationClass.dispatchNotification(indentifier: "message-food-\(FoodNotification.foodNotificationID)",
+                                                      title: "Пора поесть!",
+                                                      body: "Заходи в приложение и отмечай!",
+                                                      timeIntervalSec: 1)
+                        }
+                    }
+                }
+            case .denied:
+                return
+            case .authorized:
+                if Keys.minutesToEat != nil {
+                    NotificationClass.dispatchNotification(indentifier: "message-food-\(FoodNotification.foodNotificationID)",
+                                              title: "Пора поесть!",
+                                              body: "Заходи в приложение и отмечай!",
+                                              timeIntervalSec: 1)
+                }
+            default:
+                return
+            }
+        }
+    }
+    
     func setAlertLabel(on bar: String){
         switch bar {
         case "water":
@@ -491,6 +483,4 @@ extension HomeScreenViewController : UITableViewDataSource {
 
 extension Notification.Name {
     static let reload = Notification.Name("reload")
-    static let addTimerFoodName = Notification.Name("addTimerFoodName")
-    static let addTimerWaterName = Notification.Name("addTimerWaterName")
 }

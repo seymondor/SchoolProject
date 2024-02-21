@@ -14,8 +14,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "setupTableView(tableView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "MyProjectMaxim/ViewControllers/WaterAddViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "addCustomWaterButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "setupTableView(tableView:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "MyProjectMaxim/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "startButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "MyProjectMaxim/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "startButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,25 +110,9 @@
             filePath = "MyProjectMaxim/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "startButton(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "994334B1-59DD-4994-86DA-3B4C9075EBDC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyProjectMaxim/ViewControllers/SettingsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -158,8 +142,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "changeBar(to:)"
             landmarkType = "7">
             <Locations>
@@ -206,8 +190,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "changeBar(to:)"
             landmarkType = "7">
             <Locations>
@@ -254,8 +238,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "changeBar(to:)"
             landmarkType = "7">
             <Locations>
@@ -302,8 +286,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "changeBar(to:)"
             landmarkType = "7">
             <Locations>
@@ -350,8 +334,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "setupTableView(tableView:)"
             landmarkType = "7">
             <Locations>
@@ -398,8 +382,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "setupTableView(tableView:)"
             landmarkType = "7">
             <Locations>
@@ -446,8 +430,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
             landmarkName = "setBars()"
             landmarkType = "7">
             <Locations>
@@ -494,8 +478,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "setBars()"
             landmarkType = "7">
             <Locations>
@@ -542,8 +526,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
             <Locations>
@@ -590,8 +574,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "reloadLabel(notification:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -606,8 +590,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
             landmarkName = "getDateDictionary(fromDictionary:)"
             landmarkType = "7">
             <Locations>
@@ -654,8 +638,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "HomeScreenViewController"
             landmarkType = "3">
             <Locations>
@@ -702,8 +686,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "387"
+            endingLineNumber = "387"
             landmarkName = "getDateDictionary(fromDictionary:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -718,8 +702,8 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
+            startingLineNumber = "386"
+            endingLineNumber = "386"
             landmarkName = "getDateDictionary(fromDictionary:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -901,38 +885,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0488122E-6987-40AE-A1FD-0E40CAEE0F43"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "checkForPermissionFood()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C3FA18CD-D875-46D4-B7C2-F3E94789B478"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "checkForPermissionWater()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "CBCE561B-5FA8-41D1-92C1-DC2EE0FE1403"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -940,42 +892,10 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CBCE561B-5FA8-41D1-92C1-DC2EE0FE1403 - 6e37caf64cbaa80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyProjectMaxim.HomeScreenViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "MyProjectMaxim"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "662">
-               </Location>
-               <Location
-                  uuid = "CBCE561B-5FA8-41D1-92C1-DC2EE0FE1403 - 6e37caf64cbaa80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyProjectMaxim.HomeScreenViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "MyProjectMaxim"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "44"
-                  endingLineNumber = "44"
-                  offsetFromSymbolStart = "2211">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -988,42 +908,10 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3F523804-1F5A-4A0E-83BC-B8A30BEE0269 - 6e37caf64cbaa0c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyProjectMaxim.HomeScreenViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "MyProjectMaxim"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "2211">
-               </Location>
-               <Location
-                  uuid = "3F523804-1F5A-4A0E-83BC-B8A30BEE0269 - 6e37caf64cbaa6f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MyProjectMaxim.HomeScreenViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "MyProjectMaxim"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/maksim/SchoolProject/MyProjectMaxim/MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "3309">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

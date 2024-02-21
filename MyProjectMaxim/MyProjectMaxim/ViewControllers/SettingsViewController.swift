@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import UserNotifications
 
 class SettingViewController: UIViewController {
     @IBOutlet weak var waterTextField: UITextField!
@@ -18,49 +17,26 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var outletManButton: UIButton!
     @IBOutlet weak var outletWomanButton: UIButton!
     @IBOutlet weak var sportTextField: UITextField!
-    @IBOutlet weak var minutesEatTextField: UITextField!
-    @IBOutlet weak var minutesDrinkTextField: UITextField!
     @IBOutlet weak var getUpDatePicker: UIDatePicker!
     @IBOutlet weak var goSleepDatePicker: UIDatePicker!
     var timeEatPickerView = UIPickerView()
     var timeWaterPickerView = UIPickerView()
-    let timeEatArray = [1, 2, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350] // delete
-    let timeWaterArray = [1, 2, 5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200] // delete
+    let timeEatArray = [10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
+    let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
     
     override func viewDidLoad() {
-        heightTextField.delegate = self
-        weightTextField.delegate = self
-        ageTextField.delegate = self
-        sportTextField.delegate = self
-        minutesEatTextField.delegate = self
-        minutesDrinkTextField.delegate = self
-        
-        minutesEatTextField.tag = 1
-        minutesDrinkTextField.tag = 2
-        minutesEatTextField.inputView = timeEatPickerView
-        minutesDrinkTextField.inputView = timeWaterPickerView
-        
-        timeEatPickerView.tag = 1
-        timeWaterPickerView.tag = 2
-        timeEatPickerView.dataSource = self
-        timeWaterPickerView.dataSource = self
-        timeWaterPickerView.delegate = self
-        timeEatPickerView.delegate = self
+        setupTextFields()
+        setupPickerViews()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        waterTextField.text = "\(Keys.water ?? 0)"
-        foodTextField.text = "\(Keys.kkal ?? 0)"
-        heightTextField.text = Keys.height
-        weightTextField.text = Keys.weight
-        ageTextField.text = Keys.age
-        sportTextField.text = Keys.sport
-        minutesEatTextField.text = "\(Keys.minutesToDrink ?? 0)"
-        minutesDrinkTextField.text = "\(Keys.minutesToDrink ?? 0)"
+        setupTextFieldTexts()
         switch Keys.gender {
         case "Man": outletManButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         default: outletWomanButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         switch Keys.gender {
         case "Man": outletManButton.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1); outletWomanButton.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
@@ -132,23 +108,12 @@ class SettingViewController: UIViewController {
         case (isEmpty: false, isInRange: false): showError(error: "Неверно введено занятие спортом")
         default: break
         }
-        switch Keys.checkTextField(textField: minutesEatTextField, fromNumber: 0, upToNumber: 1000) { // !
-        case (isEmpty: false, isInRange: true): Keys.minutesToEat = Int(minutesEatTextField.text ?? "") ?? 0
-        case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о еде")
-        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о еде")
-        default: break
-        }
-        switch Keys.checkTextField(textField: minutesDrinkTextField, fromNumber: 0, upToNumber: 500) { // !
-        case (isEmpty: false, isInRange: true): Keys.minutesToDrink = Int(minutesDrinkTextField.text ?? "") ?? 0
-        case (isEmpty: true, isInRange: false): showError(error: "Не введено уведомление о воде")
-        case (isEmpty: false, isInRange: false): showError(error: "Неверно введено уведомление о воде")
-        default: break
-        }
+        
         Keys.timeGetUp = formatDatePicker(sender: getUpDatePicker)
         Keys.timeGoSleep = formatDatePicker(sender: goSleepDatePicker)
+        
         if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
             showAlert(alert: "Прогресс сброшен")
-            
             if keysBeforeFood != Keys.kkal {
                 Keys.resetValueUsedKeysKkal()
             }
@@ -192,6 +157,7 @@ class SettingViewController: UIViewController {
         }))
         present(alert, animated: true)
     }
+    
     func showAlert(alert: String){
         let alert = UIAlertController(title: "Внимание", message: "\(alert).", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in
@@ -199,7 +165,31 @@ class SettingViewController: UIViewController {
         }))
         present(alert, animated: true)
     }
-
+    
+    func setupTextFields() {
+        heightTextField.delegate = self
+        weightTextField.delegate = self
+        ageTextField.delegate = self
+        sportTextField.delegate = self
+    }
+    
+    func setupPickerViews() {
+        timeEatPickerView.tag = 1
+        timeWaterPickerView.tag = 2
+        timeEatPickerView.dataSource = self
+        timeWaterPickerView.dataSource = self
+        timeWaterPickerView.delegate = self
+        timeEatPickerView.delegate = self
+    }
+    
+    func setupTextFieldTexts() {
+        waterTextField.text = "\(Keys.water ?? 0)"
+        foodTextField.text = "\(Keys.kkal ?? 0)"
+        heightTextField.text = Keys.height
+        weightTextField.text = Keys.weight
+        ageTextField.text = Keys.age
+        sportTextField.text = Keys.sport
+    }
 }
 
 extension SettingViewController: UITextFieldDelegate {
@@ -222,6 +212,7 @@ extension SettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch pickerView.tag {
         case 1:
@@ -232,6 +223,7 @@ extension SettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             return 1
         }
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch pickerView.tag {
         case 1:
@@ -240,18 +232,6 @@ extension SettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             return "\(timeWaterArray[row])"
         default:
             return ""
-        }
-    }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch pickerView.tag {
-        case 1:
-            minutesEatTextField.text = "\(timeEatArray[row])"
-            minutesEatTextField.resignFirstResponder()
-        case 2:
-            minutesDrinkTextField.text = "\(timeWaterArray[row])"
-            minutesDrinkTextField.resignFirstResponder()
-        default:
-            break
         }
     }
 }

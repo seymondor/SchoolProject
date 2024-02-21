@@ -18,10 +18,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var minutesDrinkTextField: UITextField!
     @IBOutlet weak var getUpDatePicker: UIDatePicker!
     @IBOutlet weak var goSleepDatePicker: UIDatePicker!
+    
     var eatTimePicker = UIPickerView()
     var waterTimePicker = UIPickerView()
-    let timeEatArray = [1, 2, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350] // delete
-    let timeWaterArray = [1, 2, 5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200] // delete
+    let timeEatArray = [10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
+    let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +76,7 @@ class ViewController: UIViewController {
         case (isEmpty: true, isInRange: false): showError(error: "Не выбрано уведомление о воде")
         default: break
         }
+        
         Keys.timeGetUp = formatDatePicker(sender: getUpDatePicker)
         Keys.timeGoSleep = formatDatePicker(sender: goSleepDatePicker)
 
@@ -103,7 +105,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func createFrameForButton(button: UIButton, button2: UIButton){
+    func createFrameForButton(button: UIButton, button2: UIButton) {
         if button2.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
             button2.layer.borderColor = #colorLiteral(red: 0.6074405909, green: 0.8557563424, blue: 0.8065341115, alpha: 1)
             button.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
@@ -135,7 +137,7 @@ class ViewController: UIViewController {
         waterTimePicker.tag = 1
     }
     
-    func showError(error: String){
+    func showError(error: String) {
         let alert = UIAlertController(title: "Ошибка", message: "\(error).", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in
             print("Нажал Хорошо")

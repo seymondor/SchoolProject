@@ -35,47 +35,6 @@ final class Keys {
         case selectedBar
     }
     
-    static func checkTextField(textField : UITextField, fromNumber : Int, upToNumber : Int) -> (isEmpty: Bool, isInRange: Bool) {
-        var isInRange = false
-        var isEmpty = true
-        let number = Int(textField.text!) ?? 0
-        if number != 0 { isEmpty = false }
-        if number < upToNumber && number > fromNumber {
-            isInRange = true
-        }
-        return (isEmpty, isInRange)
-    }
-    
-    static func calculateStandarts(){
-        if Keys.gender == "Woman" {
-            var beforeInitKkal = 9.6 * Double(Keys.weight!)!
-            beforeInitKkal = beforeInitKkal + 655 + (1.8 * Double(Keys.height!)!)
-            beforeInitKkal = beforeInitKkal - (4.7 * Double(Keys.age!)!)
-            Keys.kkal = Int(beforeInitKkal)
-            var beforeInitWater = Double(Keys.weight)! * 0.03
-            beforeInitWater = (beforeInitWater + (Double(Keys.sport!)! * 0.6)) * 100
-            Keys.water = Int(beforeInitWater)
-        }
-        if Keys.gender == "Man" {
-            var beforeInitKkal = 15 * Double(Keys.weight!)!
-            beforeInitKkal = beforeInitKkal + 66 + (5 * Double(Keys.height!)!)
-            beforeInitKkal = beforeInitKkal - (6.8 * Double(Keys.age!)!)
-            Keys.kkal = Int(beforeInitKkal)
-            var beforeInitWater = Double(Keys.weight)! * 0.04
-            beforeInitWater = (beforeInitWater + (Double(Keys.sport!)! * 0.7)) * 100
-            Keys.water = Int(beforeInitWater)
-        }
-        print("KKAL - \(Keys.kkal ?? 0)")
-        print("WATER - \(Keys.water ?? 0)")
-    }
-    
-    static func resetValueUsedKeys() {
-        Keys.usedKkal = 0
-        Keys.usedWater = 0
-    }
-    
-    
-    // TODO: спросить
     static var historyWater : [Dictionary<String, Int>]! {
         get {
             UserDefaults.standard.value(forKey: History.historyWater.rawValue) as? [Dictionary<String, Int>]
@@ -98,9 +57,6 @@ final class Keys {
         }
     }
 
-    
-    
-    
     static var timeGetUp: String! {
         get {
             UserDefaults.standard.string(forKey: HumanSettings.timeGetUp.rawValue)
@@ -250,4 +206,42 @@ final class Keys {
         }
     }
     
+    static func checkTextField(textField : UITextField, fromNumber : Int, upToNumber : Int) -> (isEmpty: Bool, isInRange: Bool) {
+        var isInRange = false
+        var isEmpty = true
+        let number = Int(textField.text!) ?? 0
+        if number != 0 { isEmpty = false }
+        if number < upToNumber && number > fromNumber {
+            isInRange = true
+        }
+        return (isEmpty, isInRange)
+    }
+    
+    static func calculateStandarts(){
+        if Keys.gender == "Woman" {
+            var beforeInitKkal = 9.6 * Double(Keys.weight!)!
+            beforeInitKkal = beforeInitKkal + 655 + (1.8 * Double(Keys.height!)!)
+            beforeInitKkal = beforeInitKkal - (4.7 * Double(Keys.age!)!)
+            Keys.kkal = Int(beforeInitKkal)
+            var beforeInitWater = Double(Keys.weight)! * 0.03
+            beforeInitWater = (beforeInitWater + (Double(Keys.sport!)! * 0.6)) * 100
+            Keys.water = Int(beforeInitWater)
+        }
+        if Keys.gender == "Man" {
+            var beforeInitKkal = 15 * Double(Keys.weight!)!
+            beforeInitKkal = beforeInitKkal + 66 + (5 * Double(Keys.height!)!)
+            beforeInitKkal = beforeInitKkal - (6.8 * Double(Keys.age!)!)
+            Keys.kkal = Int(beforeInitKkal)
+            var beforeInitWater = Double(Keys.weight)! * 0.04
+            beforeInitWater = (beforeInitWater + (Double(Keys.sport!)! * 0.7)) * 100
+            Keys.water = Int(beforeInitWater)
+        }
+        print("KKAL - \(Keys.kkal ?? 0)")
+        print("WATER - \(Keys.water ?? 0)")
+    }
+    
+    static func resetValueUsedKeys() {
+        Keys.usedKkal = 0
+        Keys.usedWater = 0
+    }
 }

@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-//TODO: Спросить
-
 class HistorySlot {
     var image : UIImageView = UIImageView()
     var date : Date = Date()
@@ -22,17 +20,9 @@ class HistorySlot {
     }
 }
 
-
-
 class HistoryFoodSlot : HistorySlot {
     override init(image: UIImageView, date: Date, amount: Int) {
         if image.image == UIImage(named: "carrot") {
-            var historyFoodDictionary = Keys.historyFood ?? []
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-            let formattedDate = dateFormatter.string(from: date)
-            historyFoodDictionary.append([formattedDate : amount])
-            Keys.historyFood = historyFoodDictionary
             super.init(image: image, date: date, amount: amount)
         } else {
             super.init(image: UIImageView(), date: Date(), amount: 0)
@@ -42,14 +32,32 @@ class HistoryFoodSlot : HistorySlot {
 
 class HistoryWaterSlot : HistorySlot {
     override init(image: UIImageView, date: Date, amount: Int) {
-        if image.image == UIImage(systemName: "drop.fill"){
-            var historyWaterDictionary = Keys.historyWater ?? []
-            let formattedDate = date.formatted()
-            historyWaterDictionary.append([formattedDate:amount])
-            Keys.historyWater = historyWaterDictionary
+        if image.image == UIImage(named: "water"){
             super.init(image: image, date: date, amount: amount)
         } else {
             super.init(image: UIImageView(), date: Date(), amount: 0)
         }
+    }
+}
+
+func saveSlotInDefaultsFood(array: [HistoryFoodSlot]) {
+    for item in array {
+        var historyFoodDictionary = Keys.historyFood ?? []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let formattedDate = dateFormatter.string(from: item.date)
+        historyFoodDictionary.append([formattedDate : item.amount])
+        Keys.historyFood = historyFoodDictionary
+    }
+}
+
+func saveSlotInDefaultsWater(array: [HistoryWaterSlot]) {
+    for item in array {
+        var historyWaterDictionary = Keys.historyWater ?? []
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let formattedDate = dateFormatter.string(from: item.date)
+        historyWaterDictionary.append([formattedDate : item.amount])
+        Keys.historyWater = historyWaterDictionary
     }
 }

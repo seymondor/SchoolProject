@@ -732,7 +732,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="713"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L07-bJ-Hgf">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="970"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1050"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="bwX-pf-Yiu">
                                                 <rect key="frame" x="20" y="10" width="353" height="870.66666666666663"/>
@@ -1549,10 +1549,10 @@
                                             <constraint firstAttribute="trailing" secondItem="bwX-pf-Yiu" secondAttribute="trailing" constant="20" id="FaL-9u-YRo"/>
                                             <constraint firstItem="bwX-pf-Yiu" firstAttribute="top" secondItem="L07-bJ-Hgf" secondAttribute="top" constant="10" id="Ohi-wO-Ide"/>
                                             <constraint firstAttribute="trailing" secondItem="gIW-c9-Z27" secondAttribute="trailing" constant="20" id="eFY-aY-M0e"/>
-                                            <constraint firstAttribute="height" constant="970" id="i3X-vT-Qgo"/>
+                                            <constraint firstAttribute="height" constant="1050" id="i3X-vT-Qgo"/>
                                             <constraint firstItem="gIW-c9-Z27" firstAttribute="leading" secondItem="L07-bJ-Hgf" secondAttribute="leading" constant="20" id="pHK-cn-eII"/>
                                             <constraint firstItem="bwX-pf-Yiu" firstAttribute="leading" secondItem="L07-bJ-Hgf" secondAttribute="leading" constant="20" id="sf2-fO-ga0"/>
-                                            <constraint firstAttribute="height" constant="970" id="yad-zr-Is2"/>
+                                            <constraint firstAttribute="height" constant="1050" id="yad-zr-Is2"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1598,24 +1598,6 @@
             </objects>
             <point key="canvasLocation" x="1397.709923664122" y="762.32394366197184"/>
         </scene>
-        <!--История-->
-        <scene sceneID="LUh-aW-krQ">
-            <objects>
-                <viewController id="3Gd-Xv-rbv" customClass="HistoryViewController" customModule="MyProjectMaxim" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="EFB-f1-fIk">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="bfg-6N-dvo"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="История" image="clock.fill" catalog="system" id="i4k-Br-diX">
-                        <color key="badgeColor" red="0.60856501760000004" green="0.85753862790000002" blue="0.80903288709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J1q-Wz-WhB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="693.89312977099235" y="762.67605633802816"/>
-        </scene>
         <!--Главная-->
         <scene sceneID="qi3-zr-L4G">
             <objects>
@@ -1643,10 +1625,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rlX-vZ-hKV">
-                                        <rect key="frame" x="155" y="37" width="30" height="38"/>
+                                        <rect key="frame" x="151" y="37" width="38" height="38"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uCH-rJ-z6y">
-                                                <rect key="frame" x="4" y="8" width="22" height="22"/>
+                                                <rect key="frame" x="8" y="8" width="22" height="22"/>
                                                 <color key="backgroundColor" red="0.57906624870000001" green="0.72741770679999995" blue="0.85168657400000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21.999999999999996" id="E1l-FU-sa3"/>
@@ -1659,6 +1641,7 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.58110362289999995" green="0.72764891389999997" blue="0.852099359" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" secondItem="rlX-vZ-hKV" secondAttribute="height" multiplier="1:1" id="Yk2-ta-KJZ"/>
                                             <constraint firstItem="uCH-rJ-z6y" firstAttribute="top" secondItem="rlX-vZ-hKV" secondAttribute="top" constant="7.9999999999999609" id="hbg-km-AJi"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -1690,7 +1673,6 @@
                                     <constraint firstItem="BfT-D5-FG4" firstAttribute="leading" secondItem="OQc-lp-sen" secondAttribute="leading" constant="8" id="eaD-jl-ZY1"/>
                                     <constraint firstItem="BfT-D5-FG4" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="top" constant="102" id="eek-ai-Sxc"/>
                                     <constraint firstItem="9Lt-AH-uoB" firstAttribute="top" secondItem="bEQ-hv-bI2" secondAttribute="bottom" constant="22" id="iGp-Yk-QHC"/>
-                                    <constraint firstItem="rlX-vZ-hKV" firstAttribute="leading" secondItem="OQc-lp-sen" secondAttribute="leading" constant="155" id="joQ-sK-NFF"/>
                                     <constraint firstAttribute="bottom" secondItem="9Lt-AH-uoB" secondAttribute="bottom" constant="70" id="t50-oJ-G1m"/>
                                     <constraint firstItem="rlX-vZ-hKV" firstAttribute="top" secondItem="OQc-lp-sen" secondAttribute="top" constant="37" id="tix-fb-0aI"/>
                                     <constraint firstItem="bEQ-hv-bI2" firstAttribute="top" secondItem="BfT-D5-FG4" secondAttribute="bottom" constant="30" id="vEo-Ms-VuL"/>
@@ -1960,7 +1942,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="4ZD-W7-cGn" kind="relationship" relationship="viewControllers" id="C4k-dQ-Qlg"/>
-                        <segue destination="3Gd-Xv-rbv" kind="relationship" relationship="viewControllers" id="Wpx-Pl-cCq"/>
                         <segue destination="qbw-IH-nWS" kind="relationship" relationship="viewControllers" id="WQN-oL-pEo"/>
                     </connections>
                 </tabBarController>
@@ -2073,7 +2054,6 @@
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="carrot.fill" catalog="system" width="128" height="122"/>
-        <image name="clock.fill" catalog="system" width="128" height="123"/>
         <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
         <image name="drop.fill" catalog="system" width="96" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>

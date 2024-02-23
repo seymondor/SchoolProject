@@ -10,25 +10,31 @@ import UIKit
 import BonsaiController
 var addAmountVariable = 0
 class HomeScreenViewController: UIViewController {
+    
     var historyFoodTableView = UITableView()
     var historyWaterTableView = UITableView()
     var historyFoodArray : [HistoryFoodSlot] = []
     var historyWaterArray : [HistoryWaterSlot] = []
+    
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
+    
     @IBOutlet weak var backgroundOfEmojiSelectedBar: UIView!
     @IBOutlet weak var emojiSelectedBar: UIImageView!
     @IBOutlet weak var historyView: UIView!
+    
     @IBOutlet weak var historyLabel: UILabel!
     @IBOutlet weak var alertLabel: UILabel!
     @IBOutlet weak var percentageLabel: UILabel!
     @IBOutlet weak var amountOfSomething: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
-        historyFoodArray = setArrayFromFoodKeys(array: historyFoodArray)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.dayChanged(notification:)), name: UIApplication.significantTimeChangeNotification, object: nil)
+        
+        setupWaterHistoryTableView()
+        setupFoodHistoryTableView()
         switch Keys.selectedBar {
         case "water":
             setupTableView(tableView: historyWaterTableView)
@@ -40,7 +46,6 @@ class HomeScreenViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        historyFoodArray = setArrayFromFoodKeys(array: historyFoodArray)
         setBars()
     }
     
@@ -75,24 +80,32 @@ class HomeScreenViewController: UIViewController {
     func changeBarValue(withKey keyBar: String, fromValuePercentage: Float, toValuePercentage: Float) {
         switch keyBar {
         case "water":
-            let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            var percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
-            percentageLabel.text = "\(Int(perc))%"
+            percentageLabel.text = "\(Int(percentage))%"
             amountOfSomething.text = "\(Int(Keys.usedWater))/\(Int(Keys.water)) мл"
         case "food":
-            let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            var percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: toValuePercentage, from: fromValuePercentage)
-            percentageLabel.text = "\(Int(perc))%"
+            percentageLabel.text = "\(Int(percentage))%"
             amountOfSomething.text = "\(Int(Keys.usedKkal))/\(Int(Keys.kkal)) ккал"
         default:
             break
         }
     }
     
+    @objc func dayChanged(notification: Notification){
+        Keys.resetValueUsedKeys()
+        changeBarValue(withKey: "water", fromValuePercentage: 0, toValuePercentage: 0)
+        changeBarValue(withKey: "food", fromValuePercentage: 0, toValuePercentage: 0)
+    }
+    
     func changeBar(to bar: String) {
         switch bar {
         case "water":
             historyFoodTableView.isHidden = true
+            historyWaterTableView.isHidden = false
+            
             setupTableView(tableView: historyWaterTableView)
             Keys.selectedBar = "water"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.5811036229, green: 0.7276489139, blue: 0.852099359, alpha: 1)
@@ -100,27 +113,23 @@ class HomeScreenViewController: UIViewController {
             emojiSelectedBar.image = UIImage(systemName: "drop.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6807348041, green: 0.8550895293, blue: 1, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4277995191, green: 0.7138730807, blue: 1, alpha: 1)
-            let perc = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(perc)/100)
+            var percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+
+            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(percentage)/100)
         case "food":
             historyWaterTableView.isHidden = true
+            historyFoodTableView.isHidden = false
+            
             setupTableView(tableView: historyFoodTableView)
-            let foodImageView = UIImageView()
-            foodImageView.image = UIImage(named: "carrot")
-//            for items in historyFoodArray {
-//                let timeMedium = getKeyFromDictionary(fromDictionary: items).suffix(8).prefix(5)
-//                timeLabel.text = "\(timeMedium)"
-//                let kkal = getValueFromDictionary(fromDictionary: items)
-//                addAmountView.text = "\(kkal) kkal"
-//            }
             Keys.selectedBar = "food"
             emojiSelectedBar.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
             backgroundOfEmojiSelectedBar.backgroundColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
             emojiSelectedBar.image = UIImage(systemName: "carrot.fill")
             CircularProgress.trackColor = #colorLiteral(red: 0.6870872528, green: 0.9167618414, blue: 0.7997073189, alpha: 1)
             CircularProgress.progressColor = #colorLiteral(red: 0.4841163754, green: 0.7172273993, blue: 0.4995424747, alpha: 1)
-            let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(perc)/100)
+            var percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+
+            changeBarValue(withKey: Keys.selectedBar, fromValuePercentage: 0, toValuePercentage: Float(percentage)/100)
         default:
             break
         }
@@ -146,27 +155,41 @@ class HomeScreenViewController: UIViewController {
             let foodImageView = UIImageView()
             foodImageView.backgroundColor = .white
             foodImageView.image = UIImage(named: "carrot")
+            Keys.historyFood = []
+            historyFoodArray = addNewValueInArrayFood(array: historyFoodArray, value: HistoryFoodSlot(image: foodImageView, date: Date(), amount: addAmountVariable))
             
-            historyFoodArray = addNewValueInArray(array: historyFoodArray, value: HistoryFoodSlot(image: foodImageView, date: Date(), amount: addAmountVariable))
+            UserDefaults.standard.removeObject(forKey: "historyFood")
+            saveSlotInDefaultsFood(array: historyFoodArray)
+            UserDefaults.standard.synchronize()
             
             historyFoodTableView.insertRows(at: [IndexPath(row: historyFoodArray.count - 1 , section: 0)], with: .automatic)
             historyFoodTableView.reloadData()
             
-            
-            print(Keys.historyFood)
-            
-            let beforePerc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            let beforePercentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
             amountOfSomething.text = "\((Int(Keys.usedKkal)) + addAmountVariable)/\(Int(Keys.kkal)) ккал"
             Keys.usedKkal = Keys.usedKkal + addAmountVariable
-            let perc = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            percentageLabel.text = "\(Int(perc))%"
+            var percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
+            percentageLabel.text = "\(Int(percentage))%"
             setAlertLabel(on: Keys.selectedBar)
-            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(perc)/100, from: Float(beforePerc)/100)
+            CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(percentage)/100, from: Float(beforePercentage)/100)
         case "water":
+            let waterImageView = UIImageView()
+            waterImageView.backgroundColor = .white
+            waterImageView.image = UIImage(named: "water")
+            Keys.historyWater = []
+            historyWaterArray = addNewValueInArrayWater(array: historyWaterArray, value: HistoryWaterSlot(image: waterImageView, date: Date(), amount: addAmountVariable))
+            
+            UserDefaults.standard.removeObject(forKey: "historyWater")
+            saveSlotInDefaultsWater(array: historyWaterArray)
+            UserDefaults.standard.synchronize()
+            
+            historyWaterTableView.insertRows(at: [IndexPath(row: historyWaterArray.count - 1 , section: 0)], with: .automatic)
+            historyWaterTableView.reloadData()
+            
             let beforePercentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             amountOfSomething.text = "\((Int(Keys.usedWater)) + addAmountVariable)/\(Int(Keys.water)) мл"
             Keys.usedWater = Keys.usedWater + addAmountVariable
-            let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
+            var percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
             percentageLabel.text = "\(Int(percentage))%"
             setAlertLabel(on: Keys.selectedBar)
             CircularProgress.setProgressWithAnimation(duration: 1.0, value: Float(percentage)/100, from: Float(beforePercentage)/100)
@@ -179,14 +202,12 @@ class HomeScreenViewController: UIViewController {
         switch bar {
         case "water":
             let percentage = ceil((Double(Keys.usedWater)/Double(Keys.water))*100)
-            
             if percentage > 100 {
                 alertLabel.text = "❗️Вы перепиваете"
                 alertLabel.isHidden = false
             } else { alertLabel.isHidden = true }
         default:
             let percentage = ceil((Double(Keys.usedKkal)/Double(Keys.kkal))*100)
-            
             if percentage > 100 {
                 alertLabel.text = "❗️Вы переедаете"
                 alertLabel.isHidden = false
@@ -221,7 +242,41 @@ class HomeScreenViewController: UIViewController {
             setAlertLabel(on: Keys.selectedBar)
         }
     }
-    //TODO: ДОделать
+    
+    func setupWaterHistoryTableView() {
+        historyWaterArray = []
+        if Keys.historyWater != nil {
+            historyWaterArray = setArrayFromWaterKeys(array: historyWaterArray)
+            historyWaterTableView.deleteRows(at: [IndexPath(row: historyWaterArray.count - 1 , section: 0)], with: .automatic)
+            historyWaterTableView.reloadData()
+            historyWaterArray = Array(historyWaterArray.reversed())
+        }
+    }
+    
+    func setupFoodHistoryTableView() {
+        historyFoodArray = []
+        if Keys.historyFood != nil {
+            historyFoodArray = setArrayFromFoodKeys(array: historyFoodArray)
+            historyFoodTableView.deleteRows(at: [IndexPath(row: historyFoodArray.count - 1 , section: 0)], with: .automatic)
+            historyFoodTableView.reloadData()
+            historyFoodArray = Array(historyFoodArray.reversed())
+        }
+    }
+    
+    func setArrayFromWaterKeys(array: [HistoryWaterSlot]) -> [HistoryWaterSlot] {
+        let waterImageView = UIImageView()
+        waterImageView.backgroundColor = .white
+        waterImageView.image = UIImage(named: "water")
+        var copyArray = array
+        if Keys.historyWater != nil {
+            for items in Keys.historyWater {
+                print(getDateDictionary(fromDictionary: items))
+                copyArray.append(HistoryWaterSlot(image: waterImageView, date: getDateDictionary(fromDictionary: items), amount: getValueDictionary(fromDictionary: items)))
+            }
+            copyArray = Array(copyArray.reversed())
+        }
+        return copyArray
+    }
     
     func setArrayFromFoodKeys(array: [HistoryFoodSlot]) -> [HistoryFoodSlot] {
         let foodImageView = UIImageView()
@@ -238,11 +293,18 @@ class HomeScreenViewController: UIViewController {
         return copyArray
     }
     
-    func addNewValueInArray(array: [HistoryFoodSlot], value: HistorySlot) -> [HistoryFoodSlot] {
+    func addNewValueInArrayFood(array: [HistoryFoodSlot], value: HistorySlot) -> [HistoryFoodSlot] {
         var copyArray = Array(array.reversed())
         copyArray.append(value as! ReversedCollection<[HistoryFoodSlot]>.Element)
         return Array(copyArray.reversed())
     }
+    
+    func addNewValueInArrayWater(array: [HistoryWaterSlot], value: HistorySlot) -> [HistoryWaterSlot] {
+        var copyArray = Array(array.reversed())
+        copyArray.append(value as! ReversedCollection<[HistoryWaterSlot]>.Element)
+        return Array(copyArray.reversed())
+    }
+
     
     func getDateDictionary(fromDictionary : Dictionary<String, Int>) -> Date {
         for key in fromDictionary.keys {
@@ -260,6 +322,10 @@ class HomeScreenViewController: UIViewController {
             return value
         }
         return 0
+    }
+    
+    func application(application : UIApplication) {
+        
     }
     
     
@@ -299,16 +365,35 @@ extension HomeScreenViewController : UITableViewDataSource {
         default :
             return 0
         }
-
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            print("Deleted")
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView.tag {
-//        case 1 :
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath) as? Cell else { fatalError() }
-//            cell.textLabel?.text = "Water"
-//            cell.configure(slotHistory: historyWaterArray[indexPath.row])
-//            return cell
+        case 1 :
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath) as? Cell else { fatalError() }
+            if historyWaterArray[indexPath.row] != nil {
+                cell.configure(slotHistory: historyWaterArray[indexPath.row])
+            }
+            return cell
         case 2 :
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistorySlot", for: indexPath) as? Cell else { fatalError() }
             if historyFoodArray[indexPath.row] != nil {
@@ -323,6 +408,6 @@ extension HomeScreenViewController : UITableViewDataSource {
     }
 }
 
-extension Notification.Name{
+extension Notification.Name {
     static let reload = Notification.Name("reload")
 }

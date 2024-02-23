@@ -9,12 +9,15 @@ import Foundation
 import UIKit
 
 class Cell : UITableViewCell {
+    
     let image = UIImageView()
+    
     let timeLabel : UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
+    
     let amountLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
@@ -39,8 +42,8 @@ class Cell : UITableViewCell {
             image.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
             image.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
             image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            image.widthAnchor.constraint(equalToConstant: 45),
-            image.heightAnchor.constraint(equalToConstant: 45),
+            image.widthAnchor.constraint(equalToConstant: 40),
+            image.heightAnchor.constraint(equalToConstant: 40),
             
             timeLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             timeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -50,7 +53,6 @@ class Cell : UITableViewCell {
         ])
     }
     
-    // TODO: ДОделать
     func configure(slotHistory: HistorySlot) {
         image.image = slotHistory.image.image
         timeLabel.text = formatDate(date: slotHistory.date)
@@ -63,7 +65,8 @@ class Cell : UITableViewCell {
     
     func formatDate(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.timeStyle = .short
+        formatter.dateFormat = "dd.MM, HH:mm"
+        formatter.timeZone =  .current
         return formatter.string(from: date)
     }
 }

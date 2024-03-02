@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 class SettingViewController: UIViewController {
     @IBOutlet weak var waterTextField: UITextField!
@@ -19,14 +20,13 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var sportTextField: UITextField!
     @IBOutlet weak var getUpDatePicker: UIDatePicker!
     @IBOutlet weak var goSleepDatePicker: UIDatePicker!
-    var timeEatPickerView = UIPickerView()
-    var timeWaterPickerView = UIPickerView()
+    var foodNotificationID = 1
+    var waterNotificationID = 1
     let timeEatArray = [10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
     let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
     
     override func viewDidLoad() {
         setupTextFields()
-        setupPickerViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,6 +131,111 @@ class SettingViewController: UIViewController {
         return formatter.string(from: sender.date)
     }
     
+    @objc func updateByTimerFood() {
+        foodNotificationID += 1
+        var foodNotificationIDString = "food-notification-\(foodNotificationID)"
+        checkForPermissionFood(with: foodNotificationIDString)
+    }
+    
+    @objc func updateByTimerWater() {
+        waterNotificationID += 1
+        var waterNotificationIDString = "water-notification-\(waterNotificationID)"
+        checkForPermissionWater(with: waterNotificationIDString)
+    }
+    
+    func checkForPermissionFood(with indentifier: String) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    if didAllow {
+                        if Keys.minutesToEat != nil {
+                            self.dispatchNotification(indentifier: indentifier,
+                                                      title: "Пора поесть!",
+                                                      body: "Заходи в приложение и отмечай!",
+                                                      timeIntervalSec: 1)
+                        }
+                    }
+                }
+            case .denied:
+                return
+            case .authorized:
+                if Keys.minutesToEat != nil {
+                    self.dispatchNotification(indentifier: indentifier,
+                                              title: "Пора поесть!",
+                                              body: "Заходи в приложение и отмечай!",
+                                              timeIntervalSec: 1)
+                }
+            default:
+                return
+            }
+        }
+    }
+    
+    func checkForPermissionWater(with indentifier: String) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { setting in
+            switch setting.authorizationStatus {
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    if didAllow {
+                        if Keys.minutesToDrink != nil {
+                            self.dispatchNotification(indentifier: indentifier,
+                                                      title: "Пора попить воды!",
+                                                      body: "Заходи в приложение и отмечай!",
+                                                      timeIntervalSec: 1)
+                        }
+                    }
+                }
+            case .denied:
+                return
+            case .authorized:
+                if Keys.minutesToDrink != nil {
+                    self.dispatchNotification(indentifier: indentifier,
+                                              title: "Пора попить воды!",
+                                              body: "Заходи в приложение и отмечай!",
+                                              timeIntervalSec: 1)
+                }
+            default:
+                return
+            }
+        }
+    }
+    
+    func dispatchNotification(indentifier: String, title: String, body: String, timeIntervalSec: Double) {
+        
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeIntervalSec, repeats: false)
+
+        let currentHour = Calendar.current.component(.hour, from: Date())
+        let currentMinute = Calendar.current.component(.minute, from: Date())
+        let totalCurrentMinutes = (currentHour*60) + currentMinute
+        
+        let keysTimeGetUpDate = formatString(dateString: Keys.timeGetUp, dateFormat: "HH:mm")
+        let keysTimeGoSleepDate = formatString(dateString: Keys.timeGoSleep, dateFormat: "HH:mm")
+        
+        let hourGetUp = Calendar.current.component(.hour, from: keysTimeGetUpDate)
+        let minuteGetUp = Calendar.current.component(.minute, from: keysTimeGetUpDate)
+        let totalMinutesGetUp = (hourGetUp*60) + minuteGetUp
+        
+        let hourGoSleep = Calendar.current.component(.hour, from: keysTimeGoSleepDate)
+        let minuteGoSleep = Calendar.current.component(.minute, from: keysTimeGoSleepDate)
+        let totalMinutesGoSleep = (hourGoSleep*60) + minuteGoSleep
+        
+        if totalCurrentMinutes > totalMinutesGetUp && totalCurrentMinutes < totalMinutesGoSleep {
+            let request = UNNotificationRequest(identifier: "\(indentifier)", content: content, trigger: trigger)
+            notificationCenter.removePendingNotificationRequests(withIdentifiers: ["\(indentifier)"])
+            notificationCenter.add(request)
+       }
+    }
+    
     func checkButtonManOrWoman(buttonMan:UIButton,buttonWoman:UIButton) -> String {
         var result = ""
         if buttonMan.layer.borderColor == #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1) {
@@ -148,6 +253,13 @@ class SettingViewController: UIViewController {
         } else {
             button.layer.borderColor = #colorLiteral(red: 0.3837626355, green: 0.6095732872, blue: 0.4453801228, alpha: 1)
         }
+    }
+    
+    func formatString(dateString: String, dateFormat: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = dateFormat
+        formatter.timeZone =  .current
+        return formatter.date(from: dateString) ?? Date()
     }
     
     func showError(error: String){
@@ -173,15 +285,6 @@ class SettingViewController: UIViewController {
         sportTextField.delegate = self
     }
     
-    func setupPickerViews() {
-        timeEatPickerView.tag = 1
-        timeWaterPickerView.tag = 2
-        timeEatPickerView.dataSource = self
-        timeWaterPickerView.dataSource = self
-        timeWaterPickerView.delegate = self
-        timeEatPickerView.delegate = self
-    }
-    
     func setupTextFieldTexts() {
         waterTextField.text = "\(Keys.water ?? 0)"
         foodTextField.text = "\(Keys.kkal ?? 0)"
@@ -205,33 +308,5 @@ extension SettingViewController: UITextFieldDelegate {
             return false
         }
         return allowedcharacterSet.isSuperset(of: typedCharactersetIn)
-    }
-}
-
-extension SettingViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch pickerView.tag {
-        case 1:
-            return timeEatArray.count
-        case 2:
-            return timeWaterArray.count
-        default:
-            return 1
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch pickerView.tag {
-        case 1:
-            return "\(timeEatArray[row])"
-        case 2:
-            return "\(timeWaterArray[row])"
-        default:
-            return ""
-        }
     }
 }

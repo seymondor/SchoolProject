@@ -14,9 +14,9 @@
             filePath = "MyProjectMaxim/ViewControllers/HomeScreenViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
-            landmarkName = "dispatchNotification(indentifier:title:body:timeIntervalSec:)"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
+            landmarkName = "setupTableView(tableView:)"
             landmarkType = "7">
             <Locations>
                <Location

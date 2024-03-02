@@ -21,8 +21,8 @@ class ViewController: UIViewController {
     
     var eatTimePicker = UIPickerView()
     var waterTimePicker = UIPickerView()
-    let timeEatArray = [10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
-    let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
+    let timeEatArray = [2, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200, 250, 300, 350]
+    let timeWaterArray = [1, 5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +82,17 @@ class ViewController: UIViewController {
 
         if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.sport != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
             Keys.calculateStandarts()
-            
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.getNotificationSettings { setting in
+                switch setting.authorizationStatus {
+                case .notDetermined:
+                    notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    }
+                case .denied: return
+                case .authorized: break
+                default: return
+                }
+            }
             let vc = storyboard!.instantiateViewController(withIdentifier: "Home") as UIViewController
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)

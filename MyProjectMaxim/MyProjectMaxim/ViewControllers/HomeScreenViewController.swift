@@ -17,6 +17,8 @@ class HomeScreenViewController: UIViewController {
     var historyWaterTableView = UITableView()
     var historyFoodArray : [HistoryFoodSlot] = []
     var historyWaterArray : [HistoryWaterSlot] = []
+    var waterNotificationID = 0
+    var foodNotificationID = 0
     
     @IBOutlet weak var CircularProgress :
         CircularProgressBar!
@@ -147,14 +149,14 @@ class HomeScreenViewController: UIViewController {
     }
     
     @objc func updateByTimerFood() {
-        FoodNotification.foodNotificationID += 1
-        var foodNotificationIDString = "food-notification-\(FoodNotification.foodNotificationID)"
+        foodNotificationID += 1
+        var foodNotificationIDString = "food-notification-\(foodNotificationID)"
         checkForPermissionFood(with: foodNotificationIDString)
     }
     
     @objc func updateByTimerWater() {
-        WaterNotification.waterNotificationID += 1
-        var waterNotificationIDString = "water-notification-\(WaterNotification.waterNotificationID)"
+        waterNotificationID += 1
+        var waterNotificationIDString = "water-notification-\(waterNotificationID)"
         checkForPermissionWater(with: waterNotificationIDString)
     }
     

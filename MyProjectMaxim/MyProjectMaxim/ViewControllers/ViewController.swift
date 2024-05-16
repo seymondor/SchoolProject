@@ -29,6 +29,10 @@ class ViewController: UIViewController {
         setSubviews()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+    }
+
     @IBAction func manButton(_ sender: UIButton) {
         createFrameForButton(button: sender, button2: outletWomanButton)
     }
@@ -93,9 +97,7 @@ class ViewController: UIViewController {
                 default: return
                 }
             }
-            let vc = storyboard!.instantiateViewController(withIdentifier: "Home") as UIViewController
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: true, completion: nil)
+            showAlert(alert: "Ваша норма еды: \(Keys.kkal ?? 0) ккал \nВаша норма воды: \(Keys.water ?? 0) мл")
         }
     }
     
@@ -151,6 +153,17 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "Ошибка", message: "\(error).", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in
             print("Нажал Хорошо")
+        }))
+        present(alert, animated: true)
+    }
+    
+    func showAlert(alert: String) {
+        let alert = UIAlertController(title: "Внимание", message: "\(alert).", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: { alert in
+            print("Нажал Хорошо")
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "Home") as UIViewController
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
         }))
         present(alert, animated: true)
     }

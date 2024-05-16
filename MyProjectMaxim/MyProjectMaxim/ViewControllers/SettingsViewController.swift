@@ -26,7 +26,14 @@ class SettingViewController: UIViewController {
     let timeWaterArray = [5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180, 200]
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         setupTextFields()
+    }
+    
+    @objc func tap(sender: UITapGestureRecognizer){
+            print("tapped")
+            view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,11 +64,14 @@ class SettingViewController: UIViewController {
             Keys.calculateStandarts()
             waterTextField.text = "\(Keys.water ?? 0)"
             foodTextField.text = "\(Keys.kkal ?? 0)"
+            showAlert(alert: "Прогресс сброшен. \nВаша новая норма еды: \(Keys.kkal ?? 0) ккал \nВаша новая норма воды: \(Keys.water ?? 0) мл")
         }
     }
     
     @IBAction func startButton(_ sender: UIButton) {
-        checkAllTextFields()
+        if checkAllTextFields() == true {
+            showAlert(alert: "Прогресс сброшен.")
+        }
     }
     
     func checkAllTextFields() -> Bool {
@@ -113,13 +123,13 @@ class SettingViewController: UIViewController {
         Keys.timeGoSleep = formatDatePicker(sender: goSleepDatePicker)
         
         if Keys.age != nil && Keys.gender != nil && Keys.height != nil && Keys.weight != nil && Keys.minutesToEat != nil && Keys.minutesToDrink != nil {
-            showAlert(alert: "Прогресс сброшен")
             if keysBeforeFood != Keys.kkal {
                 Keys.resetValueUsedKeysKkal()
             }
             if keysBeforeWater != Keys.water {
                 Keys.resetValueUsedKeysWater()
             }
+            
             return true
         }
         return false

@@ -34,6 +34,7 @@ class HomeScreenViewController: UIViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadLabel(notification:)), name: Notification.Name("reload"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.dayChanged(notification:)), name: UIApplication.significantTimeChangeNotification, object: nil)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
         
         var timerFood = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToEat) * 60, target: self, selector: #selector(self.updateByTimerFood), userInfo: nil, repeats: true)
         var timerWater = Timer.scheduledTimer(timeInterval: Double(Keys.minutesToDrink) * 60, target: self, selector: #selector(self.updateByTimerWater), userInfo: nil, repeats: true)
@@ -97,6 +98,11 @@ class HomeScreenViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    @objc func tap(sender: UITapGestureRecognizer){
+            print("tapped")
+            view.endEditing(true)
     }
     
     func changeBar(to bar: String) {
@@ -451,10 +457,27 @@ class HomeScreenViewController: UIViewController {
     }
 }
 
+extension HomeScreenViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField.tag {
+        case 1, 2:
+            return false
+        default:
+            break
+        }
+        let allowedcharacters = "0123456789"
+        let allowedcharacterSet = CharacterSet(charactersIn: allowedcharacters)
+        let typedCharactersetIn = CharacterSet(charactersIn: string)
+        if textField.text?.count == 0 && string == "0" {
+                return false
+        }
+        return allowedcharacterSet.isSuperset(of: typedCharactersetIn)
+    }
+}
 
 extension HomeScreenViewController: BonsaiControllerDelegate {
     func frameOfPresentedView(in containerViewFrame: CGRect) -> CGRect {
-        return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height / 1.5), size: CGSize(width: containerViewFrame.width, height: containerViewFrame.height / (3/4)))
+        return CGRect(origin: CGPoint(x: 0, y: containerViewFrame.height / 2), size: CGSize(width: containerViewFrame.width, height: containerViewFrame.height / (3/4)))
     }
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {

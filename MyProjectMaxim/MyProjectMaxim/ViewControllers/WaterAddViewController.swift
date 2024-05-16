@@ -14,21 +14,31 @@ class WaterAddViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addWaterTextField.delegate = self
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
     }
     
     @IBAction func add200mlButton(_ sender: Any) {
-        addAmountVariable = 200
-        NotificationCenter.default.post(name: .reload, object: nil)
+        addMl(ml: 200)
+    }
+    
+    @IBAction func add300mlButton(_ sender: Any) {
+        addMl(ml: 300)
+    }
+    
+    @IBAction func add400mlButton(_ sender: Any) {
+        addMl(ml: 400)
     }
     
     @IBAction func add500mlButton(_ sender: Any) {
-        addAmountVariable = 500
-        NotificationCenter.default.post(name: .reload, object: nil)
+        addMl(ml: 500)
+    }
+    
+    @IBAction func add1000mlButton(_ sender: Any) {
+        addMl(ml: 1000)
     }
     
     @IBAction func add1500mlButton(_ sender: Any) {
-        addAmountVariable = 1500
-        NotificationCenter.default.post(name: .reload, object: nil)
+        addMl(ml: 1500)
     }
     
     @IBAction func addCustomWaterButton(_ sender: Any) {
@@ -39,6 +49,16 @@ class WaterAddViewController : UIViewController {
         } else {
             showAlert(error: "Не введёно количество воды")
         }
+    }
+    
+    func addMl(ml: Int) {
+        addAmountVariable = ml
+        NotificationCenter.default.post(name: .reload, object: nil)
+    }
+    
+    @objc func tap(sender: UITapGestureRecognizer){
+            print("tapped")
+            view.endEditing(true)
     }
     
     func showAlert(error: String){

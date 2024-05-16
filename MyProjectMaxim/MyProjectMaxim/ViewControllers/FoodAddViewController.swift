@@ -14,20 +14,36 @@ class FoodAddViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addFoodTextField.delegate = self
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tap)))
     }
     
-    @IBAction func add100KkalButton(_ sender: Any) {
-        addAmountVariable = 100
-        NotificationCenter.default.post(name: .reload, object: nil)
+    
+    @IBAction func add100kkalButton(_ sender: Any) {
+        addKkal(kkal: 100)
     }
     
-    @IBAction func add500KkalButton(_ sender: Any) {
-        addAmountVariable = 500
-        NotificationCenter.default.post(name: .reload, object: nil)
+    @IBAction func add200kkalButton(_ sender: Any) {
+        addKkal(kkal: 200)
     }
     
-    @IBAction func add1000KkalButton(_ sender: Any) {
-        addAmountVariable = 1000
+    @IBAction func add300kkalButton(_ sender: Any) {
+        addKkal(kkal: 300)
+    }
+    
+    @IBAction func add400kkalButton(_ sender: UIButton) {
+        addKkal(kkal: 400)
+    }
+    
+    @IBAction func add500kkalButton(_ sender: UIButton) {
+        addKkal(kkal: 500)
+    }
+    
+    @IBAction func add1000kkalButton(_ sender: Any) {
+        addKkal(kkal: 1000)
+    }
+    
+    func addKkal(kkal: Int) {
+        addAmountVariable = kkal
         NotificationCenter.default.post(name: .reload, object: nil)
     }
     
@@ -39,6 +55,11 @@ class FoodAddViewController : UIViewController {
         } else {
             showAlert(error: "Не введёно количество еды")
         }
+    }
+    
+    @objc func tap(sender: UITapGestureRecognizer){
+            print("tapped")
+            view.endEditing(true)
     }
     
     func showAlert(error: String){
